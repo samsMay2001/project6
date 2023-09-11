@@ -5,14 +5,14 @@ import React,
   // lazy
 } from "react";
 import Chats from "./Chat";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, useTheme } from "@mui/material";
 import Conversation from "../../components/Conversation";
 
 // Dynamic import 
 // const Cat = lazy(()=> import('../../components/Cat'))
 
 const GeneralApp = () => {
-
+  const theme= useTheme(); 
   return (
     <Stack direction="row" sx={{width: '100%'}}>
       
@@ -20,7 +20,7 @@ const GeneralApp = () => {
       <Chats />
 
       {/* conversation component */}
-      <Box sx={{height: '100%', width: 'calc(100vw - 417px)', backgroundColor: '#fff'}}>
+      <Box sx={{height: '100%', width: 'calc(100vw - 417px)', backgroundColor: theme.palette.mode === 'light'? '#fff' : theme.palette.background.default}}>
         <Conversation/>
       </Box>
 

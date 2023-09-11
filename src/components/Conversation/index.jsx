@@ -22,7 +22,7 @@ function Conversation() {
         <Stack height={'100%'} maxHeight={'100vh'} width={'auto'} alignItems={'center'}>
 
             {/* Chat header */}
-            <Box p={2} sx={{ width: '100%', backgroundColor: '#f8faff', boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)' }}>
+            <Box p={2} sx={{ width: '100%', backgroundColor: theme.palette.mode === 'light'? '#f8faff' : theme.palette.background.paper , boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)' }}>
                 <Stack direction={'row'} spacing={2} height={'100%'} alignItems={'center'} justifyContent={'space-between'}>
                     {/* left corner items */}
 
@@ -70,7 +70,7 @@ function Conversation() {
             </Box>
 
             {/* Chat footer */}
-            <Box p={2} sx={{ height: 100, width: '100%', backgroundColor: '#f8faff', boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)' }}>
+            <Box p={2} sx={{ width: '100%',backgroundColor: theme.palette.mode === 'light'? '#f8faff' : theme.palette.background.paper, boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)' }}>
                 <Stack direction='row' alignItems={'center'} spacing={3}>
                     <StyledInput fullWidth placeholder='Write a message' variant='filled' InputProps={{
                         disableUnderline: true, 
