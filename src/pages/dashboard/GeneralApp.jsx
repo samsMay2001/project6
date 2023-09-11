@@ -20,7 +20,7 @@ const GeneralApp = () => {
       <Chats />
 
       {/* conversation component */}
-      <Box sx={{height: '100%', width: 'calc(100vw - 417px)', backgroundColor: '#fff', border: '1px dashed grey'}}>
+      <Box sx={{height: '100%', width: 'calc(100vw - 417px)', backgroundColor: '#fff'}}>
         <Conversation/>
       </Box>
 
