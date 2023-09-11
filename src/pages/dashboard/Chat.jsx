@@ -124,12 +124,14 @@ function Chats() {
     return (
         <Box sx={{
             position: 'relative',
-            height: '100vh',
+            
             width: '320px',
             backgroundColor: '#F8FAFF',
             boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)'
         }}>
-            <Stack p={3} spacing={2}>
+            <Stack p={3} spacing={2} sx={{height: '100vh', border: '1px dashed grey'}}>
+
+                {/* component title and icon */}
                 <Stack direction="row" alignItems={'center'} justifyContent={'space-between'}>
                     <Typography variant={'h5'}>
                         Chats
@@ -145,20 +147,34 @@ function Chats() {
                         </SearchIconWrapper>
                         <StyledInputBase placeholder={'Search...'} inputProps={{ 'aria-label': 'search' }} />
                     </Search>
-                    <Stack spacing={1}>
-                        <Stack direction={'row'} alignItems={'center'} spacing={1.5}>
-                            <ArchiveBox size={24} />
-                            <Button>Archive</Button>
-                        </Stack>
-                        <Divider />
+                </Stack>
+
+                {/* archive box and text */}
+                <Stack spacing={1}>
+                    <Stack direction={'row'} alignItems={'center'} spacing={1.5}>
+                        <ArchiveBox size={24} />
+                        <Button>Archive</Button>
                     </Stack>
-                    <Stack direction={'column'}>
-                        <Stack spacing={2.4}>
-                            <Typography variant={'subtitle2'} sx={{ color: '#676767' }}>Pinned</Typography>
-                            {ChatList.filter((el) => el.pinned).map((el) => (
-                                <ChatElement {...el} />
-                            ))}
-                        </Stack>
+                    <Divider />
+                </Stack>
+
+                {/* chat lists */}
+                <Stack direction={'column'} sx={{flexGrow:1, overflowY: 'scroll', height: '100%'}}>
+
+                    {/* "Pinned" chat list */}
+                    <Stack spacing={2.4}>
+                        <Typography variant={'subtitle2'} sx={{ color: '#676767' }}>Pinned</Typography>
+                        {ChatList.filter((el) => el.pinned).map((el) => (
+                            <ChatElement {...el} />
+                        ))}
+                    </Stack>
+
+                    {/* "All" chat list */}
+                    <Stack spacing={2.4}>
+                        <Typography variant={'subtitle2'} sx={{ color: '#676767' }}>All Chats</Typography>
+                        {ChatList.filter((el) => !el.pinned).map((el) => (
+                            <ChatElement {...el} />
+                        ))}
                     </Stack>
                 </Stack>
             </Stack>
