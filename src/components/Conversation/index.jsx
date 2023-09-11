@@ -1,23 +1,39 @@
-import { Avatar, Box, Divider, IconButton, Stack, Typography } from "@mui/material";
+import { Avatar, Box, Divider, IconButton, InputAdornment, Stack, TextField, Typography, useTheme } from "@mui/material";
+import {styled} from '@mui/material/styles'
 import { StyledBadge } from "../../pages/dashboard/Chat";
 import { faker } from "@faker-js/faker";
-import { CaretDown, MagnifyingGlass, Phone, VideoCamera } from "phosphor-react";
+import { CaretDown, LinkSimple, MagnifyingGlass, PaperPlane, PaperPlaneTilt, Phone, Smiley, VideoCamera } from "phosphor-react";
+
+const StyledInput = styled(TextField)(({ theme }) => (
+    {
+        // color: "inherit",
+        "& .MuiInputBase-input": {
+            paddingTop: '12px',
+            paddingBottom: '12px',
+            // paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+            // width: '100%'
+        }
+    }
+))
 
 function Conversation() {
-    return (  
-        <Stack height={'100%'} maxHeight = {'100vh'} width={'auto'}  alignItems={'center'}>
-            
+    const theme = useTheme()
+    return (
+        <Stack height={'100%'} maxHeight={'100vh'} width={'auto'} alignItems={'center'}>
+
             {/* Chat header */}
             <Box p={2} sx={{ width: '100%', backgroundColor: '#f8faff', boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)' }}>
                 <Stack direction={'row'} spacing={2} height={'100%'} alignItems={'center'} justifyContent={'space-between'}>
+                    {/* left corner items */}
+
                     <Stack direction={'row'} alignItems='center' spacing={2}>
+                        {/* Avatar and text section */}
                         <StyledBadge
                             overlap="circular"
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                             variant="dot">
                             <Avatar src={faker.image.avatar()} />
-                        </StyledBadge> 
-                        {/* text section */}
+                        </StyledBadge>
                         <Stack spacing={0.3}>
                             <Typography variant={'subtitle2'}>
                                 {faker.name.fullName()}
@@ -27,31 +43,59 @@ function Conversation() {
                             </Typography>
                         </Stack>
                     </Stack>
+
+                    {/* right section, which has icons  */}
                     <Stack direction='row' alignItems='center' spacing={3}>
                         <IconButton>
-                            <VideoCamera/>
+                            <VideoCamera />
                         </IconButton>
                         <IconButton>
-                            <Phone/>
+                            <Phone />
                         </IconButton>
                         <IconButton>
-                            <MagnifyingGlass/>
+                            <MagnifyingGlass />
                         </IconButton>
-                        <Divider orientation="vertical" flexItem/>
+                        <Divider orientation="vertical" flexItem />
                         <IconButton>
-                            <CaretDown/>
+                            <CaretDown />
                         </IconButton>
                     </Stack>
+
                 </Stack>
             </Box>
 
             {/* msgs */}
             <Box sx={{ flexGrow: 1, width: '100%', }}>
-                
+
             </Box>
-            
+
             {/* Chat footer */}
-            <Box sx={{height: 100, width: '100%', backgroundColor: '#f8faff', boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)' }}></Box>
+            <Box p={2} sx={{ height: 100, width: '100%', backgroundColor: '#f8faff', boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)' }}>
+                <Stack direction='row' alignItems={'center'} spacing={3}>
+                    <StyledInput fullWidth placeholder='Write a message' variant='filled' InputProps={{
+                        disableUnderline: true, 
+                        startAdornment: 
+                        <InputAdornment>
+                            <IconButton>
+                                <LinkSimple/>
+                            </IconButton>
+                        </InputAdornment>, 
+                        endAdornment: 
+                        <InputAdornment>
+                            <IconButton>
+                                <Smiley/>
+                            </IconButton>
+                        </InputAdornment>, 
+                    }}/>
+                    <Box sx={{height: 48, width: 48, backgroundColor: theme.palette.primary.main, borderRadius: 1.5}}>
+                        <Stack justifyContent={'center'} alignItems="center" sx={{width: '100%', height: '100%'}}>
+                            <IconButton>
+                                <PaperPlaneTilt color="#fff"/>
+                            </IconButton>
+                        </Stack>
+                    </Box>
+                </Stack>
+            </Box>
         </Stack>
     );
 }
