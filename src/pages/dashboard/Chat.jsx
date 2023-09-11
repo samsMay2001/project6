@@ -1,11 +1,12 @@
 import { faker } from "@faker-js/faker";
-import { Box, Stack, Typography, InputBase, Button, Divider, Badge, Avatar } from "@mui/material";
+import { Box, Stack, Typography, InputBase, Button, Divider, Badge, Avatar, useTheme } from "@mui/material";
 // import InputBase from "@mui/material/InputBase/InputBase";
 
 import { styled, alpha } from '@mui/material/styles'
 import { ArchiveBox, CircleDashed, MagnifyingGlass } from "phosphor-react";
 import { useEffect } from "react";
 import { ChatList } from "../../data";
+import { SimpleBarStyle } from "../../components/Scrollbar";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -37,15 +38,12 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
-    // const [avatarImg, ]
-    // useEffect(()=>{
-
-    // }, [])
+    const theme = useTheme()
     return (
         <Box sx={{
             width: '100%',
             borderRadius: 1,
-            background: '#fff'
+            background: theme.palette.mode==="light" ? '#fff' : theme.palette.background.default 
         }}
             p={2}
         >
@@ -89,7 +87,7 @@ const Search = styled("div")(({ theme }) => (
         position: 'relative',
         borderRadius: 20,
         // border : '1px dashed grey',
-        backgroundColor: alpha(theme.palette.background.paper, 1),
+        backgroundColor: alpha(theme.palette.background.default, 1),
         marginRight: theme.spacing(2),
         marginLeft: 0,
         width: '100%',
@@ -121,15 +119,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => (
 
 
 function Chats() {
+
+    const theme = useTheme()
+
     return (
         <Box sx={{
             position: 'relative',
-            
             width: '320px',
-            backgroundColor: '#F8FAFF',
+            backgroundColor: theme.palette.mode==="light" ? '#F8FAFF' : theme.palette.background.paper,
             boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)'
         }}>
-            <Stack p={3} spacing={2} sx={{height: '100vh', border: '1px dashed grey'}}>
+            <Stack p={3} spacing={2} sx={{height: '100vh'}}>
 
                 {/* component title and icon */}
                 <Stack direction="row" alignItems={'center'} justifyContent={'space-between'}>
@@ -159,23 +159,27 @@ function Chats() {
                 </Stack>
 
                 {/* chat lists */}
-                <Stack direction={'column'} sx={{flexGrow:1, overflowY: 'scroll', height: '100%'}}>
+                <Stack spacing={2} direction={'column'} sx={{flexGrow:1, 
+                    // overflowY: 'scroll', 
+                    height: '100%'}}>
+                    {/* <SimpleBarStyle > */}
+                        
+                        {/* "Pinned" chat list */}
+                        <Stack spacing={2.4}>
+                            <Typography variant={'subtitle2'} sx={{ color: '#676767' }}>Pinned</Typography>
+                            {ChatList.filter((el) => el.pinned).map((el) => (
+                                <ChatElement {...el} />
+                            ))}
+                        </Stack>
 
-                    {/* "Pinned" chat list */}
-                    <Stack spacing={2.4}>
-                        <Typography variant={'subtitle2'} sx={{ color: '#676767' }}>Pinned</Typography>
-                        {ChatList.filter((el) => el.pinned).map((el) => (
-                            <ChatElement {...el} />
-                        ))}
-                    </Stack>
-
-                    {/* "All" chat list */}
-                    <Stack spacing={2.4}>
-                        <Typography variant={'subtitle2'} sx={{ color: '#676767' }}>All Chats</Typography>
-                        {ChatList.filter((el) => !el.pinned).map((el) => (
-                            <ChatElement {...el} />
-                        ))}
-                    </Stack>
+                        {/* "All" chat list */}
+                        <Stack spacing={2.4}>
+                            <Typography variant={'subtitle2'} sx={{ color: '#676767' }}>All Chats</Typography>
+                            {ChatList.filter((el) => !el.pinned).map((el) => (
+                                <ChatElement {...el} />
+                            ))}
+                        </Stack>
+                    {/* </SimpleBarStyle> */}
                 </Stack>
             </Stack>
         </Box>
