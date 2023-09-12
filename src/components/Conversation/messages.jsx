@@ -9,7 +9,7 @@ function Message() {
                 {Chat_History.map((el)=>{
                     switch (el.type) {
                         case 'divider': 
-                            return <TimeLine/>
+                            return <TimeLine el={el}/>
                             break;
                         case 'msg': 
                             switch(el.subtype) {
