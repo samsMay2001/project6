@@ -13,10 +13,14 @@ const StyledInput = styled(TextField)(({ theme }) => (
             paddingBottom: '12px',
             // paddingLeft: `calc(1em + ${theme.spacing(4)})`,
             // width: '100%'
-        }
+        },
+
+        "& input": {
+            autocomplete: 'off', // Add this line to disable autocomplete
+          },
     }
 ))
- function ConvoFooter() {
+export function ConvoFooter() {
     const theme = useTheme()
     return ( 
         <Box p={2} sx={{ width: '100%',backgroundColor: theme.palette.mode === 'light'? '#f8faff' : theme.palette.background.paper, boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)' }}>
