@@ -5,6 +5,7 @@ import { faker } from "@faker-js/faker";
 import { CaretDown, LinkSimple, MagnifyingGlass, PaperPlane, PaperPlaneTilt, Phone, Smiley, VideoCamera } from "phosphor-react";
 import ConvoHeader from "./Header";
 import ConvoFooter from "./Footer";
+import Message from "./messages";
 
 const StyledInput = styled(TextField)(({ theme }) => (
     {
@@ -28,7 +29,7 @@ function Conversation() {
 
             {/* msgs */}
             <Box sx={{ flexGrow: 1, width: '100%', }}>
-                
+                <Message/>
             </Box>
 
             {/* Chat footer */}

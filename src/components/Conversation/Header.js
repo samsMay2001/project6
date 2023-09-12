@@ -5,7 +5,7 @@ import { faker } from "@faker-js/faker";
 import { CaretDown, LinkSimple, MagnifyingGlass, PaperPlane, PaperPlaneTilt, Phone, Smiley, VideoCamera } from "phosphor-react";
 
 
-export function ConvoHeader() {
+ function ConvoHeader() {
     const theme = useTheme()
     return ( 
         <Box p={2} sx={{ width: '100%', backgroundColor: theme.palette.mode === 'light'? '#f8faff' : theme.palette.background.paper , boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)' }}>
