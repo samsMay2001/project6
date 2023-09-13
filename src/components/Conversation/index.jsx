@@ -22,13 +22,13 @@ const StyledInput = styled(TextField)(({ theme }) => (
 function Conversation() {
     const theme = useTheme()
     return (
-        <Stack height={'100%'} maxHeight={'100vh'} width={'auto'} alignItems={'center'}>
+        <Stack height={'100vh'}  width={'100%'} alignItems={'center'}>
 
             {/* Chat header */}
             <ConvoHeader/>
 
             {/* msgs */}
-            <Box sx={{ flexGrow: 1, width: '100%', }}>
+            <Box sx={{ flexGrow: 1, width: '100%', position: 'relative'}}>
                 <Message/>
             </Box>
 

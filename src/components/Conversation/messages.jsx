@@ -1,26 +1,33 @@
 import { Box, Stack } from "@mui/material";
 import { Chat_History } from "../../data";
-import {TextMessage, TimeLine} from "./MsgTypes";
+import {LinkMsg, MediaMsg, ReplyMsg, TextMessage, TimeLine} from "./MsgTypes";
 
 function Message() {
     return ( 
-        <Box p={3}>
-            <Stack spacing={3}>
+        <Box p={3} sx={
+            {
+                position: 'absolute', 
+                left: 0,
+                top: 0,
+                width: '100%',
+                bottom: 0, 
+                overflowY: 'scroll'}}>
+            <Stack spacing={3} >
                 {Chat_History.map((el)=>{
                     switch (el.type) {
                         case 'divider': 
                             return <TimeLine el={el}/>
-                            break;
                         case 'msg': 
                             switch(el.subtype) {
                                 case 'doc': 
-                                break; 
+                                break;
                                 case 'link': 
-                                break; 
+                                return <LinkMsg el={el}/>
                                 case 'img': 
-                                break; 
+                                return <MediaMsg el={el}/>
+                                
                                 case 'reply': 
-                                break; 
+                                return <ReplyMsg el={el}/>
 
                                 default: //  txt msg 
                                 return <TextMessage el={el}/>
