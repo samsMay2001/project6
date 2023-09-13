@@ -1,7 +1,8 @@
 import { faker } from "@faker-js/faker";
-import { Box, Divider, Link, Stack, Typography } from "@mui/material";
+import { Box, Divider, IconButton, Link, Stack, Typography } from "@mui/material";
 
 import {useTheme} from "@mui/material/styles"
+import { DownloadSimple, Image } from "phosphor-react";
 
 function TimeLine({el}) {
     const theme = useTheme(); 
@@ -95,36 +96,69 @@ function LinkMsg({el}){
                     borderRadius : 1.5, 
                     width: 'max-content'
                 }
-                    }>
-                        <Stack spacing={2}>
-                            <Stack spacing={3} p={2} alignItems={'sleft'} sx={{
-                                backgroundColor: theme.palette.background.paper,
-                                borderRadius: 1
-                            }} >
-                                <img src={el.preview} alt={el.message} style={{
-                                    maxHeight: 210, 
-                                    borderRadius: '10px'
-                                }}/>
-                                <Stack spacing={2}>
-                                    <Typography variant={'subtitle2'}>
-                                        Creating A Chat App
-                                    </Typography>
-                                    <Typography variant={'subtitle2'} component={Link} sx={{
-                                        color: theme.palette.primary.main
-                                    }}
-                                    to={'//https://www.youtube.com'}
-                                    >
-                                        www.yoututbe.com
-                                    </Typography>
-                                </Stack>
-                                <Typography variant="body2" color={el.incoming ? theme.palette.text : '#fff'}>
-                                    {el.message}
+                }>
+                    <Stack spacing={2}>
+                        <Stack spacing={3} p={2} alignItems={'sleft'} sx={{
+                            backgroundColor: theme.palette.background.paper,
+                            borderRadius: 1
+                        }} >
+                            <img src={el.preview} alt={el.message} style={{
+                                maxHeight: 210, 
+                                borderRadius: '10px'
+                            }}/>
+                            <Stack spacing={2}>
+                                <Typography variant={'subtitle2'}>
+                                    Creating A Chat App
+                                </Typography>
+                                <Typography variant={'subtitle2'} component={Link} sx={{
+                                    color: theme.palette.primary.main
+                                }}
+                                to={'//https://www.youtube.com'}
+                                >
+                                    www.yoututbe.com
                                 </Typography>
                             </Stack>
-
+                            <Typography variant="body2" color={el.incoming ? theme.palette.text : '#fff'}>
+                                {el.message}
+                            </Typography>
                         </Stack>
+
+                    </Stack>
             </Box>
         </Stack>
     )
 }
-export {TimeLine, TextMessage, MediaMsg, ReplyMsg, LinkMsg};
+
+function DocMsg({el}){
+    const theme = useTheme(); 
+    return ( 
+        <Stack direction={'row'} justifyContent={el.incoming ? 'start' : 'end'}>
+            <Box p={1.5} sx={
+                {
+                    backgroundColor: el.incoming ? theme.palette.background.paper : theme.palette.primary.main, 
+                    borderRadius : 1.5, 
+                    width: 'max-content'
+                }
+                }>
+                    <Stack p={2} direction={'row'} spacing={3} alignItems={'center'} sx={{
+                        backgroundColor: theme.palette.background.paper, 
+                        borderRadius: 1, 
+                    }}>
+                        <Image size={48} />
+                        <Typography variant="caption">Abstract.png</Typography>
+                        <IconButton>
+                            <DownloadSimple/>
+                        </IconButton>
+                    </Stack>
+                    <Typography
+                     variant='body2' sx={{
+                        color: el.incoming ? theme.palette.text : '#fff' 
+                     }}
+                    >
+                        {el.message}
+                    </Typography>
+            </Box>
+        </Stack>
+     );
+}
+export {DocMsg, TimeLine, TextMessage, MediaMsg, ReplyMsg, LinkMsg};

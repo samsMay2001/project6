@@ -1,6 +1,6 @@
 import { Box, Stack } from "@mui/material";
 import { Chat_History } from "../../data";
-import {LinkMsg, MediaMsg, ReplyMsg, TextMessage, TimeLine} from "./MsgTypes";
+import {DocMsg, LinkMsg, MediaMsg, ReplyMsg, TextMessage, TimeLine} from "./MsgTypes";
 
 function Message() {
     return ( 
@@ -20,7 +20,7 @@ function Message() {
                         case 'msg': 
                             switch(el.subtype) {
                                 case 'doc': 
-                                break;
+                                return <DocMsg el={el}/>
                                 case 'link': 
                                 return <LinkMsg el={el}/>
                                 case 'img': 
