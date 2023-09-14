@@ -1,4 +1,4 @@
-import { Avatar, Box, Divider, IconButton, InputAdornment, Stack, TextField, Typography, useTheme } from "@mui/material";
+import { Avatar, Box, Divider, Fab, IconButton, InputAdornment, Stack, TextField, Tooltip, Typography, useTheme } from "@mui/material";
 import {styled} from '@mui/material/styles'
 import { StyledBadge } from "../../pages/dashboard/Chat";
 import { faker } from "@faker-js/faker";
@@ -7,6 +7,7 @@ import ConvoHeader from "./Header";
 import Picker  from "@emoji-mart/react";
 import data from "@emoji-mart/data"
 import { useState } from "react";
+import { Actions } from "./footerActions";
 
 const StyledInput = styled(TextField)(({ theme }) => (
     {
@@ -23,18 +24,39 @@ const StyledInput = styled(TextField)(({ theme }) => (
 ))
 
 const ChatInput = ({setOpenPicker}) => {
+
+    const [openActions, setOpenAction] = useState(false); 
     return (
         <StyledInput fullWidth placeholder='Write a message' variant='filled' InputProps={{
             disableUnderline: true, 
-            startAdornment: 
-            <InputAdornment  >
-                    <IconButton>
-                        <LinkSimple/>
-                    </IconButton>
-            </InputAdornment>, 
+            startAdornment: (
+                <Stack sx={{width: 'max-content'}}>
+                    <Stack sx={{
+                        position: 'relative', 
+                        display: openActions ? 'inline-block' : 'none'
+                        }}>
+                        {Actions.map((el)=> (
+                            <Tooltip title={el.title} placement="right">
+                                <Fab sx={{
+                                    position: 'absolute', 
+                                    top: -el.y, 
+                                    backgroundColor: el.color
+                                }}>
+                                    {el.icon}
+                                </Fab>
+                            </Tooltip>
+                        ))}
+                    </Stack>
+                    <InputAdornment  >
+                            <IconButton onBlur={()=> {setOpenAction(false)}} onClick={()=> {setOpenAction((oldVal)=> !oldVal)}}>
+                                <LinkSimple/>
+                            </IconButton>
+                    </InputAdornment> 
+                </Stack>
+            ), 
             endAdornment: 
             <InputAdornment>
-                <IconButton onClick={()=> {setOpenPicker((oldVal)=> !oldVal)}}>
+                <IconButton onBlur={()=> {setOpenPicker(false)}} onClick={()=> {setOpenPicker((oldVal)=> !oldVal)}}>
                     <Smiley/>
                 </IconButton>
             </InputAdornment>, 
