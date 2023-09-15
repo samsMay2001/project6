@@ -78,7 +78,6 @@ export function ConvoFooter() {
                         bottom: 81, 
                         right: 100
                     }}>
-                        {/* 34:01 */}
                         <Picker theme={theme.palette.mode} data={data}/>
                     </Box>
                     <ChatInput setOpenPicker={setOpenPicker}/>
