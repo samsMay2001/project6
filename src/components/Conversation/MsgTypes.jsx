@@ -1,8 +1,10 @@
 import { faker } from "@faker-js/faker";
-import { Box, Divider, IconButton, Link, Stack, Typography } from "@mui/material";
+import { Box, Divider, IconButton, Link, Menu, MenuItem, Stack, Typography } from "@mui/material";
 
 import {useTheme} from "@mui/material/styles"
-import { DownloadSimple, Image } from "phosphor-react";
+import { DotsThreeVertical, DownloadSimple, Image } from "phosphor-react";
+import { Message_options } from "../../data";
+import { useState } from "react";
 
 function TimeLine({el}) {
     const theme = useTheme(); 
@@ -33,6 +35,7 @@ function MediaMsg({el}){
                     </Typography>
                 </Stack>
             </Box>
+            <MessageOptions/>
         </Stack>
     )
 }
@@ -52,6 +55,7 @@ function TextMessage({el}) {
                             {el.message}
                         </Typography>
             </Box>
+            <MessageOptions/>
         </Stack>
      );
 }
@@ -79,7 +83,7 @@ function ReplyMsg({el}){
                         {el.reply}
                     </Typography>
                     {/* {el.img} */}
-                    
+                    <MessageOptions/>
                 </Stack>
             </Box>
         </Stack>
@@ -125,6 +129,7 @@ function LinkMsg({el}){
 
                     </Stack>
             </Box>
+            <MessageOptions/>
         </Stack>
     )
 }
@@ -158,7 +163,52 @@ function DocMsg({el}){
                         {el.message}
                     </Typography>
             </Box>
+            <MessageOptions/>
         </Stack>
      );
+}
+
+const MessageOptions = () => {
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+
+    return (
+        <>
+            
+            <DotsThreeVertical size={20}
+                id="demo-positioned-button"
+                aria-controls={open ? 'demo-positioned-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick} 
+                style={{
+                    cursor: 'pointer'
+                }}
+             />
+            <Menu
+                id="demo-positioned-menu"
+                aria-labelledby="demo-positioned-button"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                    "aria-labelledby": "basic-button"
+                }}
+            >
+                <Stack spacing={1} px={1} >
+                    {Message_options.map((el)=> (
+                        <MenuItem onClick={()=> {}}>{el.title}</MenuItem>
+                    ))}
+                </Stack>
+            </Menu>
+        </>
+    )
 }
 export {DocMsg, TimeLine, TextMessage, MediaMsg, ReplyMsg, LinkMsg};
