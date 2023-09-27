@@ -7,6 +7,7 @@ import React,
 import Chats from "./Chat";
 import { Box, Stack, useTheme } from "@mui/material";
 import Conversation from "../../components/Conversation";
+import Contact from "../../components/Contacts";
 
 // Dynamic import 
 // const Cat = lazy(()=> import('../../components/Cat'))
@@ -20,10 +21,12 @@ const GeneralApp = () => {
       <Chats />
 
       {/* conversation component */}
-      <Box sx={{height: '100%', width: 'calc(100vw - 417px)', backgroundColor: theme.palette.mode === 'light'? '#f0f4fa' : theme.palette.background.default}}>
+      <Box sx={{height: '100%', width: 'calc(100vw - 740px)', backgroundColor: theme.palette.mode === 'light'? '#f0f4fa' : theme.palette.background.default}}>
         <Conversation/>
       </Box>
 
+      {/* contacts */}
+      <Contact/>
     </Stack>
   );
 };
