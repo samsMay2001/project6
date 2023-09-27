@@ -83,9 +83,9 @@ function ReplyMsg({el}){
                         {el.reply}
                     </Typography>
                     {/* {el.img} */}
-                    <MessageOptions/>
                 </Stack>
             </Box>
+            <MessageOptions/>
         </Stack>
     )
 }
