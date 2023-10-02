@@ -15,7 +15,7 @@ const slice = createSlice({
     reducers: {
         // toggle sidebar
         toggleSidebar(state, action) {
-            state.sidebar.open = !state.sidebar.open
+            state.sidebar.open = !state.sidebar.open; 
         }, 
         updateSidebarType(state, action) {
             state.sidebar.type = action.payload.type
@@ -24,4 +24,20 @@ const slice = createSlice({
 })
 
 // Reducer
-export default slice.reducer
+export default slice.reducer 
+
+// toggling
+export function ToggleSidebar () {
+    return async () => {
+        await dispatch(slice.actions.toggleSidebar())
+        // console.log('a')
+
+    }
+}
+export function UpdateSidebarType (type) {
+    return async () => {
+        dispatch(
+            slice.actions.updateSidebarType({type})
+        )
+    }
+}

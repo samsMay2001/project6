@@ -1,5 +1,6 @@
 // import {comb} from 'redux';
-import { combineReducers } from 'redux' 
+// import { combineReducers } from 'redux' 
+import { combineReducers } from 'redux'
 import storage from 'redux-persist/lib/storage'
 import appReducer from './slices/app'
 
@@ -12,7 +13,7 @@ const rootPersistConfig = {
 }
 
 const rootReducer = combineReducers({
-    app: appReducer // where is this imported from !!!!!!!!
+    app: appReducer 
 })
 
 export {rootPersistConfig, rootReducer}

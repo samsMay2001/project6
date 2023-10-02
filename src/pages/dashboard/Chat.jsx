@@ -124,10 +124,14 @@ function Chats() {
 
     return (
         <Box sx={{
-            position: 'relative',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            bottom: 0,
             width: '320px',
             backgroundColor: theme.palette.mode==="light" ? '#F8FAFF' : theme.palette.background.paper,
-            boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)'
+            boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)', 
+            // border: '4px dashed blue'
         }}>
             <Stack p={3} spacing={2} sx={{height: '100vh'}}>
 
