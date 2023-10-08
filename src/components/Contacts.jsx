@@ -102,7 +102,10 @@ function Contact() {
                         </Stack> 
                         <AntSwitch />
                     </Stack>
-
+                    <Stack direction={'row'} alignItems={'center'} spacing={2}>
+                        <Button fullWidth variant="outlined">Block</Button>
+                        <Button fullWidth variant="outlined">Delete</Button>
+                    </Stack>
                 </Stack>
             </Stack>
         </Box>
