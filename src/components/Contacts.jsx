@@ -2,7 +2,7 @@
 import { Avatar, Box, Button, Divider, IconButton, Stack, Typography, useTheme } from "@mui/material";
 import { Bell, CaretRight, Phone, Star, VideoCamera, X } from "phosphor-react";
 import { useDispatch } from "react-redux";
-import { ToggleSidebar } from "../redux/slices/app";
+import { ToggleSidebar, UpdateSidebarType } from "../redux/slices/app";
 import { faker } from "@faker-js/faker";
 import { AntSwitch } from "../layouts/dashboard/antswitch";
 // import { Stack } from "phosphor-react";
@@ -16,7 +16,7 @@ function Contact() {
             {
                 // width: 323,
                 position: 'absolute',
-                width: '300px',
+                width: '320px',
                 height: '100vh', 
                 top: 0,  
                 right: 0
@@ -73,7 +73,9 @@ function Contact() {
                     <Divider/>
                     <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
                         <Typography variant="subtitle2">Media, Link & Docs</Typography>
-                        <Button endIcon={<CaretRight/>}>
+                        <Button onClick={()=>{
+                            dispatch(UpdateSidebarType("SHARED"))
+                        }} endIcon={<CaretRight/>}>
                             401
                         </Button>
                     </Stack>
@@ -90,7 +92,9 @@ function Contact() {
                             <Star/>
                             <Typography variant="subtitle2">Starred messages</Typography>
                         </Stack> 
-                        <IconButton>
+                        <IconButton onClick={()=>{
+                            dispatch(UpdateSidebarType("STARRED"))
+                        }}>
                             <CaretRight/>
                         </IconButton>
                     </Stack>
