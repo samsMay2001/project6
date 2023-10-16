@@ -1,16 +1,57 @@
 // import { useTheme } from "@emotion/react";
-import { Avatar, Box, Button, Divider, IconButton, Stack, Typography, useTheme } from "@mui/material";
+import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, IconButton, Slide, Stack, Typography, useTheme } from "@mui/material";
 import { Bell, CaretRight, Phone, Star, VideoCamera, X } from "phosphor-react";
 import { useDispatch } from "react-redux";
 import { ToggleSidebar, UpdateSidebarType } from "../redux/slices/app";
 import { faker } from "@faker-js/faker";
 import { AntSwitch } from "../layouts/dashboard/antswitch";
+import { forwardRef } from "react";
+import { useState } from "react";
 // import { Stack } from "phosphor-react";
 // import {Stack}
+
+const Transition = forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
+  
+export function AlertDialogSlide({openBlock, openDelete, handleClose}) {
+
+
+return (
+    <div>
+    {(openBlock || openDelete) && <Dialog
+        open={openBlock || openDelete}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+    >
+        {openBlock && <DialogTitle>{"Block this contact"}</DialogTitle>}
+        {openDelete && <DialogTitle>{"Delete this contact"}</DialogTitle>}
+        <DialogContent>
+        <DialogContentText id="alert-dialog-slide-description">
+            { openBlock && 'Are you sure you want to block this contact?'} 
+            { openDelete && 'Are you sure you want to delete this contact?'} 
+        </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={handleClose}>Yes</Button>
+        </DialogActions>
+    </Dialog>}
+    </div>
+);
+}
 
 function Contact() {
     const theme = useTheme()
     const dispatch = useDispatch(); 
+    const [openBlock, setOpenBlock] = useState(false);
+    const [openDelete, setOpenDelete] = useState(false); 
+    const handleClose = () => {
+        setOpenDelete(false); 
+        setOpenBlock(false); 
+    };
     return ( 
         <Box sx={
             {
@@ -107,11 +148,12 @@ function Contact() {
                         <AntSwitch />
                     </Stack>
                     <Stack direction={'row'} alignItems={'center'} spacing={2}>
-                        <Button fullWidth variant="outlined">Block</Button>
-                        <Button fullWidth variant="outlined">Delete</Button>
+                        <Button fullWidth variant="outlined" onClick={()=> {setOpenBlock(true)}}>Block</Button>
+                        <Button fullWidth variant="outlined" onClick={()=> {setOpenDelete(true)}}>Delete</Button>
                     </Stack>
                 </Stack>
             </Stack>
+            {<AlertDialogSlide openBlock={openBlock} openDelete={openDelete} handleClose={handleClose}/>}
         </Box>
      );
 }
