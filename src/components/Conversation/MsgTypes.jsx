@@ -17,7 +17,7 @@ function TimeLine({el}) {
      );
 }
 
-function MediaMsg({el}){
+function MediaMsg({el, menu}){
     const theme= useTheme()
     return (
         <Stack direction={'row'} justifyContent={el.incoming ? "start" : 'end'}>
@@ -35,12 +35,13 @@ function MediaMsg({el}){
                     </Typography>
                 </Stack>
             </Box>
-            <MessageOptions/>
+            {menu && <MessageOptions/>}
+            {/* <MessageOptions/> */}
         </Stack>
     )
 }
 
-function TextMessage({el}) {
+function TextMessage({el, menu}) {
     const theme = useTheme(); 
     return ( 
         <Stack direction={'row'} justifyContent={el.incoming ? 'start' : 'end'}>
@@ -55,12 +56,12 @@ function TextMessage({el}) {
                             {el.message}
                         </Typography>
             </Box>
-            <MessageOptions/>
+            {menu && <MessageOptions/>}
         </Stack>
      );
 }
 
-function ReplyMsg({el}){
+function ReplyMsg({el, menu}){
     const theme= useTheme()
     return (
         <Stack direction={'row'} justifyContent={el.incoming ? "start" : 'end'}>
@@ -85,12 +86,12 @@ function ReplyMsg({el}){
                     {/* {el.img} */}
                 </Stack>
             </Box>
-            <MessageOptions/>
+            {menu && <MessageOptions/>}
         </Stack>
     )
 }
 
-function LinkMsg({el}){
+function LinkMsg({el, menu}){
     const theme = useTheme()
     return (
         <Stack direction={'row'} justifyContent={el.incoming ? 'start' : 'end'}>
@@ -129,12 +130,12 @@ function LinkMsg({el}){
 
                     </Stack>
             </Box>
-            <MessageOptions/>
+            {menu && <MessageOptions/>}
         </Stack>
     )
 }
 
-function DocMsg({el}){
+function DocMsg({el, menu}){
     const theme = useTheme(); 
     return ( 
         <Stack direction={'row'} justifyContent={el.incoming ? 'start' : 'end'}>
@@ -163,7 +164,7 @@ function DocMsg({el}){
                         {el.message}
                     </Typography>
             </Box>
-            <MessageOptions/>
+            {menu && <MessageOptions/>}
         </Stack>
      );
 }

@@ -2,7 +2,7 @@ import { Box, Stack } from "@mui/material";
 import { Chat_History } from "../../data";
 import {DocMsg, LinkMsg, MediaMsg, ReplyMsg, TextMessage, TimeLine} from "./MsgTypes";
 
-function Message() {
+function Message({menu}) {
     return ( 
         <Box p={3} sx={
             {
@@ -16,21 +16,21 @@ function Message() {
                 {Chat_History.map((el)=>{
                     switch (el.type) {
                         case 'divider': 
-                            return <TimeLine el={el}/>
+                            return <TimeLine el={el} />
                         case 'msg': 
                             switch(el.subtype) {
                                 case 'doc': 
-                                return <DocMsg el={el}/>
+                                return <DocMsg el={el} menu={menu}/>
                                 case 'link': 
-                                return <LinkMsg el={el}/>
+                                return <LinkMsg el={el}  menu={menu}/>
                                 case 'img': 
-                                return <MediaMsg el={el}/>
+                                return <MediaMsg el={el}  menu={menu}/>
                                 
                                 case 'reply': 
-                                return <ReplyMsg el={el}/>
+                                return <ReplyMsg el={el} menu={menu}/>
 
                                 default: //  txt msg 
-                                return <TextMessage el={el}/>
+                                return <TextMessage el={el} menu={menu}/>
                                 // break; 
                             }
                             return 

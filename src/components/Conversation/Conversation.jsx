@@ -29,7 +29,7 @@ function Conversation() {
 
             {/* msgs */}
             <Box sx={{ flexGrow: 1, width: '100%', position: 'relative'}}>
-                <Message/>
+                <Message menu={true}/>
             </Box>
 
             {/* Chat footer */}

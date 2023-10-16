@@ -6,10 +6,11 @@ import React,
 } from "react";
 import Chats from "./Chat";
 import { Box, Stack, useTheme } from "@mui/material";
-import Conversation from "../../components/Conversation";
+import Conversation from "../../components/Conversation/Conversation";
 import Contact from "../../components/Contacts";
 import { useSelector } from "react-redux";
 import SharedMessages from "../../components/SharedMessages";
+import StarredMessages from "../../components/StarredMessages";
 
 // Dynamic import 
 // const Cat = lazy(()=> import('../../components/Cat'))
@@ -46,7 +47,7 @@ const GeneralApp = () => {
             return <Contact />; 
           
           case "STARRED":
-            break; 
+            return <StarredMessages/>
 
           case "SHARED":
             return <SharedMessages/>

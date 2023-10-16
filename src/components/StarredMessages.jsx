@@ -6,6 +6,7 @@ import { useState } from "react";
 import { faker } from "@faker-js/faker";
 import { SHARED_DOCUMENTS, SHARED_LINKS } from "../data";
 import { DocMsg, LinkMsg } from "./Conversation/MsgTypes";
+import Message from "./Conversation/messages";
 
 function StarredMessages() {
     const theme = useTheme(); 
@@ -45,7 +46,7 @@ function StarredMessages() {
                     </Box>
                     {/* Body */}
                     <Stack sx={{height: '100%', position: 'relative', flexGrow: 1}} p={3} spacing={3}>
-                       
+                       <Message menu={false} />
                     </Stack>
                 </Stack>
         </Box>
