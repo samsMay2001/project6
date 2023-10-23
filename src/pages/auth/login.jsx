@@ -1,6 +1,7 @@
 import { Link, Stack, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import AuthSocial from "./AuthSocial";
+import LoginForm from "./LoginForm";
 
 function Login() {
     return ( 
@@ -16,7 +17,7 @@ function Login() {
             </Stack>
 
             {/* Login Form  */}
-            
+            <LoginForm/>
             {/* AuthSocial */}
             <AuthSocial/>
         </Stack>
