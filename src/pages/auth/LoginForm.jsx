@@ -4,8 +4,10 @@ import {useForm} from 'react-hook-form'
 import {yupResolver} from "@hookform/resolvers/yup"
 import { async } from "emoji-mart";
 import FormProvider from "../../components/hook-form/FormProvider";
-import { Alert, Stack } from "@mui/material";
+import { Alert, Button, IconButton, InputAdornment, Stack } from "@mui/material";
 import { RHFTextField } from "../../components/hook-form";
+import { Eye, EyeSlash } from "phosphor-react";
+import { Link } from "react-router-dom";
  
 function LoginForm() {
     const [showPassword, setShowPassword] = useState(false); 
@@ -48,8 +50,36 @@ function LoginForm() {
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={3}>
                 {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
+                <RHFTextField name={'email'} label={"Email address"} />
+                <RHFTextField name={'password'} label={"Password"} type={showPassword ? "text" : "password"} 
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment>
+                            <IconButton onClick={()=> {
+                                setShowPassword(!showPassword)
+                            }}>
+                                {showPassword ? <Eye/> : <EyeSlash/>}
+                            </IconButton>
+                        </InputAdornment>
+                    )
+                }} />
             </Stack>
-            <RHFTextField name={'email'} label={"Email address"} />
+            <Stack alignItems={'flex-end'} sx={{my: 2}}>
+                <Link variant="body2" color={'inherit'} underline="always">
+                    Forgot Password
+                </Link>
+            </Stack>
+            <Button fullWidth color="inherit" size="large" type="submit" variant="contained" sx={{
+                bgcolor: 'text.primary', 
+                color: (theme) => theme.palette.mode === "light" ? "common.white" : "grey.800", 
+                "&:hover": {
+                    bgcolor: "text.primary", 
+                    color: (theme) => 
+                    theme.palette.mode === "light" ? "common.white" : "grey.800"
+                }
+            }}>
+                Login
+            </Button>
         </FormProvider>
      );
 }
