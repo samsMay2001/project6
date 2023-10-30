@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 function LoginForm() {
     const [showPassword, setShowPassword] = useState(false); 
 
-    const loginSchema = Yup.object().shape({
+    const LoginSchema = Yup.object().shape({
         email: Yup.string().required('Email is required').email('Email must valid'), 
         password: Yup.string().required('Password is required')
     })
@@ -23,7 +23,7 @@ function LoginForm() {
     }
 
     const methods = useForm({
-        resolver: yupResolver(LoginForm), 
+        resolver: yupResolver(LoginSchema), 
         defaultValues
     })
 
