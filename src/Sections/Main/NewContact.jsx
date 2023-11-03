@@ -6,7 +6,7 @@ function NewContact() {
     const [openDialogue, setOpenDialogue] = useState(false); 
     return ( 
         <div>
-            Freinds and Friend requests
+            Friends and Friend requests
         </div>
      );
 }
