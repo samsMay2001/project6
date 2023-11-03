@@ -1,12 +1,13 @@
 import { faker } from "@faker-js/faker";
-import { Box, Stack, Typography, InputBase, Button, Divider, Badge, Avatar, useTheme } from "@mui/material";
+import { Box, Stack, Typography, InputBase, Button, Divider, Badge, Avatar, useTheme, Link, IconButton } from "@mui/material";
 // import InputBase from "@mui/material/InputBase/InputBase";
 
 import { styled, alpha } from '@mui/material/styles'
-import { ArchiveBox, CircleDashed, MagnifyingGlass } from "phosphor-react";
+import { ArchiveBox, CircleDashed, MagnifyingGlass, Plus } from "phosphor-react";
 import { useEffect } from "react";
 import { ChatList } from "../../data";
 import { SimpleBarStyle } from "../../components/Scrollbar";
+import {Link as RouterLink} from 'react-router-dom'
 
 export const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -134,7 +135,7 @@ function Chats() {
             // border: '4px dashed blue'
         }}>
             <Stack p={3} spacing={2} sx={{height: '100vh'}}>
-
+            
                 {/* component title and icon */}
                 <Stack direction="row" alignItems={'center'} justifyContent={'space-between'}>
                     <Typography variant={'h5'}>
@@ -152,7 +153,17 @@ function Chats() {
                         <StyledInputBase placeholder={'Search...'} inputProps={{ 'aria-label': 'search' }} />
                     </Search>
                 </Stack>
-
+                {/* New conversation */}
+                <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+                    <Typography variant="subtitle2" component={Link}>
+                        Start Conversation
+                    </Typography>
+                    <IconButton onClick={()=> {
+                        // setOpenDialogue to true
+                    }}>
+                        <Plus style={{color: theme.palette.primary.main }} />
+                    </IconButton>
+                </Stack>
                 {/* archive box and text */}
                 <Stack spacing={1}>
                     <Stack direction={'row'} alignItems={'center'} spacing={1.5}>
