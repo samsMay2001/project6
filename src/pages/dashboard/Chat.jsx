@@ -134,7 +134,7 @@ function Chats() {
             boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)', 
             // border: '4px dashed blue'
         }}>
-            <Stack p={3} spacing={2} sx={{height: '100vh'}}>
+            <Stack p={3} spacing={2} sx={{height: '100%'}}>
             
                 {/* component title and icon */}
                 <Stack direction="row" alignItems={'center'} justifyContent={'space-between'}>
@@ -175,7 +175,7 @@ function Chats() {
 
                 {/* chat lists */}
                 <Stack spacing={2} direction={'column'} sx={{flexGrow:1, 
-                    // overflowY: 'scroll', 
+                    overflowY: 'scroll', 
                     height: '100%'}}>
                     {/* <SimpleBarStyle > */}
                         

@@ -21,7 +21,7 @@ function Settings() {
     ]
     return ( 
         <>
-            <Stack direction={'row'} sx={{width: '100%'}}>
+           { false && <Stack direction={'row'} sx={{width: '100%'}}>
                 {/* Left panel */}
                 <Box sx={{
                     // overflowY: "scroll", 
@@ -69,7 +69,7 @@ function Settings() {
                     </Stack>
                 </Box>
                 {/* Right panel */}
-            </Stack>
+            </Stack> }
         </>
      );
 }

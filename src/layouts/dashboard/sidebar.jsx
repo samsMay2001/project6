@@ -32,7 +32,7 @@ function SideBar() {
       setAnchorEl(null);
     };
     return ( 
-        <Box p={2} sx={{ backgroundColor: theme.palette.background.paper, height: '100vh', boxShadow: "0px 0px 2px rgba(0,0,0, 0.25)", width: 100 }}>
+        <Box p={2} sx={{ backgroundColor: theme.palette.background.paper, height: '100%', boxShadow: "0px 0px 2px rgba(0,0,0, 0.25)", width: 100 }}>
 
         <Stack spacing={3} direction="column" sx={{ width: '100%', height: '100%' }} alignItems={'center'} justifyContent={'space-between'}>
           <Stack alignItems={'center'} spacing={4}>
