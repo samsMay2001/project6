@@ -22,7 +22,7 @@ const StyledInput = styled(TextField)(({ theme }) => (
 function Conversation() {
     const theme = useTheme()
     return (
-        <Stack height={'100vh'}  width={'100%'} alignItems={'center'}>
+        <Stack height={'100%'}  width={'100%'} alignItems={'center'}>
 
             {/* Chat header */}
             <ConvoHeader/>
