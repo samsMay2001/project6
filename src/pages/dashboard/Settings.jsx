@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { Avatar, Box, Divider, IconButton, Stack, Typography, useTheme } from "@mui/material";
 import { Bell, CaretLeft, Lock, PencilCircle } from "phosphor-react";
+import Profile from "./Profile";
 
 function Settings() {
     const theme = useTheme()
@@ -70,6 +71,7 @@ function Settings() {
                     </Stack>
                 </Box>
                 {/* Right panel */}
+                <Profile />
             </Stack> }
             {/* Profile */}
         </>
