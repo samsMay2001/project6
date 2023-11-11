@@ -1,9 +1,11 @@
 import * as Yup from 'yup'
-import {FormProvider, useForm} from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 import {yupResolver} from "@hookform/resolvers/yup"
-import { useCallback } from 'react'
-import { RHFTextField } from '../../components/hook-form'
-import { Alert, Stack } from '@mui/material'
+import FormProvider from "../../components/hook-form/FormProvider";
+import { Alert, Button, Stack } from "@mui/material";
+import { RHFTextField } from "../../components/hook-form";
+import { useCallback } from 'react';
+
 
 export const ProfileForm = () => {
     const ProfileSchema = Yup.object().shape({
@@ -60,9 +62,14 @@ export const ProfileForm = () => {
         <div>
             <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
                 <Stack spacing={3}>
-                    {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
-                    <RHFTextField name={'name'} label={"Name"} helperText={'This name is visible to your contacts'} />
-                    <RHFTextField multiline rows={4} maxRows = {5} name={'about'} label={'about'} />
+                    <Stack spacing={3}>
+                        {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
+                        <RHFTextField name={'name'} label={"Name"} helperText={'This name is visible to your contacts'} />
+                        <RHFTextField multiline rows={4} maxRows = {5} name={'about'} label={'about'} />
+                    </Stack>
+                    <Stack direction={'row'} justifyContent={'end'}>
+                        <Button fullWidth color='primary' size='large' type='submit' variant='outlined' >Save</Button>
+                    </Stack>
                 </Stack>
             </FormProvider>
         </div>
