@@ -5,8 +5,8 @@ import { CaretLeft } from "phosphor-react";
 function Profile(){
     return (
         <div>
-            <Stack alignItems={'center'} justifyContent={'center'}>        
-                <Stack p={4} spacing={5}>
+            <Stack alignItems={'center'} justifyContent={'center'} sx={{width: '450px'}}>        
+                <Stack p={4} spacing={5} sx={{width: '100%'}}>
                     {/* Header */}
                     <Stack direction={'row'} alignItems={'center'} spacing={3}>
                         <Typography variant="h5">Profile</Typography>

@@ -68,7 +68,7 @@ export const ProfileForm = () => {
                         <RHFTextField multiline rows={4} maxRows = {5} name={'about'} label={'about'} />
                     </Stack>
                     <Stack direction={'row'} justifyContent={'end'}>
-                        <Button fullWidth color='primary' size='large' type='submit' variant='outlined' >Save</Button>
+                        <Button  color='primary' size='large' type='submit' variant='outlined' >Save</Button>
                     </Stack>
                 </Stack>
             </FormProvider>

@@ -9,15 +9,32 @@ import { useState } from "react";
 import { faker } from "@faker-js/faker";
 import useSettings from "../../hooks/useSettings";
 import { AntSwitch } from "./antswitch";
+import { values } from "emoji-mart";
+import { useNavigate } from "react-router-dom";
 // import SideBar from "./sidebar";
 
 
 
-
+const getPath = (index) => {
+  switch(index){
+    case 0:
+      return '/app'; 
+    // case 1:
+    //   return '/app'; 
+    // case 2:
+    //   return '/app'; 
+    case 3:
+      return '/settings'; 
+    
+    default:
+      break;
+  }
+}
 
 function SideBar() {
 
     const theme = useTheme()
+    const navigate = useNavigate()
 
     const [selected, setSelected] = useState(0)
 
@@ -33,7 +50,6 @@ function SideBar() {
     };
     return ( 
         <Box p={2} sx={{ backgroundColor: theme.palette.background.paper, height: '100%', boxShadow: "0px 0px 2px rgba(0,0,0, 0.25)", width: 100 }}>
-
         <Stack spacing={3} direction="column" sx={{ width: '100%', height: '100%' }} alignItems={'center'} justifyContent={'space-between'}>
           <Stack alignItems={'center'} spacing={4}>
 
@@ -48,15 +64,23 @@ function SideBar() {
 
             </Box>
             <Stack sx={{ width: 'max-content' }} spacing={3} alignItems='center'>
-              {Nav_Buttons.map((el) => (
+              {Nav_Buttons.map((el, index) => (
                 el.index === selected ?
-                  <Box p={1} sx={{ backgroundColor: theme.palette.primary.main, borderRadius: 1.5, }}>
-                    <IconButton key={el.index} sx={{ width: 'max-content', color: '#fff' }} onClick={()=>{setSelected(el.index)}}>
+                  <Box key={index} p={1} sx={{ backgroundColor: theme.palette.primary.main, borderRadius: 1.5, }}>
+                    <IconButton key={el.index} sx={{ width: 'max-content', color: '#fff' }} 
+                    onClick={()=>{
+                        setSelected(el.index); 
+                        navigate(getPath(el.index))
+                        // console.log(getPath(el.index))
+                      }}>
                       {el.icon}
                     </IconButton>
                   </Box>
                   :
-                  <IconButton key={el.index} sx={{ width: 'max-content', color: theme.palette.mode ==="light" ? '#000' : theme.palette.text.primary   }} onClick={()=>{setSelected(el.index)}}>
+                  <IconButton key={index} sx={{ width: 'max-content', color: theme.palette.mode ==="light" ? '#000' : theme.palette.text.primary   }} onClick={()=>{
+                    setSelected(el.index); 
+                    navigate(getPath(el.index))
+                  }}>
 
                     {el.icon}
                   </IconButton>
@@ -65,12 +89,17 @@ function SideBar() {
 
               {selected === 3 ?
                 <Box p={1} sx={{ backgroundColor: theme.palette.primary.main, borderRadius: 1.5, }}>
-                  <IconButton onClick={()=>{setSelected(3)}} sx={{ width: 'max-content', color: '#fff' }}>
+                  <IconButton onClick={()=>{
+                    setSelected(3)
+                    navigate(getPath(3))
+                    }} sx={{ width: 'max-content', color: '#fff' }}>
                     <Gear />
                   </IconButton>
                 </Box>
                 :
-                <IconButton onClick={()=>{setSelected(3)}} sx={{ width: 'max-content', color: theme.palette.mode ==="light" ? '#000' : theme.palette.text.primary }}>
+                <IconButton onClick={()=>{
+                  setSelected(3)
+                  navigate(getPath(3))}} sx={{ width: 'max-content', color: theme.palette.mode ==="light" ? '#000' : theme.palette.text.primary }}>
                   <Gear />
                 </IconButton>
               }
@@ -108,6 +137,7 @@ function SideBar() {
                   horizontal: 'left'
                 }}
             >
+            
                 <Stack spacing={1} px={1} >
                     {Profile_Menu.map((el)=> (
                         <MenuItem onClick={()=> {}}>
