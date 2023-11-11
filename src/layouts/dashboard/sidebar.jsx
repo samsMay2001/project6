@@ -19,10 +19,7 @@ const getPath = (index) => {
   switch(index){
     case 0:
       return '/app'; 
-    // case 1:
-    //   return '/app'; 
-    // case 2:
-    //   return '/app'; 
+
     case 3:
       return '/settings'; 
     
@@ -30,6 +27,7 @@ const getPath = (index) => {
       break;
   }
 }
+
 
 function SideBar() {
 
@@ -44,6 +42,7 @@ function SideBar() {
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
+
     };
     const handleClose = () => {
       setAnchorEl(null);
@@ -119,36 +118,6 @@ function SideBar() {
                   cursor: 'pointer'
               }}
             />
-            <Menu
-                id="demo-positioned-menu"
-                aria-labelledby="demo-positioned-button"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                    "aria-labelledby": "basic-button"
-                }}
-                anchorOrigin={{
-                  vertical: 'bottom', 
-                  horizontal: 'right'
-                }}
-                transformOrigin={{
-                  vertical : 'bottom', 
-                  horizontal: 'left'
-                }}
-            >
-            
-                <Stack spacing={1} px={1} >
-                    {Profile_Menu.map((el)=> (
-                        <MenuItem onClick={()=> {}}>
-                          <Stack sx={{width: 100}} direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
-                            <span>{el.title}</span>
-                            {el.icon}
-                          </Stack>
-                        </MenuItem>
-                    ))}
-                </Stack>
-            </Menu>
           </Stack>
         </Stack>
       </Box>
