@@ -21,13 +21,14 @@ function Settings() {
     ]
     return ( 
         <>
-           { false && <Stack direction={'row'} sx={{width: '100%'}}>
+           { true && <Stack direction={'row'} sx={{width: '100%'}}>
                 {/* Left panel */}
                 <Box sx={{
                     // overflowY: "scroll", 
                     height: "100vh", 
                     width: 320, 
-                    backgroundColor: theme.palette.mode = "light" ? "#F8FAFF" : theme.palette.background,  
+                    background: theme.palette.mode==="light" ? '#F8FAFF' : theme.palette.background.default ,  
+                    // F8FAFF
                     boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)', 
                 }}>
                     <Stack p={4} spacing={5}>
@@ -70,6 +71,7 @@ function Settings() {
                 </Box>
                 {/* Right panel */}
             </Stack> }
+            {/* Profile */}
         </>
      );
 }
