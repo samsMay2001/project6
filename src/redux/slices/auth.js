@@ -26,5 +26,5 @@ export default slice.reducer;
 // login
 
 export function LoginUser(formValues){
-    
+    console.log(formValues); 
 }
