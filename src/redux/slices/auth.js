@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from '../../utils/axios';
+import { dispatch } from "../store";
+
 
 const initialState = {
   isLoggedIn: false,
@@ -33,7 +35,10 @@ export function LoginUser(formValues) {
         "Content-Type": "application/json"
       }
     }).then((res)=> {
-      console.log(res)
+      dispatch(slice.actions.logIn({
+        isLoggedIn: true, 
+        token: res.data.token
+      }))
     }).catch((err)=> {
       console.log(err)
     })

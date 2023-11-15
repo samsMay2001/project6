@@ -6,15 +6,16 @@ import { useState } from "react";
 import Switch from "@mui/material/Switch/Switch";
 import useSettings from "../../hooks/useSettings";
 import SideBar from "./sidebar";
+import { useSelector } from "react-redux";
 
 const isAuthenticated = false;
 const DashboardLayout = () => {
   const theme = useTheme();
-
+  const {isLoggedIn} = useSelector((state) => state.auth)
   const [selected, setSelected] = useState(0);
 
   const { onToggleMode } = useSettings();
-  if (!isAuthenticated) {
+  if (!isLoggedIn) {
     return <Navigate to={"/auth/login"} />;
   }
 

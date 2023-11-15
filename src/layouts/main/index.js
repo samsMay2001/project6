@@ -3,10 +3,11 @@ import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import logo from "../../assets/Images/logo.ico";
 import { Columns } from "phosphor-react";
+import { useSelector } from "react-redux";
 
-const isAuthenticated = false;
 const MainLayout = () => {
-  if (isAuthenticated) {
+  const {isLoggedIn} = useSelector((state) => state.auth)
+  if (isLoggedIn) {
     return <Navigate to={"/app"} />;
   }
   return (
