@@ -15,12 +15,12 @@ const MainLayout = () => {
         direction={"column"}
         // justifyContent={"center"}
         // alignItems={"center"}
-        sx={{ height: "100vh"}}
+        sx={{ height: "100vh" }}
       >
         <Container maxWidth="sm">
           <Stack spacing={5}>
             <Stack
-              sx={{ width: "100%", marginTop: '150px'}}
+              sx={{ width: "100%", marginTop: "100px" }}
               direction={"column"}
               alignItems={"center"}
             >
