@@ -49,11 +49,11 @@ function LoginForm() {
       dispatch(LoginUser(data));
     } catch (err) {
       console.log(err);
-      //   reset();
-      //   setError("afterSubmit", {
-      //     ...err,
-      //     message: err.message,
-      //   });
+        reset();
+        setError("afterSubmit", {
+          ...err,
+          message: err.message,
+        });
     }
   };
   return (
