@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -16,10 +16,13 @@ import { RHFTextField } from "../../components/hook-form";
 import { Eye, EyeSlash } from "phosphor-react";
 import { Link as RouterLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { LoginUser } from "../../redux/slices/auth";
+import { LoginUser, resetErrorMessage } from "../../redux/slices/auth";
+// import { logoutUser } from "../../redux/slices/auth";
+import { useSelector } from "react-redux";
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const {errorMessage} = useSelector((state) => state.auth); 
   const dispatch = useDispatch();
   const LoginSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email must valid"),
@@ -56,6 +59,17 @@ function LoginForm() {
         });
     }
   };
+
+  useEffect(()=> {
+    // displays errors that may have occured while loging in on the server.
+    if (errorMessage.length > 1){
+      reset(); 
+      setError("afterSubmit", {
+        message: errorMessage,
+      });
+      dispatch(resetErrorMessage())
+    }
+  }, [errorMessage])
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
