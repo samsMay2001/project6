@@ -1,0 +1,395 @@
+[33mcommit 90b46b017d3d9c15e52dc3e31a6bc5746eeae57c[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: samsMay2001 <muhigirwasamuel2001@gmail.com>
+Date:   Thu Nov 16 18:23:56 2023 -0400
+
+    login error message dispalys, when needed
+
+[33mcommit c7db8034c98fd5e87cb19bfbf59920906e54068c[m
+Author: samsMay2001 <muhigirwasamuel2001@gmail.com>
+Date:   Thu Nov 16 15:31:09 2023 -0400
+
+    signout feature done
+
+[33mcommit f97f9b05922946c5a021d0be4e0820150d01eea9[m
+Author: samsMay2001 <muhigirwasamuel2001@gmail.com>
+Date:   Wed Nov 15 18:17:29 2023 -0400
+
+    login error ui restored
+
+[33mcommit 435556b8c9c9e14e3ec2f2acc086527758c98e48[m
+Author: samsMay2001 <muhigirwasamuel2001@gmail.com>
+Date:   Wed Nov 15 18:16:15 2023 -0400
+
+    login feature complete
+
+[33mcommit 480d79050fdb1e8e10d29814761545075ce91e5d[m
+Author: Samuel Muhigirwa <127790767+samsMay2001@users.noreply.github.com>
+Date:   Wed Nov 15 22:03:14 2023 +0000
+
+    Update index.js
+
+[33mcommit 8c0c203558d60a7eba3f8397720231682840de68[m
+Author: samsMay2001 <muhigirwasamuel2001@gmail.com>
+Date:   Wed Nov 15 17:50:01 2023 -0400
+
+    changed some layout issues
+
+[33mcommit 7478e1d9a0f75f0579ab073347d590fb99cb29e5[m
+Author: samsMay2001 <muhigirwasamuel2001@gmail.com>
+Date:   Wed Nov 15 17:43:36 2023 -0400
+
+    receiving logged in data
+
+[33mcommit 83c6a37f3b355d8aee6196b89b52d6ad3ad26d07[m
+Author: Samuel Muhigirwa <127790767+samsMay2001@users.noreply.github.com>
+Date:   Wed Nov 15 21:15:41 2023 +0000
+
+    Update 3 files
+
+[33mcommit 7ee56db62feece3c6154a65f9cb5303770818b4a[m
+Author: Samuel Muhigirwa <127790767+samsMay2001@users.noreply.github.com>
+Date:   Wed Nov 15 21:05:52 2023 +0000
+
+    set LoginUser to return a valid return value
+
+[33mcommit 9265ff4f791888da8521947c904c1c9ecc52f221[m
+Author: Samuel Muhigirwa <127790767+samsMay2001@users.noreply.github.com>
+Date:   Wed Nov 15 21:02:23 2023 +0000
+
+    data is being sent to the loginUser function
+
+[33mcommit c1f572c4223e211924981da8513e7e33808dd5b5[m
+Author: samsMay2001 <muhigirwasamuel2001@gmail.com>
+Date:   Wed Nov 15 15:16:15 2023 -0400
+
+    auth state management
+
+[33mcommit 7c858f853aaaf34c7cc2a0c67bb7d4b9b8001898[m
+Author: Samuel Muhigirwa <127790767+samsMay2001@users.noreply.github.com>
+Date:   Wed Nov 15 18:56:56 2023 +0000
+
+    Update 3 files
+
+[33mcommit dbac69233a737fdbc912e1edf5b188d757fc16a3[m
+Author: samsMay2001 <muhigirwasamuel2001@gmail.com>
+Date:   Sat Nov 11 16:23:39 2023 -0400
+
+    later, mplement logout on sidebar
+
+[33mcommit a1e0e7aa44a4987a74cf03d8fa37b7b3fca33c9f[m
+Author: samsMay2001 <muhigirwasamuel2001@gmail.com>
+Date:   Sat Nov 11 16:11:56 2023 -0400
+
+    auth navigation
+
+[33mcommit 043f27b98f7753a5f38125365ce1388326f6dd41[m
+Author: samsMay2001 <muhigirwasamuel2001@gmail.com>
+Date:   Sat Nov 11 16:01:01 2023 -0400
+
+    sidebar tabs navigation and profile layout
+
+[33mcommit eca8cd840bcc2966d05a5d2ce5b8b8dea81a62ba[m
+Author: samsMay2001 <muhigirwasamuel2001@gmail.com>
+Date:   Sat Nov 11 14:41:01 2023 -0400
+
+    bug free profile layout complete
+
+[33mcommit f3633f87e231f9ee6ec6474ae14577829dad1e0d[m
+Author: samsMay2001 <muhigirwasamuel2001@gmail.com>
+Date:   Sat Nov 11 14:21:11 2023 -0400
+
+    Profile form basic layout
+
+[33mcommit 4b7363a95b54ce37fb0671ee85d740f592f08032[m
+Author: samsMay2001 <muhigirwasamuel2001@gmail.com>
+Date:   Sat Nov 11 13:09:25 2023 -0400
+
+    corrected theme issues on the settings route
+
+[33mcommit c27ec294588187ec0eb8d418b8b8b78ca9282142[m
+Author: Samuel Muhigirwa <127790767+samsMay2001@users.noreply.github.com>
+Date:   Fri Nov 10 02:34:35 2023 +0000
+
+    Update Conversation.jsx regarding layout
+
+[33mcommit 5380faa029205c9bdf5f4f98ea0e92aab6200b02[m
+Author: Samuel Muhigirwa <127790767+samsMay2001@users.noreply.github.com>
+Date:   Fri Nov 10 02:01:31 2023 +0000
+
+    Update 6 files
+
+[33mcommit 1dcfcb8f5c725de764255ce5a38c82bba65e016c[m
+Author: sam <samscloud2@gmail.com>
+Date:   Fri Nov 3 12:23:25 2023 -0300
+
+    some typos in newContact
+
+[33mcommit b6338545b3fd5cc271c5d7f67a4f0576e2754a4a[m
+Author: sam <samscloud2@gmail.com>
+Date:   Fri Nov 3 12:20:47 2023 -0300
+
+    starting friend request dialogue
+
+[33mcommit ee2f8edd5e0348c6832200f0fc23f3142a818d51[m
+Author: sam <samscloud2@gmail.com>
+Date:   Fri Nov 3 10:27:18 2023 -0300
+
+    newpassword component layout done
+
+[33mcommit 84ea055d6c7851927b0eb0d66cfe1b277fb64a4d[m
+Author: sam <samscloud2@gmail.com>
+Date:   Tue Oct 31 10:01:50 2023 -0300
+
+    forgotpassword component layout and basic routing
+
+[33mcommit a45b3f360ce58f7f1643d82ad2a723923313465d[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Oct 30 12:15:47 2023 -0300
+
+    register layout and auth layout fix
+
+[33mcommit 74943799c1e98efae9ab1ac0e18266508fd0a1be[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Oct 30 09:10:50 2023 -0300
+
+    yupResolver takes in loginschema no loginform
+
+[33mcommit 6caaef0639f1d45fd04e7777bb78bf22b014f124[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Oct 23 17:47:05 2023 -0300
+
+    login form completed
+
+[33mcommit 0ca010d98078677dc0fccfc425c3e138069f8f75[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Oct 23 17:26:55 2023 -0300
+
+    email address input
+
+[33mcommit 39cdf73ebd7c63ba23003bba044cec929fa0c7a8[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Oct 23 15:37:03 2023 -0300
+
+    added Login icons, starting to work on the login form
+
+[33mcommit e27c85449d22b50302a401703a65148bf0c0f250[m
+Author: sam <samscloud2@gmail.com>
+Date:   Thu Oct 19 12:44:36 2023 -0300
+
+    login route, component, logo, and page
+
+[33mcommit d4f0128d8c7ad0563ad769b83dfede20a038d48c[m
+Author: sam <samscloud2@gmail.com>
+Date:   Thu Oct 19 12:00:59 2023 -0300
+
+    added some settings options
+
+[33mcommit 93cd9a2a78cc1349faf8d41d7d66a52d0344bde9[m
+Author: sam <samscloud2@gmail.com>
+Date:   Tue Oct 17 06:00:46 2023 -0300
+
+    added settings component and its route
+
+[33mcommit 001928e2a630f913385bf665d06cf3c5936fb337[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Oct 16 07:27:45 2023 -0300
+
+    blocking and delete dialog components done
+
+[33mcommit 52a705af6bee9e09f2f2d65f8b4f74241fe4afe4[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Oct 16 06:49:56 2023 -0300
+
+    starred messages layout done
+
+[33mcommit eb4b93fa8a6f575526e61a451904db1d5fa7032c[m
+Author: sam <samscloud2@gmail.com>
+Date:   Thu Oct 12 07:09:59 2023 -0300
+
+    shared messages layout complete
+
+[33mcommit 1c1342877293997bbf3b92775aedfbb239376af0[m
+Author: sam <samscloud2@gmail.com>
+Date:   Thu Oct 12 06:11:43 2023 -0300
+
+    shared messages tabs layout
+
+[33mcommit bc7077c0b8f2199a5414c358b1e7ffbdb4b713a5[m
+Author: sam <samscloud2@gmail.com>
+Date:   Sun Oct 8 15:42:35 2023 -0300
+
+    added the delete and block buttons
+
+[33mcommit fd47aa46acf01156455fc566cb737bda25e5b9a3[m
+Author: sam <samscloud2@gmail.com>
+Date:   Sun Oct 8 15:38:41 2023 -0300
+
+    contacts sub components, didn't add the block or add button feature, for the sake of saving time
+
+[33mcommit c450cc3b1c76daa67c9eb907479cca05d269a4e6[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Oct 2 13:59:19 2023 -0300
+
+    contact component, its opening and closing feature, and general layout
+
+[33mcommit 5271d5312aa85488b35f5be46e19a9253391663b[m
+Author: sam <samscloud2@gmail.com>
+Date:   Wed Sep 27 15:21:05 2023 -0300
+
+    successfuly setup redux
+
+[33mcommit 5070c632586a136eae393cbb15834fc45f819468[m
+Author: sam <samscloud2@gmail.com>
+Date:   Wed Sep 27 13:40:33 2023 -0300
+
+    fixed the message options positioning on reply messages
+
+[33mcommit a794341f802efd3afd6f34feeeada4b31b1cff80[m
+Author: sam <samscloud2@gmail.com>
+Date:   Fri Sep 15 19:37:03 2023 -0300
+
+    user profile options feature
+
+[33mcommit bfa15e51e69b2386204695716b5dc8d392368813[m
+Author: sam <samscloud2@gmail.com>
+Date:   Fri Sep 15 19:21:13 2023 -0300
+
+    message options feature
+
+[33mcommit 62d650aa03697d3b47ae2ddab5ac84e8687443ca[m
+Author: sam <samscloud2@gmail.com>
+Date:   Fri Sep 15 18:14:30 2023 -0300
+
+    miner edit
+
+[33mcommit b269572c38f74bafd51f6e44a469ea4776ebbca6[m
+Author: sam <samscloud2@gmail.com>
+Date:   Wed Sep 13 23:15:33 2023 -0300
+
+    footer action toggle feature
+
+[33mcommit 553f0478c7cfa39339751a5138bd4041c717b3fa[m
+Author: sam <samscloud2@gmail.com>
+Date:   Wed Sep 13 22:12:42 2023 -0300
+
+    emoji component and its toggle feature
+
+[33mcommit 036521ffb7a51a503ff445f5c4792489825cc95b[m
+Author: sam <samscloud2@gmail.com>
+Date:   Wed Sep 13 12:59:06 2023 -0300
+
+    docMsg component ui
+
+[33mcommit 3c4b182d93b03b0937f3e5f0735f56623a9764d2[m
+Author: sam <samscloud2@gmail.com>
+Date:   Wed Sep 13 12:36:47 2023 -0300
+
+    MediaMsg, LinkMsg, and ReplyMsg components ui
+
+[33mcommit aec61221791e1b24c37e3a228629ecfb2dc69dc8[m
+Author: sam <samscloud2@gmail.com>
+Date:   Tue Sep 12 18:12:45 2023 -0300
+
+    Text Msgs component ui
+
+[33mcommit 1bf68c625cb6b30216f20303ed5bc623450bb2a5[m
+Author: sam <samscloud2@gmail.com>
+Date:   Tue Sep 12 17:34:04 2023 -0300
+
+    TimeLine divider component ui
+
+[33mcommit 985fa66ceeb72f1045042d7f511f3c84f71ef325[m
+Author: sam <samscloud2@gmail.com>
+Date:   Tue Sep 12 17:27:13 2023 -0300
+
+    messages component logic structure
+
+[33mcommit 1b280a8c841f60d216bea86e542aa814c884ea08[m
+Author: sam <samscloud2@gmail.com>
+Date:   Tue Sep 12 17:07:35 2023 -0300
+
+    rearranged code blox into their own files for the conversation component
+
+[33mcommit 5d19a262507bb839020471d5944b77e79fa9a850[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Sep 11 18:17:13 2023 -0300
+
+    made conversation ui responsive to dark theme
+
+[33mcommit 5efc0c783cf3916040546b92349898f20a06548e[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Sep 11 18:09:48 2023 -0300
+
+    conversation footer ui
+
+[33mcommit 11a29922d206aafdfafedf8485b7f5681108c5e5[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Sep 11 17:37:50 2023 -0300
+
+    chat header ui
+
+[33mcommit 1c8fc88f90c4b8b8c4be5b66716fd431492e31a0[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Sep 11 17:02:49 2023 -0300
+
+    corrected the message component layout
+
+[33mcommit 5714bb208aa76ca5431478e00b976d20f38d9784[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Sep 11 14:20:51 2023 -0300
+
+    main layout of the conversation component
+
+[33mcommit 25cf64db6fa396ea2acc85f45413c57afb8a1ade[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Sep 11 12:21:36 2023 -0300
+
+    made the chat component reactive to theme changing
+
+[33mcommit c16f8ee877db9a6e3d43b8c5589d2be21bc07634[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Sep 11 11:39:31 2023 -0300
+
+    html revision on the chat component and added 'All Chats' list
+
+[33mcommit c10c170bec0711bf327566d2a6c3f562c9ffa4ab[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Sep 11 11:12:35 2023 -0300
+
+    pinned chats list
+
+[33mcommit 8770242c4a7a09656798121891f3433a86058f14[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Sep 11 10:55:37 2023 -0300
+
+    chat element
+
+[33mcommit c7e7f17ffc5816a8db6009dfc8babf424a17ca0b[m
+Author: sam <samscloud2@gmail.com>
+Date:   Mon Sep 11 10:23:36 2023 -0300
+
+    added the archive text and box
+
+[33mcommit 3db5a2aa2994c679b24f80e17a8a5821992724ea[m
+Author: sam <samscloud2@gmail.com>
+Date:   Sun Sep 10 15:19:22 2023 -0300
+
+    search bar styled component
+
+[33mcommit cba3e5ed5246fa78ae5980252b4e66c78a901e08[m
+Author: sam <samscloud2@gmail.com>
+Date:   Sun Sep 10 14:15:43 2023 -0300
+
+    chats component top 'chats' text and left dashed circle
+
+[33mcommit 0967938db36efc15cbeac3276c9ce46adfbb4ceb[m
+Author: sam <samscloud2@gmail.com>
+Date:   Fri Sep 8 12:29:57 2023 -0300
+
+    added the dashboard side bar with clicking features and theme changing features
+
+[33mcommit 00afb420a3840e6d0f66a2d91f1b22e21332725a[m
+Author: sam <samscloud2@gmail.com>
+Date:   Thu Sep 7 17:57:11 2023 -0300
+
+    chat app initial

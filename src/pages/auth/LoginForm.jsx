@@ -22,7 +22,7 @@ import { useSelector } from "react-redux";
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const {errorMessage} = useSelector((state) => state.auth); 
+  const { errorMessage } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const LoginSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email must valid"),
@@ -52,24 +52,24 @@ function LoginForm() {
       dispatch(LoginUser(data));
     } catch (err) {
       console.log(err);
-        reset();
-        setError("afterSubmit", {
-          ...err,
-          message: err.message,
-        });
+      reset();
+      setError("afterSubmit", {
+        ...err,
+        message: err.message,
+      });
     }
   };
 
-  useEffect(()=> {
+  useEffect(() => {
     // displays errors that may have occured while loging in on the server.
-    if (errorMessage.length > 1){
-      reset(); 
+    if (errorMessage && errorMessage.length > 1) {
+      reset();
       setError("afterSubmit", {
         message: errorMessage,
       });
-      dispatch(resetErrorMessage())
+      dispatch(resetErrorMessage());
     }
-  }, [errorMessage])
+  }, [errorMessage]);
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
