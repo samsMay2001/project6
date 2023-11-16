@@ -1,4 +1,5 @@
 import { Avatar, Box, Divider, IconButton, Menu, MenuItem, Stack } from "@mui/material";
+import {SignOut}  from 'phosphor-react';
 import {useTheme} from "@mui/material/styles";
 import React from "react";
 // import { Outlet } from "react-router-dom";
@@ -11,6 +12,9 @@ import useSettings from "../../hooks/useSettings";
 import { AntSwitch } from "./antswitch";
 import { values } from "emoji-mart";
 import { useNavigate } from "react-router-dom";
+import { dispatch } from "../../redux/store";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../redux/slices/auth";
 // import SideBar from "./sidebar";
 
 
@@ -33,7 +37,7 @@ function SideBar() {
 
     const theme = useTheme()
     const navigate = useNavigate()
-
+    const dispatch = useDispatch()
     const [selected, setSelected] = useState(0)
 
     const {onToggleMode} = useSettings(); 
@@ -82,8 +86,10 @@ function SideBar() {
                   }}>
 
                     {el.icon}
-                  </IconButton>
+                  </IconButton >
               ))}
+              {/* Sign out button */}
+              
               <Divider sx={{ width: "48px" }} />
 
               {selected === 3 ?
@@ -102,7 +108,14 @@ function SideBar() {
                   <Gear />
                 </IconButton>
               }
-
+              <Divider sx={{ width: "48px" }} />
+              <Box sx={{backgroundColor: theme.palette.main}}>
+                <IconButton sx={{color: theme.palette.mode ==="light" ? '#000' : theme.palette.text.primary }} onClick={()=>{
+                  dispatch(logoutUser())
+                }} >
+                  <SignOut  />
+                </IconButton>
+              </Box>
             </Stack>
 
           </Stack>

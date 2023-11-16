@@ -44,3 +44,9 @@ export function LoginUser(formValues) {
     })
   };
 }
+
+export function logoutUser(){
+  return async () => {
+    dispatch(slice.actions.signOut())
+  }
+}
