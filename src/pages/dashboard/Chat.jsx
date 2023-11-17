@@ -201,23 +201,6 @@ function Chats() {
             />
           </Search>
         </Stack>
-        {/* New conversation */}
-        <Stack
-          direction={"row"}
-          justifyContent={"space-between"}
-          alignItems={"center"}
-        >
-          <Typography variant="subtitle2" component={Link}>
-            Start Conversation
-          </Typography>
-          <IconButton
-            onClick={() => {
-              // setOpenDialogue to true
-            }}
-          >
-            <Plus style={{ color: theme.palette.primary.main }} />
-          </IconButton>
-        </Stack>
         {/* archive box and text */}
         <Stack spacing={1}>
           <Stack direction={"row"} alignItems={"center"} spacing={1.5}>
