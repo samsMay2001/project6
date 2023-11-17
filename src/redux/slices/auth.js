@@ -102,7 +102,6 @@ export function createUser(formValues) {
             errorMessage: err.response.data.error,
           }),
         );
-        // console.log(err.response.data.message)
       });
   };
 }
