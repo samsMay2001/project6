@@ -7,6 +7,9 @@ const initialState = {
   token: "",
   isLoading: false,
   errorMessage: "",
+  firstname: "", 
+  lastname: "", 
+  _id: ""
 };
 
 const slice = createSlice({
@@ -17,6 +20,9 @@ const slice = createSlice({
       state.isLoggedIn = action.payload.isLoggedIn;
       state.token = action.payload.token;
       state.errorMessage = action.payload.errorMessage;
+      state.firstname = action.payload.firstname; 
+      state.lastname = action.payload.lastname; 
+      state._id = action.payload._id;
     },
     signOut(state, action) {
       state.isLoggedIn = false;
@@ -50,6 +56,9 @@ export function LoginUser(formValues) {
           slice.actions.logIn({
             isLoggedIn: true,
             token: res.data.token,
+            firstname: res.data.firstname, 
+            lastname: res.data.lastname, 
+            _id: res.data._id
           }),
         );
       })
@@ -93,6 +102,9 @@ export function createUser(formValues) {
           slice.actions.logIn({
             isLoggedIn: true,
             token: res.data.token,
+            firstname: res.data.firstname, 
+            lastname: res.data.lastname, 
+            _id: res.data._id
           }),
         );
       })

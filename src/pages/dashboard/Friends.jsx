@@ -4,9 +4,9 @@ import { FetchFriends } from "../../redux/slices/app";
 import { dispatch } from "../../redux/store";
 
 export const Friends = () => {
-  const { friends } = useSelector((state) => state.app);
+  const { friends, _id } = useSelector((state) => state.auth);
   useEffect(() => {
-    dispatch(FetchFriends());
+    dispatch(FetchFriends(_id));
   }, []);
   return friends && friends.length > 0 ? (
     friends.map((item, index) => <div>Friend {index + 1}</div>)

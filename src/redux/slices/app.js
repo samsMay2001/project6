@@ -70,14 +70,14 @@ export function FetchUsers() {
       });
   };
 }
-export function FetchFriends() {
+export function FetchFriends(userId) {
   // not tested
   return async (dispatch, getState) => {
     await axios
       .post(
         "/friends",
         {
-          _id: "6553e79f3f4b4c89c06a4554",
+          _id: userId,
         },
         {
           headers: {
