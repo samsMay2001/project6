@@ -16,6 +16,7 @@ const DashboardLayout = () => {
 
   const { onToggleMode } = useSettings();
   if (!isLoggedIn) {
+    console.log(isLoggedIn)
     return <Navigate to={"/auth/login"} />;
   }
 

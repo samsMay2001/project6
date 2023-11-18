@@ -51,11 +51,14 @@ export function UpdateSidebarType(type) {
   };
 }
 
-export function FetchUsers() {
+export function FetchUsers(userFriends, userId) {
   // not tested not sure if I'll need it
   return async (dispatch, getState) => {
     await axios
-      .post("/users", {
+      .post("/users",{
+        _id: userId, 
+        friends : userFriends
+      }, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getState().auth.token}`,
@@ -87,7 +90,7 @@ export function FetchFriends(userId) {
         },
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(slice.actions.updateUsers({ friends: res.data.data }));
       })
       .catch((err) => {
