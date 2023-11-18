@@ -1,4 +1,3 @@
-import { faker } from "@faker-js/faker";
 import {
   Box,
   Stack,
@@ -25,89 +24,13 @@ import {
   UserList,
   UserPlus,
 } from "phosphor-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ChatList } from "../../data";
 import { SimpleBarStyle } from "../../components/Scrollbar";
 import { Link as RouterLink } from "react-router-dom";
-
-export const StyledBadge = styled(Badge)(({ theme }) => ({
-  "& .MuiBadge-badge": {
-    backgroundColor: "#44b700",
-    color: "#44b700",
-    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-    "&::after": {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      borderRadius: "50%",
-      animation: "ripple 1.2s infinite ease-in-out",
-      border: "1px solid currentColor",
-      content: '""',
-    },
-  },
-  "@keyframes ripple": {
-    "0%": {
-      transform: "scale(.8)",
-      opacity: 1,
-    },
-    "100%": {
-      transform: "scale(2.4)",
-      opacity: 0,
-    },
-  },
-}));
-
-const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
-  const theme = useTheme();
-  return (
-    <Box
-      sx={{
-        width: "100%",
-        borderRadius: 1,
-        background:
-          theme.palette.mode === "light"
-            ? "#fff"
-            : theme.palette.background.default,
-      }}
-      p={2}
-    >
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent={"space-between"}
-      >
-        {/* avatar section */}
-        <Stack direction={"row"} spacing={2}>
-          {online ? (
-            <StyledBadge
-              overlap="circular"
-              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-              variant="dot"
-            >
-              <Avatar src={faker.image.avatar()} />
-            </StyledBadge>
-          ) : (
-            <Avatar src={faker.image.avatar()} />
-          )}
-          {/* text section */}
-          <Stack spacing={0.3}>
-            <Typography variant={"subtitle2"}>{name}</Typography>
-            <Typography variant={"caption"}>{msg}</Typography>
-          </Stack>
-        </Stack>
-        {/* time section */}
-        <Stack spacing={2} alignItems="center">
-          <Typography sx={{ fontWeigth: 600 }} variant="caption">
-            {time}
-          </Typography>
-          <Badge color="primary" badgeContent={unread} />
-        </Stack>
-      </Stack>
-    </Box>
-  );
-};
+import { ActualChats } from "./ActualChats";
+import { Friends } from "./Friends";
+import { AddFriends } from "./AddFriends";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -140,6 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function Chats() {
   const theme = useTheme();
+  const [tab, setTab] = useState(0);
 
   return (
     <Box
@@ -171,17 +95,45 @@ function Chats() {
             justifyContent={"end"}
             spacing={2}
           >
-            <IconButton>
+            {/* tabs */}
+            {/* friends */}
+            <IconButton
+              sx={{
+                backgroundColor:
+                  tab === 0 ? "rgb(0,0,0,.06)" : "rgb(0, 0, 0, 0)",
+              }}
+              onClick={() => {
+                setTab(0);
+              }}
+            >
               <Tooltip title="Friends" placement="bottom">
                 <AddressBook />
               </Tooltip>
             </IconButton>
-            <IconButton>
+            {/* Add friends */}
+            <IconButton
+              onClick={() => {
+                setTab(1);
+              }}
+              sx={{
+                backgroundColor:
+                  tab === 1 ? "rgb(0,0,0,.06)" : "rgb(0, 0, 0, 0)",
+              }}
+            >
               <Tooltip title="Add" placement="bottom">
                 <UserPlus />
               </Tooltip>
             </IconButton>
-            <IconButton>
+            {/* Chats */}
+            <IconButton
+              onClick={() => {
+                setTab(2);
+              }}
+              sx={{
+                backgroundColor:
+                  tab === 2 ? "rgb(0,0,0,.06)" : "rgb(0, 0, 0, 0)",
+              }}
+            >
               <Tooltip title="Chats" placement="bottom">
                 <CircleDashed />
               </Tooltip>
@@ -201,6 +153,7 @@ function Chats() {
             />
           </Search>
         </Stack>
+
         {/* archive box and text */}
         <Stack spacing={1}>
           <Stack direction={"row"} alignItems={"center"} spacing={1.5}>
@@ -210,35 +163,14 @@ function Chats() {
           <Divider />
         </Stack>
 
-        {/* chat lists */}
-        <Stack
-          spacing={2}
-          direction={"column"}
-          sx={{ flexGrow: 1, overflowY: "scroll", height: "100%" }}
-        >
-          {/* <SimpleBarStyle > */}
+        {/* My Friends */}
+        {tab === 0 && <Friends />}
+        {/* Add Friends */}
+        {tab === 1 && <AddFriends />}
+        {/* Chats */}
+        {tab === 2 && <ActualChats />}
 
-          {/* "Pinned" chat list */}
-          <Stack spacing={2.4}>
-            <Typography variant={"subtitle2"} sx={{ color: "#676767" }}>
-              Pinned
-            </Typography>
-            {ChatList.filter((el) => el.pinned).map((el) => (
-              <ChatElement {...el} />
-            ))}
-          </Stack>
-
-          {/* "All" chat list */}
-          <Stack spacing={2.4}>
-            <Typography variant={"subtitle2"} sx={{ color: "#676767" }}>
-              All Chats
-            </Typography>
-            {ChatList.filter((el) => !el.pinned).map((el) => (
-              <ChatElement {...el} />
-            ))}
-          </Stack>
-          {/* </SimpleBarStyle> */}
-        </Stack>
+        {/* {false && } */}
       </Stack>
     </Box>
   );
