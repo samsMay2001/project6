@@ -52,7 +52,6 @@ export function UpdateSidebarType(type) {
 }
 
 export function FetchUsers(userFriends, userId) {
-  // not tested not sure if I'll need it
   return async (dispatch, getState) => {
     await axios
       .post("/users",{
@@ -74,7 +73,6 @@ export function FetchUsers(userFriends, userId) {
   };
 }
 export function FetchFriends(userId) {
-  // not tested
   return async (dispatch, getState) => {
     await axios
       .post(
