@@ -34,7 +34,7 @@ export function AddFriends() {
         }} onClick={()=> {setTab(1)}}>Requests</Button>
       </Stack>
       {(users && tab === 0) && users.map((item, index)=> (
-        <div>User {index+1}</div>
+        <User index={index} />
       ))}
       {tab === 1 && <FriendRequests/>}
     </div>
@@ -42,10 +42,16 @@ export function AddFriends() {
 }
 
 export function FriendRequests() {
-  const {friends, users} = useSelector((state)=> state.app )
+  const { requests} = useSelector((state)=> state.app )
   const {_id} = useSelector((state) => state.auth)
   useEffect(()=> {
     dispatch(FetchRequests(_id))
   }, [])
   return <div>Friend Requests</div>;
+}
+
+export function User({index}) {
+  return (
+    <div>User {index+1}</div>
+  )
 }
