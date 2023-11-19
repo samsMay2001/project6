@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { FetchFriends, FetchUsers } from "../../redux/slices/app";
+import { FetchFriends, FetchRequests, FetchUsers } from "../../redux/slices/app";
 import { dispatch } from "../../redux/store";
 import { Button, Stack, Tab, Tabs, useTheme } from "@mui/material";
 
@@ -36,10 +36,16 @@ export function AddFriends() {
       {(users && tab === 0) && users.map((item, index)=> (
         <div>User {index+1}</div>
       ))}
+      {tab === 1 && <FriendRequests/>}
     </div>
   );
 }
 
 export function FriendRequests() {
+  const {friends, users} = useSelector((state)=> state.app )
+  const {_id} = useSelector((state) => state.auth)
+  useEffect(()=> {
+    dispatch(FetchRequests(_id))
+  }, [])
   return <div>Friend Requests</div>;
 }

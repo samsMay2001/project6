@@ -9,7 +9,7 @@ const initialState = {
   },
   users: [],
   friends: [],
-  friendRequests: [],
+  requests: [],
 };
 
 const slice = createSlice({
@@ -30,7 +30,7 @@ const slice = createSlice({
       state.friends = action.payload.friends;
     },
     updateFriendRequests(state, action) {
-      state.friendRequests = action.payload.requests;
+      state.requests = action.payload.requests;
     },
   },
 });
@@ -64,7 +64,6 @@ export function FetchUsers(userFriends, userId) {
         },
       })
       .then((res) => {
-        console.log(res);
         dispatch(slice.actions.updateUsers({ users: res.data.data }));
       })
       .catch((err) => {
@@ -96,11 +95,13 @@ export function FetchFriends(userId) {
       });
   };
 }
-export function FetchRequests() {
+export function FetchRequests(_id) {
   // not tested
   return async (dispatch, getState) => {
     await axios
       .post("/requests", {
+        _id : _id
+      }, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getState().auth.token}`,
@@ -108,7 +109,7 @@ export function FetchRequests() {
       })
       .then((res) => {
         console.log(res);
-        dispatch(slice.actions.updateUsers({ users: res.data.data }));
+        dispatch(slice.actions.updateFriendRequests({ requests: res.data.data }));
       })
       .catch((err) => {
         console.log(err);
