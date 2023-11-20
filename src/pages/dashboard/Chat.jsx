@@ -98,9 +98,7 @@ function Chats() {
           >
             {/* tabs */}
             {/* friends */}
-            <Stack
-              justifyContent={"center"}
-              alignItems={"center"}
+            <IconButton
               sx={{
                 backgroundColor:
                   tab === 0
@@ -119,16 +117,14 @@ function Chats() {
                       : "#333E4A", // Change to the desired hover color
                 },
                 cursor: "pointer",
-                width: "40px",
-                borderRadius: "5px",
               }}
               onClick={() => {
                 setTab(0);
               }}
             >
               <AddressBook fontSize={20} />
-            </Stack>
-            <Button
+            </IconButton>
+            <IconButton
               sx={{
                 backgroundColor:
                   tab === 1
@@ -152,8 +148,8 @@ function Chats() {
               }}
             >
               <UserPlus fontSize={20} />
-            </Button>
-            <Button
+            </IconButton>
+            <IconButton
               sx={{
                 backgroundColor:
                   tab === 2
@@ -177,7 +173,7 @@ function Chats() {
               }}
             >
               <CircleDashed fontSize={20} />
-            </Button>
+            </IconButton>
           </Stack>
         </Stack>
 
