@@ -94,50 +94,90 @@ function Chats() {
             direction={"row"}
             justifyContent={"end"}
             spacing={2}
+            p={2}
           >
             {/* tabs */}
             {/* friends */}
-            <IconButton
+            <Stack
+              justifyContent={"center"}
+              alignItems={"center"}
               sx={{
                 backgroundColor:
-                  tab === 0 ? "rgb(0,0,0,.06)" : "rgb(0, 0, 0, 0)",
+                  tab === 0
+                    ? theme.palette.mode === "light"
+                      ? "rgb(0,0,0,.06)"
+                      : "#36414E"
+                    : "rgb(0, 0, 0, 0)",
+                color:
+                  theme.palette.mode === "light"
+                    ? "#000"
+                    : "rgba(255, 255, 255, 0.8)",
+                "&:hover": {
+                  backgroundColor:
+                    theme.palette.mode === "light"
+                      ? "rgb(0,0,0,.06)"
+                      : "#333E4A", // Change to the desired hover color
+                },
+                cursor: "pointer",
+                width: "40px",
+                borderRadius: "5px",
               }}
               onClick={() => {
                 setTab(0);
               }}
             >
-              <Tooltip title="Friends" placement="bottom">
-                <AddressBook />
-              </Tooltip>
-            </IconButton>
-            {/* Add friends */}
-            <IconButton
+              <AddressBook fontSize={20} />
+            </Stack>
+            <Button
+              sx={{
+                backgroundColor:
+                  tab === 1
+                    ? theme.palette.mode === "light"
+                      ? "rgb(0,0,0,.06)"
+                      : "#36414E"
+                    : "rgb(0, 0, 0, 0)",
+                color:
+                  theme.palette.mode === "light"
+                    ? "#000"
+                    : "rgba(255, 255, 255, 0.8)",
+                "&:hover": {
+                  backgroundColor:
+                    theme.palette.mode === "light"
+                      ? "rgb(0,0,0,.06)"
+                      : "#333E4A", // Change to the desired hover color
+                },
+              }}
               onClick={() => {
                 setTab(1);
               }}
+            >
+              <UserPlus fontSize={20} />
+            </Button>
+            <Button
               sx={{
                 backgroundColor:
-                  tab === 1 ? "rgb(0,0,0,.06)" : "rgb(0, 0, 0, 0)",
+                  tab === 2
+                    ? theme.palette.mode === "light"
+                      ? "rgb(0,0,0,.06)"
+                      : "#36414E"
+                    : "rgb(0, 0, 0, 0)",
+                color:
+                  theme.palette.mode === "light"
+                    ? "#000"
+                    : "rgba(255, 255, 255, 0.8)",
+                "&:hover": {
+                  backgroundColor:
+                    theme.palette.mode === "light"
+                      ? "rgb(0,0,0,.06)"
+                      : "#333E4A", // Change to the desired hover color
+                },
               }}
-            >
-              <Tooltip title="Add" placement="bottom">
-                <UserPlus />
-              </Tooltip>
-            </IconButton>
-            {/* Chats */}
-            <IconButton
               onClick={() => {
                 setTab(2);
               }}
-              sx={{
-                backgroundColor:
-                  tab === 2 ? "rgb(0,0,0,.06)" : "rgb(0, 0, 0, 0)",
-              }}
             >
-              <Tooltip title="Chats" placement="bottom">
-                <CircleDashed />
-              </Tooltip>
-            </IconButton>
+              <CircleDashed fontSize={20} />
+            </Button>
           </Stack>
         </Stack>
 
