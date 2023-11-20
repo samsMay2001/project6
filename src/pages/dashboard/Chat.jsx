@@ -205,7 +205,6 @@ function Chats() {
         {tab === 1 && <AddFriends />}
         {/* Chats */}
         {tab === 2 && <ActualChats />}
-
         {/* {false && } */}
       </Stack>
     </Box>
