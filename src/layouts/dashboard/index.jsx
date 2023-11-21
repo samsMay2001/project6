@@ -12,42 +12,49 @@ import { connectSocket, socket } from "../../socket";
 const isAuthenticated = false;
 const DashboardLayout = () => {
   const theme = useTheme();
-  const {isLoggedIn, user_id} = useSelector((state) => state.auth)
-  const [selected, setSelected] = useState(0); 
-  const dispatch = useDispatch(); 
+  const { isLoggedIn, _id } = useSelector((state) => state.auth);
+  const [selected, setSelected] = useState(0);
+  const dispatch = useDispatch();
   const { onToggleMode } = useSettings();
-  
 
-  useEffect(()=>{
-    // friend requests socket code. 
-    // window.onload = () => {
-    //   if (!window.location.hash){
-    //     window.location = window.location + "#loaded"; 
-    //     window.location.reload(); 
-    //   }
-    // }
-    // window.reload();
-    // if (!socket){
-    //   connectSocket(user_id)
-    // }
+  useEffect(() => {
+    // friend requests socket code.
+    window.onload = () => {
+      if (!window.location.hash) {
+        window.location = window.location + "#loaded";
+        window.location.reload();
+      }
+    };
+    if (!socket) {
+      connectSocket(_id);
+    }
+    if (socket){
+      socket.connect()
+    }
+    socket.on('connect', (data)=> {
+      console.log('socket connected')
+    })
+    socket.on('error', (err)=> {
+      console.log(err)
+    })
+    socket.on("new_friend_request", (data) => {
+      console.log("friend request was received");
+    });
 
-    // socket.on("new_friend_request", (data)=> {
-    //   console.log('friend request was received')
-    // })
-    // socket.on("request_accepted", (data)=> {
-    //   console.log('friend request was received')
-    // })
-    // socket.on("request_sent", (data)=> {
-    //   console.log('friend request was received')
-    // })
+    socket.on("request_accepted", (data) => {
+      console.log("friend request was received");
+    });
 
-    // return () => {
-    //   socket.off("new_friend_request")
-    //   socket.off("request_accepted")
-    //   socket.off("request_sent")
-    // }
+    socket.on("request_sent", (data) => {
+      console.log("friend request was received");
+    });
 
-  }, [])
+    return () => {
+      socket.off("new_friend_request");
+      socket.off("request_accepted");
+      socket.off("request_sent");
+    };
+  }, []);
   if (!isLoggedIn) {
     return <Navigate to={"/auth/login"} />;
   }

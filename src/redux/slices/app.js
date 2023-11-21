@@ -108,7 +108,6 @@ export function FetchRequests(_id) {
         },
       })
       .then((res) => {
-        console.log(res);
         dispatch(slice.actions.updateFriendRequests({ requests: res.data.data }));
       })
       .catch((err) => {
