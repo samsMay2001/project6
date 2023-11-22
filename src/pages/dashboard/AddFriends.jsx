@@ -22,7 +22,7 @@ import { socket } from "../../socket";
 import { styled } from "@mui/system";
 
 export function AddFriends() {
-  const { friends, users } = useSelector((state) => state.app);
+  const { friends, users, requests } = useSelector((state) => state.app);
   const { _id } = useSelector((state) => state.auth);
   const [tab, setTab] = useState(0);
   const theme = useTheme();
@@ -31,6 +31,7 @@ export function AddFriends() {
   }
   useEffect(() => {
     dispatch(FetchUsers(friends, _id));
+    dispatch(FetchRequests(_id));
   }, []);
   return (
     <div>
@@ -94,19 +95,77 @@ export function AddFriends() {
               user_id={item._id}
             />
           ))}
-        {tab === 1 && <FriendRequests />}
+        {tab === 1 &&
+          requests &&
+          requests.map((item, index) => (
+            <FriendRequests
+              index={index}
+              online="true"
+              name={`${item.sender.firstname} ${item.sender.lastname}`}
+              img={""}
+              user_id={item.sender._id}
+            />
+          ))}
       </Stack>
     </div>
   );
 }
 
-export function FriendRequests() {
-  const { requests } = useSelector((state) => state.app);
+export function FriendRequests({ name, img, online }) {
   const { _id } = useSelector((state) => state.auth);
   useEffect(() => {
     dispatch(FetchRequests(_id));
   }, []);
-  return <div>Friend Requests</div>;
+  return (
+    <StyledChatBox
+      sx={{
+        width: "100%",
+        // borderRadius: 1,
+        // backgroundColor: theme.palette.background.paper,
+        // border: "1px dashed #212B36",
+      }}
+      p={2}
+    >
+      <Stack
+        direction={"row"}
+        alignItems="center"
+        justifyContent={"space-between"}
+      >
+        <Stack direction={"row"} alignItems="center" spacing={2}>
+          {""}
+          {online ? (
+            <StyledBadge
+              overlap="circular"
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+              variant="dot"
+            >
+              <Avatar alt={name} src={img} />
+            </StyledBadge>
+          ) : (
+            <Avatar alt={name} src={img} />
+          )}
+          <Stack spacing={0.3}>
+            <Typography variant="subtitle2">{name}</Typography>
+          </Stack>
+        </Stack>
+        <Stack direction={"row"} spacing={2} alignItems={"center"}>
+          <Button
+            onClick={() => {
+              // socket.emit(
+              //   "friend_request",
+              //   { to: user_id, from: _id },
+              //   () => {
+              //     alert("request sent");
+              //   },
+              // );
+            }}
+          >
+            Accept
+          </Button>
+        </Stack>
+      </Stack>
+    </StyledChatBox>
+  );
 }
 
 export function User({ index, online, name, img, user_id }) {
@@ -150,7 +209,7 @@ export function User({ index, online, name, img, user_id }) {
               onClick={() => {
                 socket.emit(
                   "friend_request",
-                  { to: _id, from: user_id },
+                  { to: user_id, from: _id },
                   () => {
                     alert("request sent");
                   },

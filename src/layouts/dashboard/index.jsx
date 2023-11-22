@@ -8,6 +8,7 @@ import useSettings from "../../hooks/useSettings";
 import SideBar from "./sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { connectSocket, socket } from "../../socket";
+import { FetchRequests } from "../../redux/slices/app";
 
 const isAuthenticated = false;
 const DashboardLayout = () => {
@@ -28,17 +29,17 @@ const DashboardLayout = () => {
     if (!socket) {
       connectSocket(_id);
     }
-    if (socket){
-      socket.connect()
+    if (socket) {
+      socket.connect();
     }
-    socket.on('connect', (data)=> {
-      console.log('socket connected')
-    })
-    socket.on('error', (err)=> {
-      console.log(err)
-    })
+    socket.on("connect", (data) => {
+      console.log("socket connected");
+    });
+    socket.on("error", (err) => {
+      console.log(err);
+    });
     socket.on("new_friend_request", (data) => {
-      console.log("friend request was received");
+      dispatch(FetchRequests(_id));
     });
 
     socket.on("request_accepted", (data) => {
