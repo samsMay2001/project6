@@ -8,12 +8,13 @@ import useSettings from "../../hooks/useSettings";
 import SideBar from "./sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { connectSocket, socket } from "../../socket";
-import { FetchRequests } from "../../redux/slices/app";
+import { FetchRequests, FetchUsers } from "../../redux/slices/app";
 
 const isAuthenticated = false;
 const DashboardLayout = () => {
   const theme = useTheme();
   const { isLoggedIn, _id } = useSelector((state) => state.auth);
+  const { friends } = useSelector((state) => state.app);
   const [selected, setSelected] = useState(0);
   const dispatch = useDispatch();
   const { onToggleMode } = useSettings();
@@ -47,7 +48,7 @@ const DashboardLayout = () => {
     });
 
     socket.on("request_sent", (data) => {
-      console.log("friend request was received");
+      dispatch(FetchUsers(friends, _id))
     });
 
     return () => {

@@ -30,6 +30,7 @@ export function AddFriends() {
     setTab(value);
   }
   useEffect(() => {
+    console.log(users);
     dispatch(FetchUsers(friends, _id));
     dispatch(FetchRequests(_id));
   }, []);
@@ -93,6 +94,7 @@ export function AddFriends() {
               name={`${item.firstname} ${item.lastname}`}
               img={""}
               user_id={item._id}
+              added={item.added}
             />
           ))}
         {tab === 1 &&
@@ -168,7 +170,7 @@ export function FriendRequests({ name, img, online }) {
   );
 }
 
-export function User({ index, online, name, img, user_id }) {
+export function User({ index, online, name, img, user_id, added }) {
   const theme = useTheme();
   const { _id } = useSelector((state) => state.auth);
   return (
@@ -216,7 +218,8 @@ export function User({ index, online, name, img, user_id }) {
                 );
               }}
             >
-              Add +
+              {added && "Added"}
+              {!added && "Add +"}
             </Button>
           </Stack>
         </Stack>
