@@ -89,9 +89,9 @@ export function AddFriends() {
             <User
               index={index}
               online="true"
-              name="user name"
+              name={`${item.firstname} ${item.lastname}`}
               img={""}
-              user_id={index}
+              user_id={item._id}
             />
           ))}
         {tab === 1 && <FriendRequests />}
