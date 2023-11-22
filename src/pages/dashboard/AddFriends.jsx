@@ -30,7 +30,6 @@ export function AddFriends() {
     setTab(value);
   }
   useEffect(() => {
-    console.log(users);
     dispatch(FetchUsers(friends, _id));
     dispatch(FetchRequests(_id));
   }, []);
@@ -108,6 +107,7 @@ export function AddFriends() {
               user_id={item.sender._id}
             />
           ))}
+        {tab === 1 && requests.length < 1 && "No requests"}
       </Stack>
     </div>
   );
