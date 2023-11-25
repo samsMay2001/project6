@@ -16,6 +16,7 @@ const MainLayout = () => {
         direction={"column"}
         // justifyContent={"center"}
         // alignItems={"center"}
+        
         sx={{ height: "100vh" }}
       >
         <Container maxWidth="sm">

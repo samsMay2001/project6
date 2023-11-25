@@ -42,13 +42,15 @@ const DashboardLayout = () => {
     socket.on("new_friend_request", (data) => {
       dispatch(FetchRequests(_id));
     });
-
     socket.on("request_accepted", (data) => {
       console.log("friend request was received");
     });
 
     socket.on("request_sent", (data) => {
-      dispatch(FetchUsers(friends, _id))
+      dispatch(FetchUsers(friends, _id));
+    });
+    socket.on("request_cancelled", (data) => {
+      dispatch(FetchUsers(friends, _id));
     });
 
     return () => {

@@ -209,13 +209,23 @@ export function User({ index, online, name, img, user_id, added }) {
           <Stack direction={"row"} spacing={2} alignItems={"center"}>
             <Button
               onClick={() => {
-                socket.emit(
-                  "friend_request",
-                  { to: user_id, from: _id },
-                  () => {
-                    alert("request sent");
-                  },
-                );
+                if (!added) {
+                  socket.emit(
+                    "friend_request",
+                    { to: user_id, from: _id },
+                    () => {
+                      alert("request sent");
+                    },
+                  );
+                } else {
+                  socket.emit(
+                    "cancel_request",
+                    { from_id: _id, to_id: user_id },
+                    () => {
+                      alert("request canceled");
+                    },
+                  );
+                }
               }}
             >
               {added && "Added"}

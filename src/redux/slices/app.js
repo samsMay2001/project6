@@ -54,15 +54,19 @@ export function UpdateSidebarType(type) {
 export function FetchUsers(userFriends, userId) {
   return async (dispatch, getState) => {
     await axios
-      .post("/users",{
-        _id: userId, 
-        friends : userFriends
-      }, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getState().auth.token}`,
+      .post(
+        "/users",
+        {
+          _id: userId,
+          friends: userFriends,
         },
-      })
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getState().auth.token}`,
+          },
+        },
+      )
       .then((res) => {
         dispatch(slice.actions.updateUsers({ users: res.data.data }));
       })
@@ -99,16 +103,22 @@ export function FetchRequests(_id) {
   // not tested
   return async (dispatch, getState) => {
     await axios
-      .post("/requests", {
-        _id : _id
-      }, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getState().auth.token}`,
+      .post(
+        "/requests",
+        {
+          _id: _id,
         },
-      })
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getState().auth.token}`,
+          },
+        },
+      )
       .then((res) => {
-        dispatch(slice.actions.updateFriendRequests({ requests: res.data.data }));
+        dispatch(
+          slice.actions.updateFriendRequests({ requests: res.data.data }),
+        );
       })
       .catch((err) => {
         console.log(err);
