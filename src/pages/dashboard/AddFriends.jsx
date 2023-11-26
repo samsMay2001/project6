@@ -94,7 +94,7 @@ export function AddFriends() {
               img={""}
               user_id={item._id}
               added={item.added}
-              friend = {item.friend}
+              friend={item.friend}
             />
           ))}
         {tab === 1 &&
@@ -105,7 +105,7 @@ export function AddFriends() {
               online="true"
               name={`${item.sender.firstname} ${item.sender.lastname}`}
               img={""}
-              user_id={item.sender._id}
+              request_id={item._id}
             />
           ))}
         {tab === 1 && requests.length < 1 && "No requests"}
@@ -114,7 +114,7 @@ export function AddFriends() {
   );
 }
 
-export function FriendRequests({ name, img, online }) {
+export function FriendRequests({ name, img, online, request_id }) {
   const { _id } = useSelector((state) => state.auth);
   useEffect(() => {
     dispatch(FetchRequests(_id));
@@ -154,13 +154,9 @@ export function FriendRequests({ name, img, online }) {
         <Stack direction={"row"} spacing={2} alignItems={"center"}>
           <Button
             onClick={() => {
-              // socket.emit(
-              //   "friend_request",
-              //   { to: user_id, from: _id },
-              //   () => {
-              //     alert("request sent");
-              //   },
-              // );
+              socket.emit("accept_request", { request_id: request_id }, () => {
+                alert("request sent");
+              });
             }}
           >
             Accept
@@ -219,9 +215,9 @@ export function User({ index, online, name, img, user_id, added, friend }) {
                     },
                   );
                 } else {
-                  if (friend){
-                    console.log('view this user')
-                  }else {
+                  if (friend) {
+                    console.log("view this user");
+                  } else {
                     socket.emit(
                       "cancel_request",
                       { from_id: _id, to_id: user_id },
