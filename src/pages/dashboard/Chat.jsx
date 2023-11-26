@@ -88,7 +88,11 @@ function Chats() {
           alignItems={"center"}
           justifyContent={"space-between"}
         >
-          <Typography variant={"h5"}>Chats</Typography>
+          <Typography variant={"h5"}>
+            {tab === 0 && "Friends"}
+            {tab === 1 && "Explore"}
+            {tab === 2 && "Chats"}
+          </Typography>
           <Stack
             sx={{ width: "100%" }}
             direction={"row"}

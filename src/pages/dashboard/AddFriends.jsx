@@ -94,6 +94,7 @@ export function AddFriends() {
               img={""}
               user_id={item._id}
               added={item.added}
+              friend = {item.friend}
             />
           ))}
         {tab === 1 &&
@@ -170,7 +171,7 @@ export function FriendRequests({ name, img, online }) {
   );
 }
 
-export function User({ index, online, name, img, user_id, added }) {
+export function User({ index, online, name, img, user_id, added, friend }) {
   const theme = useTheme();
   const { _id } = useSelector((state) => state.auth);
   return (
@@ -209,7 +210,7 @@ export function User({ index, online, name, img, user_id, added }) {
           <Stack direction={"row"} spacing={2} alignItems={"center"}>
             <Button
               onClick={() => {
-                if (!added) {
+                if (!added && !friend) {
                   socket.emit(
                     "friend_request",
                     { to: user_id, from: _id },
@@ -218,18 +219,23 @@ export function User({ index, online, name, img, user_id, added }) {
                     },
                   );
                 } else {
-                  socket.emit(
-                    "cancel_request",
-                    { from_id: _id, to_id: user_id },
-                    () => {
-                      alert("request canceled");
-                    },
-                  );
+                  if (friend){
+                    console.log('view this user')
+                  }else {
+                    socket.emit(
+                      "cancel_request",
+                      { from_id: _id, to_id: user_id },
+                      () => {
+                        alert("request canceled");
+                      },
+                    );
+                  }
                 }
               }}
             >
-              {added && "Added"}
-              {!added && "Add +"}
+              {added && !friend && "Added"}
+              {!added && !friend && "Add +"}
+              {friend && "View"}
             </Button>
           </Stack>
         </Stack>

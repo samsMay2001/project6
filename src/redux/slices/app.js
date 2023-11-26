@@ -92,7 +92,7 @@ export function FetchFriends(userId) {
       )
       .then((res) => {
         // console.log(res);
-        dispatch(slice.actions.updateUsers({ friends: res.data.data }));
+        dispatch(slice.actions.updateFriends({ friends: res.data.data }));
       })
       .catch((err) => {
         console.log(err);
