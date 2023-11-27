@@ -106,7 +106,7 @@ export function AddFriends() {
               name={`${item.sender.firstname} ${item.sender.lastname}`}
               img={""}
               request_id={item._id}
-              accepted={item.accpeted}
+              accepted={item.accepted}
             />
           ))}
         {tab === 1 && requests.length < 1 && "No requests"}
@@ -155,7 +155,7 @@ export function FriendRequests({ name, img, online, request_id, accepted }) {
             </Stack>
           </Stack>
           <Stack direction={"row"} spacing={2} alignItems={"center"}>
-            {accepted && (
+            {!accepted && (
               <Button
                 onClick={() => {
                   socket.emit(
@@ -170,7 +170,7 @@ export function FriendRequests({ name, img, online, request_id, accepted }) {
                 Accept
               </Button>
             )}
-            {!accepted && (
+            {accepted && (
               <Typography
                 variant="body2"
                 color={
