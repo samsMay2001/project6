@@ -51,6 +51,7 @@ const DashboardLayout = () => {
     });
     socket.on("request_cancelled", (data) => {
       dispatch(FetchUsers(friends, _id));
+      dispatch(FetchRequests(_id)); 
     });
 
     return () => {
