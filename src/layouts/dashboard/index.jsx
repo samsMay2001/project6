@@ -43,7 +43,7 @@ const DashboardLayout = () => {
       dispatch(FetchRequests(_id));
     });
     socket.on("request_accepted", (data) => {
-      console.log("friend request was received");
+      console.log("friend request was accepted");
     });
 
     socket.on("request_sent", (data) => {

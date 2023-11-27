@@ -106,6 +106,7 @@ export function AddFriends() {
               name={`${item.sender.firstname} ${item.sender.lastname}`}
               img={""}
               request_id={item._id}
+              accepted={item.accpeted}
             />
           ))}
         {tab === 1 && requests.length < 1 && "No requests"}
@@ -114,56 +115,78 @@ export function AddFriends() {
   );
 }
 
-export function FriendRequests({ name, img, online, request_id }) {
+export function FriendRequests({ name, img, online, request_id, accepted }) {
   const { _id } = useSelector((state) => state.auth);
+  const theme = useTheme();
   useEffect(() => {
     dispatch(FetchRequests(_id));
   }, []);
   return (
-    <StyledChatBox
-      sx={{
-        width: "100%",
-        // borderRadius: 1,
-        // backgroundColor: theme.palette.background.paper,
-        // border: "1px dashed #212B36",
-      }}
-      p={2}
-    >
-      <Stack
-        direction={"row"}
-        alignItems="center"
-        justifyContent={"space-between"}
+    <>
+      <StyledChatBox
+        sx={{
+          width: "100%",
+          // borderRadius: 1,
+          // backgroundColor: theme.palette.background.paper,
+          // border: "1px dashed #212B36",
+        }}
+        p={2}
       >
-        <Stack direction={"row"} alignItems="center" spacing={2}>
-          {""}
-          {online ? (
-            <StyledBadge
-              overlap="circular"
-              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-              variant="dot"
-            >
+        <Stack
+          direction={"row"}
+          alignItems="center"
+          justifyContent={"space-between"}
+        >
+          <Stack direction={"row"} alignItems="center" spacing={2}>
+            {""}
+            {online ? (
+              <StyledBadge
+                overlap="circular"
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                variant="dot"
+              >
+                <Avatar alt={name} src={img} />
+              </StyledBadge>
+            ) : (
               <Avatar alt={name} src={img} />
-            </StyledBadge>
-          ) : (
-            <Avatar alt={name} src={img} />
-          )}
-          <Stack spacing={0.3}>
-            <Typography variant="subtitle2">{name}</Typography>
+            )}
+            <Stack spacing={0.3}>
+              <Typography variant="subtitle2">{name}</Typography>
+            </Stack>
+          </Stack>
+          <Stack direction={"row"} spacing={2} alignItems={"center"}>
+            {accepted && (
+              <Button
+                onClick={() => {
+                  socket.emit(
+                    "accept_request",
+                    { request_id: request_id },
+                    () => {
+                      alert("request sent");
+                    },
+                  );
+                }}
+              >
+                Accept
+              </Button>
+            )}
+            {!accepted && (
+              <Typography
+                variant="body2"
+                color={
+                  theme.palette.mode === "light"
+                    ? "rgb(0,0,0,.6)"
+                    : "rgb(255, 255, 255, 0.6)"
+                }
+              >
+                2d ago
+              </Typography>
+            )}
           </Stack>
         </Stack>
-        <Stack direction={"row"} spacing={2} alignItems={"center"}>
-          <Button
-            onClick={() => {
-              socket.emit("accept_request", { request_id: request_id }, () => {
-                alert("request sent");
-              });
-            }}
-          >
-            Accept
-          </Button>
-        </Stack>
-      </Stack>
-    </StyledChatBox>
+      </StyledChatBox>
+      <Divider />
+    </>
   );
 }
 
