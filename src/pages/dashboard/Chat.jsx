@@ -81,7 +81,15 @@ function Chats() {
         // border: '4px dashed blue'
       }}
     >
-      <Stack p={3} spacing={2} sx={{ height: "100%" }}>
+      <Stack
+        p={3}
+        spacing={2}
+        sx={{
+          height: "100%",
+          padding: "25px",
+          paddingBottom: "0px",
+        }}
+      >
         {/* component title and icon */}
         <Stack
           direction="row"

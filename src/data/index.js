@@ -27,7 +27,7 @@ const Profile_Menu = [
 const Nav_Buttons = [
   {
     index: 0,
-    icon: <ChatCircleDots />,
+    icon: <ChatCircleDots size={24} />,
   },
   // {
   //   index: 1,
@@ -228,10 +228,9 @@ const SHARED_LINKS = [
     message: "Yep, I can also do that",
     incoming: true,
     outgoing: false,
-  }
-]
+  },
+];
 const SHARED_DOCUMENTS = [
-  
   {
     type: "msg",
     subtype: "doc",
@@ -246,7 +245,7 @@ const SHARED_DOCUMENTS = [
     incoming: true,
     outgoing: false,
   },
-]
+];
 export {
   Profile_Menu,
   Nav_Setting,
@@ -254,6 +253,6 @@ export {
   ChatList,
   Chat_History,
   Message_options,
-  SHARED_DOCUMENTS, 
-  SHARED_LINKS
+  SHARED_DOCUMENTS,
+  SHARED_LINKS,
 };

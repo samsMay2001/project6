@@ -83,20 +83,29 @@ function SideBar() {
           >
             <img src={Logo} alt="Chat App Logo" />
           </Box>
-          <Stack sx={{ width: "max-content" }} spacing={3} alignItems="center">
+          <Stack sx={{ width: "max-content" }} spacing={2} alignItems="center">
             {Nav_Buttons.map((el, index) =>
               el.index === selected ? (
                 <Box
                   key={index}
-                  p={1}
+                  p={2}
                   sx={{
-                    backgroundColor: theme.palette.primary.main,
+                    backgroundColor:
+                      theme.palette.mode === "light"
+                        ? "rgb(0, 0, 0, .07)"
+                        : "rgb(255, 255, 255, 0.07)",
                     borderRadius: 1.5,
+                    cursor: "pointer",
                   }}
                 >
-                  <IconButton
+                  <Stack
                     key={el.index}
-                    sx={{ width: "max-content", color: "#fff" }}
+                    sx={{
+                      width: "max-content",
+                      color:
+                        theme.palette.mode === "light" ? "rgb(0,0,0)" : "#fff",
+                      cursor: "pointer",
+                    }}
                     onClick={() => {
                       setSelected(el.index);
                       navigate(getPath(el.index));
@@ -104,10 +113,11 @@ function SideBar() {
                     }}
                   >
                     {el.icon}
-                  </IconButton>
+                  </Stack>
                 </Box>
               ) : (
-                <IconButton
+                <Stack
+                  p={2}
                   key={index}
                   sx={{
                     width: "max-content",
@@ -115,6 +125,7 @@ function SideBar() {
                       theme.palette.mode === "light"
                         ? "#000"
                         : theme.palette.text.primary,
+                    cursor: "pointer",
                   }}
                   onClick={() => {
                     setSelected(el.index);
@@ -122,7 +133,7 @@ function SideBar() {
                   }}
                 >
                   {el.icon}
-                </IconButton>
+                </Stack>
               ),
             )}
             {/* Sign out button */}
@@ -131,38 +142,46 @@ function SideBar() {
 
             {selected === 3 ? (
               <Box
-                p={1}
+                p={2}
                 sx={{
-                  backgroundColor: theme.palette.primary.main,
+                  backgroundColor:
+                    theme.palette.mode === "light"
+                      ? "rgb(0, 0, 0, .07)"
+                      : "rgb(255, 255, 255, 0.07)",
                   borderRadius: 1.5,
+                  cursor: "pointer",
                 }}
               >
-                <IconButton
+                <Stack
                   onClick={() => {
                     setSelected(3);
                     navigate(getPath(3));
                   }}
-                  sx={{ width: "max-content", color: "#fff" }}
+                  sx={{
+                    width: "max-content",
+                    color:
+                      theme.palette.mode === "light" ? "rgb(0,0,0)" : "#fff",
+                    cursor: "pointer",
+                  }}
                 >
-                  <Gear />
-                </IconButton>
+                  <Gear size={24} />
+                </Stack>
               </Box>
             ) : (
-              <IconButton
+              <Stack
+                p={2}
                 onClick={() => {
                   setSelected(3);
                   navigate(getPath(3));
                 }}
                 sx={{
                   width: "max-content",
-                  color:
-                    theme.palette.mode === "light"
-                      ? "#000"
-                      : theme.palette.text.primary,
+                  color: theme.palette.mode === "light" ? "rgb(0,0,0)" : "#fff",
+                  cursor: "pointer",
                 }}
               >
-                <Gear />
-              </IconButton>
+                <Gear size={24} />
+              </Stack>
             )}
             <Divider sx={{ width: "48px" }} />
             <Box sx={{ backgroundColor: theme.palette.main }}>

@@ -142,7 +142,7 @@ export function ActualChats() {
       </Stack> */}
 
       {/* "All" chat list */}
-      <Stack spacing={2.4}>
+      <Stack spacing={2.4} sx={{ paddingBottom: "15px" }}>
         <Typography
           variant={"subtitle2"}
           sx={{ color: theme.palette.mode === "light" ? "#676767" : "#fff" }}
