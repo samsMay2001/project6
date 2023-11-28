@@ -128,7 +128,6 @@ export function FriendRequests({ name, img, online, request_id, accepted }) {
           width: "100%",
           // borderRadius: 1,
           // backgroundColor: theme.palette.background.paper,
-          border: "1px dashed grey",
         }}
         p={2}
       >
