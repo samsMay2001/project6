@@ -10,6 +10,8 @@ const initialState = {
   users: [],
   friends: [],
   requests: [],
+  chat_type: null,
+  room_id: null,
 };
 
 const slice = createSlice({
@@ -32,13 +34,19 @@ const slice = createSlice({
     updateFriendRequests(state, action) {
       state.requests = action.payload.requests;
     },
+    selectConversation(state, action) {
+      state.chat_type = "individual";
+      state.room_id = action.payload.room_id;
+    },
     resetAppState(state, action) {
-      state.sidebar.open = false; 
-      state.sidebar.type = "CONTACT"; 
-      state.users = []; 
-      state.friends = []; 
-      state.requests = []; 
-    }
+      state.sidebar.open = false;
+      state.sidebar.type = "CONTACT";
+      state.users = [];
+      state.friends = [];
+      state.requests = [];
+      state.chat_type = null;
+      state.room_id = null;
+    },
   },
 });
 
@@ -75,7 +83,6 @@ export function FetchUsers(userFriends, userId) {
         },
       )
       .then((res) => {
-        console.log(res.data.data);
         dispatch(slice.actions.updateUsers({ users: res.data.data }));
       })
       .catch((err) => {
@@ -134,8 +141,14 @@ export function FetchRequests(_id) {
   };
 }
 
-export function resetAppState(){
+export function resetAppState() {
   return (dispatch, getState) => {
-    dispatch(slice.actions.resetAppState({}))
-  }
+    dispatch(slice.actions.resetAppState({}));
+  };
+}
+
+export function selectConversation(room_id) {
+  return (dispatch, getState) => {
+    dispatch(slice.actions.selectConversation({ room_id }));
+  };
 }

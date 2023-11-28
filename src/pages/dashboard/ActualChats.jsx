@@ -7,7 +7,9 @@ import { SimpleBarStyle } from "../../components/Scrollbar";
 import { Link as RouterLink } from "react-router-dom";
 import { Box, Stack, Typography, Badge, Avatar, useTheme } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
-
+import { useSelector } from "react-redux";
+import { dispatch } from "../../redux/store";
+import { selectConversation } from "../../redux/slices/app";
 // import {ChatEle}
 export const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -38,8 +40,13 @@ export const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
+const ChatElement = ({ id, name, img, msg, time, unread, online, chatId }) => {
   const theme = useTheme();
+  const { room_id } = useSelector((state) => state.app);
+
+  useEffect(() => {
+    dispatch(selectConversation(0));
+  }, []);
   return (
     <Box
       sx={{
@@ -47,10 +54,18 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
         borderRadius: 1,
         background:
           theme.palette.mode === "light"
-            ? "#fff"
-            : theme.palette.background.default,
+            ? chatId !== room_id
+              ? "#fff"
+              : "rgb(0, 0, 0, .05)"
+            : chatId !== room_id
+              ? "rgb(255, 255, 255, 0.025)"
+              : "rgb(255, 255, 255, 0.07)",
+        cursor: "pointer",
       }}
       p={2}
+      onClick={() => {
+        dispatch(selectConversation(chatId));
+      }}
     >
       <Stack
         direction="row"
@@ -117,22 +132,25 @@ export function ActualChats() {
       {/* <SimpleBarStyle > */}
 
       {/* "Pinned" chat list */}
-      <Stack spacing={2.4}>
+      {/* <Stack spacing={2.4}>
         <Typography variant={"subtitle2"} sx={{ color: "#676767" }}>
           Pinned
         </Typography>
-        {ChatList.filter((el) => el.pinned).map((el) => (
-          <ChatElement {...el} />
+        {ChatList.filter((el) => el.pinned).map((el, index) => (
+          <ChatElement {...el} chatId={index} />
         ))}
-      </Stack>
+      </Stack> */}
 
       {/* "All" chat list */}
       <Stack spacing={2.4}>
-        <Typography variant={"subtitle2"} sx={{ color: "#676767" }}>
+        <Typography
+          variant={"subtitle2"}
+          sx={{ color: theme.palette.mode === "light" ? "#676767" : "#fff" }}
+        >
           All Chats
         </Typography>
-        {ChatList.filter((el) => !el.pinned).map((el) => (
-          <ChatElement {...el} />
+        {ChatList.map((el, index) => (
+          <ChatElement {...el} chatId={index} />
         ))}
       </Stack>
       {/* </SimpleBarStyle> */}

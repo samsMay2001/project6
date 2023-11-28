@@ -20,6 +20,7 @@ import {
 import { StyledBadge } from "./ActualChats";
 import { socket } from "../../socket";
 import { styled } from "@mui/system";
+import { ChatCircle, ChatCircleDots } from "phosphor-react";
 
 export function AddFriends() {
   const { friends, users, requests } = useSelector((state) => state.app);
@@ -230,35 +231,49 @@ export function User({ index, online, name, img, user_id, added, friend }) {
             </Stack>
           </Stack>
           <Stack direction={"row"} spacing={2} alignItems={"center"}>
-            <Button
-              onClick={() => {
-                if (!added && !friend) {
-                  socket.emit(
-                    "friend_request",
-                    { to: user_id, from: _id },
-                    () => {
-                      alert("request sent");
-                    },
-                  );
-                } else {
-                  if (friend) {
-                    console.log("view this user");
-                  } else {
+            {(added || !added) && !friend && (
+              <Button
+                onClick={() => {
+                  if (!added && !friend) {
                     socket.emit(
-                      "cancel_request",
-                      { from_id: _id, to_id: user_id },
+                      "friend_request",
+                      { to: user_id, from: _id },
                       () => {
-                        alert("request canceled");
+                        alert("request sent");
                       },
                     );
+                  } else {
+                    if (friend) {
+                      console.log("view this user");
+                    } else {
+                      socket.emit(
+                        "cancel_request",
+                        { from_id: _id, to_id: user_id },
+                        () => {
+                          alert("request canceled");
+                        },
+                      );
+                    }
                   }
-                }
-              }}
-            >
-              {added && !friend && "Added"}
-              {!added && !friend && "Add +"}
-              {friend && "View"}
-            </Button>
+                }}
+              >
+                {added && !friend && "Added"}
+                {!added && !friend && "Add +"}
+              </Button>
+            )}
+            {friend && (
+              <Stack sx={{ paddingRight: "20px" }}>
+                <ChatCircleDots
+                  weight={"fill"}
+                  size={25}
+                  color={
+                    theme.palette.mode === "light"
+                      ? "rgb(0, 0, 0, 0.25)"
+                      : "rgb(255, 255, 255, 0.25)"
+                  }
+                />
+              </Stack>
+            )}
           </Stack>
         </Stack>
       </StyledChatBox>
