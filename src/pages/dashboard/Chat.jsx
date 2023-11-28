@@ -202,14 +202,34 @@ function Chats() {
           </Stack>
           <Divider />
         </Stack>
+        <Box
+          sx={{
+            overflowY: "scroll",
+            scrollbarWidth: "thin", // For Firefox
+            scrollbarColor: "transparent transparent", // For Firefox
 
-        {/* My Friends */}
-        {tab === 0 && <Friends />}
-        {/* Add Friends */}
-        {tab === 1 && <AddFriends />}
-        {/* Chats */}
-        {tab === 2 && <ActualChats />}
-        {/* {false && } */}
+            // For WebKit browsers (Chrome, Safari)
+            WebkitOverflowScrolling: "touch",
+            "&::-webkit-scrollbar": {
+              width: "5px", // Adjust as needed
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "transparent", // Hide scrollbar thumb
+            },
+            "&::-webkit-scrollbar-track": {
+              backgroundColor: "transparent", // Hide scrollbar track
+            },
+          }}
+        >
+          {/* My Friends */}
+
+          {tab === 0 && <Friends />}
+          {/* Add Friends */}
+          {tab === 1 && <AddFriends />}
+          {/* Chats */}
+          {tab === 2 && <ActualChats />}
+          {/* {false && } */}
+        </Box>
       </Stack>
     </Box>
   );

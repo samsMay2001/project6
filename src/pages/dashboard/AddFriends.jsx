@@ -128,7 +128,7 @@ export function FriendRequests({ name, img, online, request_id, accepted }) {
           width: "100%",
           // borderRadius: 1,
           // backgroundColor: theme.palette.background.paper,
-          // border: "1px dashed #212B36",
+          border: "1px dashed grey",
         }}
         p={2}
       >
@@ -201,8 +201,12 @@ export function User({ index, online, name, img, user_id, added, friend }) {
           // borderRadius: 1,
           // backgroundColor: theme.palette.background.paper,
           // border: "1px dashed #212B36",
+          paddingTop: "15px",
+          paddingLeft: "0px",
+          paddingRight: "0px",
+          paddingBottom: "15px",
         }}
-        p={2}
+        // p={1.5}
       >
         <Stack
           direction={"row"}

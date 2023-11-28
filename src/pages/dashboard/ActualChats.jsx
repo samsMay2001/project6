@@ -5,14 +5,7 @@ import { useEffect, useState } from "react";
 import { ChatList } from "../../data";
 import { SimpleBarStyle } from "../../components/Scrollbar";
 import { Link as RouterLink } from "react-router-dom";
-import {
-  Box,
-  Stack,
-  Typography,
-  Badge,
-  Avatar,
-  useTheme,
-} from "@mui/material";
+import { Box, Stack, Typography, Badge, Avatar, useTheme } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 
 // import {ChatEle}
@@ -101,7 +94,25 @@ export function ActualChats() {
     <Stack
       spacing={2}
       direction={"column"}
-      sx={{ flexGrow: 1, overflowY: "scroll", height: "100%" }}
+      sx={{
+        flexGrow: 1,
+        overflowY: "scroll",
+        height: "100%",
+        scrollbarWidth: "thin", // For Firefox
+        scrollbarColor: "transparent transparent", // For Firefox
+
+        // For WebKit browsers (Chrome, Safari)
+        WebkitOverflowScrolling: "touch",
+        "&::-webkit-scrollbar": {
+          width: "12px", // Adjust as needed
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "transparent", // Hide scrollbar thumb
+        },
+        "&::-webkit-scrollbar-track": {
+          backgroundColor: "transparent", // Hide scrollbar track
+        },
+      }}
     >
       {/* <SimpleBarStyle > */}
 
