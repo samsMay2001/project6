@@ -8,7 +8,11 @@ import useSettings from "../../hooks/useSettings";
 import SideBar from "./sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { connectSocket, socket } from "../../socket";
-import { FetchRequests, FetchUsers } from "../../redux/slices/app";
+import {
+  FetchRequests,
+  FetchUsers,
+  FetchFriends,
+} from "../../redux/slices/app";
 
 const isAuthenticated = false;
 const DashboardLayout = () => {
@@ -35,6 +39,9 @@ const DashboardLayout = () => {
     }
     socket.on("connect", (data) => {
       console.log("socket connected");
+      dispatch(FetchUsers(friends, _id));
+      dispatch(FetchRequests(_id));
+      dispatch(FetchFriends(_id));
     });
     socket.on("error", (err) => {
       console.log(err);
@@ -42,8 +49,15 @@ const DashboardLayout = () => {
     socket.on("new_friend_request", (data) => {
       dispatch(FetchRequests(_id));
     });
+    socket.on("new_socket_id", (data) => {
+      dispatch(FetchUsers(friends, _id));
+      dispatch(FetchRequests(_id));
+      dispatch(FetchFriends(_id));
+    })
     socket.on("request_accepted", (data) => {
-      console.log("friend request was accepted");
+      dispatch(FetchUsers(friends, _id));
+      dispatch(FetchRequests(_id));
+      dispatch(FetchFriends(_id));
     });
 
     socket.on("request_sent", (data) => {
@@ -51,7 +65,7 @@ const DashboardLayout = () => {
     });
     socket.on("request_cancelled", (data) => {
       dispatch(FetchUsers(friends, _id));
-      dispatch(FetchRequests(_id)); 
+      dispatch(FetchRequests(_id));
     });
 
     return () => {

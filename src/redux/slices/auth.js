@@ -28,6 +28,9 @@ const slice = createSlice({
       state.isLoggedIn = false;
       state.token = "";
       state.errorMessage = "";
+      state.firstname = ""; 
+      state.lastname = ""; 
+      _id: ""
     },
     resetErrorMessage(state, action) {
       state.errorMessage = "";

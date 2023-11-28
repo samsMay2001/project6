@@ -32,6 +32,13 @@ const slice = createSlice({
     updateFriendRequests(state, action) {
       state.requests = action.payload.requests;
     },
+    resetAppState(state, action) {
+      state.sidebar.open = false; 
+      state.sidebar.type = "CONTACT"; 
+      state.users = []; 
+      state.friends = []; 
+      state.requests = []; 
+    }
   },
 });
 
@@ -68,6 +75,7 @@ export function FetchUsers(userFriends, userId) {
         },
       )
       .then((res) => {
+        console.log(res.data.data);
         dispatch(slice.actions.updateUsers({ users: res.data.data }));
       })
       .catch((err) => {
@@ -124,4 +132,10 @@ export function FetchRequests(_id) {
         console.log(err);
       });
   };
+}
+
+export function resetAppState(){
+  return (dispatch, getState) => {
+    dispatch(slice.actions.resetAppState({}))
+  }
 }
