@@ -2,7 +2,7 @@
 // import { Typography } from "@mui/material";
 import { faker } from "@faker-js/faker";
 import { useEffect, useState } from "react";
-import { ChatList } from "../../data";
+// import { ChatList } from "../../data";
 import { SimpleBarStyle } from "../../components/Scrollbar";
 import { Link as RouterLink } from "react-router-dom";
 import { Box, Stack, Typography, Badge, Avatar, useTheme } from "@mui/material";
@@ -105,6 +105,12 @@ const ChatElement = ({ id, name, img, msg, time, unread, online, chatId }) => {
 
 export function ActualChats() {
   const theme = useTheme();
+  const { chatList, room_id, requests } = useSelector((state) => state.app); // gets the new chat list
+  useEffect(() => {
+    // get the chat list
+    //
+    console.log(chatList);
+  }, []);
   return (
     <Stack
       spacing={2}
@@ -149,7 +155,7 @@ export function ActualChats() {
         >
           All Chats
         </Typography>
-        {ChatList.map((el, index) => (
+        {chatList.map((el, index) => (
           <ChatElement {...el} chatId={index} />
         ))}
       </Stack>

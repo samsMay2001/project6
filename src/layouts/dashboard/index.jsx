@@ -53,7 +53,7 @@ const DashboardLayout = () => {
       dispatch(FetchUsers(friends, _id));
       dispatch(FetchRequests(_id));
       dispatch(FetchFriends(_id));
-    })
+    });
     socket.on("request_accepted", (data) => {
       dispatch(FetchUsers(friends, _id));
       dispatch(FetchRequests(_id));
@@ -66,6 +66,9 @@ const DashboardLayout = () => {
     socket.on("request_cancelled", (data) => {
       dispatch(FetchUsers(friends, _id));
       dispatch(FetchRequests(_id));
+    });
+    socket.on("new_chat", (data) => {
+      console.log("new chat");
     });
 
     return () => {

@@ -9,6 +9,7 @@ const initialState = {
   },
   users: [],
   friends: [],
+  chatList: [],
   requests: [],
   chat_type: null,
   room_id: null,
@@ -38,6 +39,12 @@ const slice = createSlice({
       state.chat_type = "individual";
       state.room_id = action.payload.room_id;
     },
+    getChatList(state, action) {
+      state.chatList = action.payload.chatList;
+    },
+    setNewChat(state, action) {
+      state.chatList.unShift(action.payload.user);
+    },
     resetAppState(state, action) {
       state.sidebar.open = false;
       state.sidebar.type = "CONTACT";
@@ -46,6 +53,7 @@ const slice = createSlice({
       state.requests = [];
       state.chat_type = null;
       state.room_id = null;
+      state.chatList = [];
     },
   },
 });
@@ -150,5 +158,18 @@ export function resetAppState() {
 export function selectConversation(room_id) {
   return (dispatch, getState) => {
     dispatch(slice.actions.selectConversation({ room_id }));
+  };
+}
+
+export function getChatList(_id) {
+  return async (dispatch, getState) => {
+    await axios.post("url", {
+      _id: _id,
+    });
+  };
+}
+export function newChat(user) {
+  return (dispatch, getState) => {
+    dispatch(slice.actions.setNewChat({ user }));
   };
 }
