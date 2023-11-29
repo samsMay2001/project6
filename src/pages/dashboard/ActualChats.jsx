@@ -40,10 +40,10 @@ export const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const ChatElement = ({ id, name, img, msg, time, unread, online, chatId }) => {
+const ChatElement = ({ id, names, img, msg, time, unread, online, chatId }) => {
   const theme = useTheme();
   const { room_id } = useSelector((state) => state.app);
-
+  const { firstname } = useSelector((state) => state.auth);
   useEffect(() => {
     dispatch(selectConversation(0));
   }, []);
@@ -74,7 +74,7 @@ const ChatElement = ({ id, name, img, msg, time, unread, online, chatId }) => {
       >
         {/* avatar section */}
         <Stack direction={"row"} spacing={2}>
-          {online ? (
+          {true ? (
             <StyledBadge
               overlap="circular"
               anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
@@ -87,8 +87,12 @@ const ChatElement = ({ id, name, img, msg, time, unread, online, chatId }) => {
           )}
           {/* text section */}
           <Stack spacing={0.3}>
-            <Typography variant={"subtitle2"}>{name}</Typography>
-            <Typography variant={"caption"}>{msg}</Typography>
+            <Typography variant={"subtitle2"}>
+              {names.map((name, index) => name !== firstname && name)}
+            </Typography>
+            <Typography variant={"caption"}>
+              {msg.length > 1 ? msg : "No messages"}
+            </Typography>
           </Stack>
         </Stack>
         {/* time section */}
@@ -96,7 +100,7 @@ const ChatElement = ({ id, name, img, msg, time, unread, online, chatId }) => {
           <Typography sx={{ fontWeigth: 600 }} variant="caption">
             {time}
           </Typography>
-          <Badge color="primary" badgeContent={unread} />
+          <Badge color="primary" badgeContent={true} />
         </Stack>
       </Stack>
     </Box>
@@ -106,11 +110,7 @@ const ChatElement = ({ id, name, img, msg, time, unread, online, chatId }) => {
 export function ActualChats() {
   const theme = useTheme();
   const { chatList, room_id, requests } = useSelector((state) => state.app); // gets the new chat list
-  useEffect(() => {
-    // get the chat list
-    //
-    console.log(chatList);
-  }, []);
+  useEffect(() => {}, []);
   return (
     <Stack
       spacing={2}
@@ -158,6 +158,7 @@ export function ActualChats() {
         {chatList.map((el, index) => (
           <ChatElement {...el} chatId={index} />
         ))}
+        {/* {chatList.length < 1 && "No Chats"} */}
       </Stack>
       {/* </SimpleBarStyle> */}
     </Stack>

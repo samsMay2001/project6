@@ -202,7 +202,7 @@ export function User({
   user,
 }) {
   const theme = useTheme();
-  const { _id } = useSelector((state) => state.auth);
+  const { _id, firstname } = useSelector((state) => state.auth);
   const { chatList } = useSelector((state) => state.app);
   return (
     <>
@@ -276,15 +276,19 @@ export function User({
               <Stack
                 sx={{ paddingRight: "20px" }}
                 onClick={() => {
-                  console.log(user);
                   // see if a mutual chat between this user and the logged in user already exists
                   const mutualChatIndex = chatList.findIndex(
                     (chat) => chat.participants.includes(user._id), // to be tested
                   );
-                  console.log(mutualChatIndex);
                   if (mutualChatIndex < 0) {
                     // create a new chat
-                    dispatch(newChat(user));
+                    const newChatObj = {
+                      names: [user.firstname, firstname],
+                      participants: [user._id, _id],
+                      msg: "", // should be empty
+                      time: "9:00 am", // should be the current time
+                    };
+                    dispatch(newChat(newChatObj));
                   } else {
                     // move the chat to the begining of chatList
                   }

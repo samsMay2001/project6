@@ -55,6 +55,7 @@ const slice = createSlice({
       state.chat_type = null;
       state.room_id = null;
       state.chatList = [];
+      state.chatTab = 0;
     },
     setChatTab(state, action) {
       state.chatTab = action.payload.tab;
