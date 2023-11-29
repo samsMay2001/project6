@@ -21,7 +21,7 @@ import { StyledBadge } from "./ActualChats";
 import { socket } from "../../socket";
 import { styled } from "@mui/system";
 import { ChatCircle, ChatCircleDots } from "phosphor-react";
-
+import { setChatTab } from "../../redux/slices/app";
 export function AddFriends() {
   const { friends, users, requests } = useSelector((state) => state.app);
   const { _id } = useSelector((state) => state.auth);
@@ -262,7 +262,14 @@ export function User({ index, online, name, img, user_id, added, friend }) {
               </Button>
             )}
             {friend && (
-              <Stack sx={{ paddingRight: "20px" }}>
+              <Stack
+                sx={{ paddingRight: "20px" }}
+                onClick={() => {
+                  console.log("view friend");
+                  // switch tab to 2
+                  // dispatch(setChatTab(2))
+                }}
+              >
                 <ChatCircleDots
                   weight={"fill"}
                   size={25}

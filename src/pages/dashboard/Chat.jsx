@@ -31,7 +31,9 @@ import { Link as RouterLink } from "react-router-dom";
 import { ActualChats } from "./ActualChats";
 import { Friends } from "./Friends";
 import { AddFriends } from "./AddFriends";
-
+import { useSelector } from "react-redux";
+import { setChatTab } from "../../redux/slices/app";
+import { dispatch } from "../../redux/store";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: 20,
@@ -63,8 +65,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function Chats() {
   const theme = useTheme();
-  const [tab, setTab] = useState(0);
-
+  const { chatTab } = useSelector((state) => state.app);
+  const tab = chatTab;
+  // useEffect(() => {}, []);
   return (
     <Box
       sx={{
@@ -131,7 +134,7 @@ function Chats() {
                 cursor: "pointer",
               }}
               onClick={() => {
-                setTab(0);
+                dispatch(setChatTab(0));
               }}
             >
               <AddressBook fontSize={20} />
@@ -156,7 +159,7 @@ function Chats() {
                 },
               }}
               onClick={() => {
-                setTab(1);
+                dispatch(setChatTab(1));
               }}
             >
               <UserPlus fontSize={20} />
@@ -181,7 +184,7 @@ function Chats() {
                 },
               }}
               onClick={() => {
-                setTab(2);
+                dispatch(setChatTab(2));
               }}
             >
               <CircleDashed fontSize={20} />

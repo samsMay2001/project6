@@ -10,6 +10,7 @@ const initialState = {
   users: [],
   friends: [],
   chatList: [],
+  chatTab: 0,
   requests: [],
   chat_type: null,
   room_id: null,
@@ -55,11 +56,21 @@ const slice = createSlice({
       state.room_id = null;
       state.chatList = [];
     },
+    setChatTab(state, action) {
+      state.chatTab = action.payload.tab;
+    },
   },
 });
 
 // Reducer
 export default slice.reducer;
+// changing chatTabs
+export function setChatTab(tab) {
+  // console.log(tab);
+  return (dispatch, getState) => {
+    dispatch(slice.actions.setChatTab({ tab }));
+  };
+}
 
 // toggling
 export function ToggleSidebar() {
