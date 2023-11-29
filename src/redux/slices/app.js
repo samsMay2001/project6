@@ -44,7 +44,7 @@ const slice = createSlice({
       state.chatList = action.payload.chatList;
     },
     setNewChat(state, action) {
-      state.chatList.unShift(action.payload.user);
+      state.chatList.unshift(action.payload.user);
     },
     resetAppState(state, action) {
       state.sidebar.open = false;

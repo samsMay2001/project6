@@ -21,7 +21,7 @@ import { StyledBadge } from "./ActualChats";
 import { socket } from "../../socket";
 import { styled } from "@mui/system";
 import { ChatCircle, ChatCircleDots } from "phosphor-react";
-import { setChatTab } from "../../redux/slices/app";
+import { setChatTab, newChat } from "../../redux/slices/app";
 export function AddFriends() {
   const { friends, users, requests } = useSelector((state) => state.app);
   const { _id } = useSelector((state) => state.auth);
@@ -96,6 +96,7 @@ export function AddFriends() {
               user_id={item._id}
               added={item.added}
               friend={item.friend}
+              user={item}
             />
           ))}
         {tab === 1 &&
@@ -190,9 +191,19 @@ export function FriendRequests({ name, img, online, request_id, accepted }) {
   );
 }
 
-export function User({ index, online, name, img, user_id, added, friend }) {
+export function User({
+  index,
+  online,
+  name,
+  img,
+  user_id,
+  added,
+  friend,
+  user,
+}) {
   const theme = useTheme();
   const { _id } = useSelector((state) => state.auth);
+  const { chatList } = useSelector((state) => state.app);
   return (
     <>
       <StyledChatBox
@@ -265,9 +276,20 @@ export function User({ index, online, name, img, user_id, added, friend }) {
               <Stack
                 sx={{ paddingRight: "20px" }}
                 onClick={() => {
-                  console.log("view friend");
-                  // switch tab to 2
-                  // dispatch(setChatTab(2))
+                  console.log(user);
+                  // see if a mutual chat between this user and the logged in user already exists
+                  const mutualChatIndex = chatList.findIndex(
+                    (chat) => chat.participants.includes(user._id), // to be tested
+                  );
+                  console.log(mutualChatIndex);
+                  if (mutualChatIndex < 0) {
+                    // create a new chat
+                    dispatch(newChat(user));
+                  } else {
+                    // move the chat to the begining of chatList
+                  }
+                  // change chatTabs to chats
+                  dispatch(setChatTab(2));
                 }}
               >
                 <ChatCircleDots
