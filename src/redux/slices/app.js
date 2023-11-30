@@ -10,6 +10,7 @@ const initialState = {
   users: [],
   friends: [],
   chatList: [],
+  chatIndex: 0,
   chatTab: 0,
   requests: [],
   chat_type: null,
@@ -56,6 +57,10 @@ const slice = createSlice({
       state.room_id = null;
       state.chatList = [];
       state.chatTab = 0;
+      state.chatIndex = 0;
+    },
+    setChatIndex(state, action) {
+      state.chatIndex = action.payload.index;
     },
     setChatTab(state, action) {
       state.chatTab = action.payload.tab;
@@ -183,5 +188,10 @@ export function getChatList(_id) {
 export function newChat(user) {
   return (dispatch, getState) => {
     dispatch(slice.actions.setNewChat({ user }));
+  };
+}
+export function setChatIndex(index) {
+  return (dispatch, getState) => {
+    dispatch(slice.actions.setChatIndex({ index }));
   };
 }

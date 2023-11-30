@@ -1,61 +1,70 @@
 // import { Cat } from "phosphor-react";
-import React,
-{
-  // Suspense,
-  // lazy
-} from "react";
+import React from "react"; // lazy // Suspense,
 import Chats from "./Chat";
-import { Box, Stack, useTheme } from "@mui/material";
+import { Box, Stack, useTheme, Typography } from "@mui/material";
 import Conversation from "../../components/Conversation/Conversation";
 import Contact from "../../components/Contacts";
 import { useSelector } from "react-redux";
 import SharedMessages from "../../components/SharedMessages";
 import StarredMessages from "../../components/StarredMessages";
 
-// Dynamic import 
+// Dynamic import
 // const Cat = lazy(()=> import('../../components/Cat'))
 
 const GeneralApp = () => {
-  const theme= useTheme();
-  const {sidebar} = useSelector((store) => store.app); 
+  const theme = useTheme();
+  const { sidebar, chatList } = useSelector((store) => store.app);
   return (
-    <Stack direction="row" sx={{width: '100%', position: 'relative'}}>
-      
+    <Stack direction="row" sx={{ width: "100%", position: "relative" }}>
       {/* chats list component */}
       <Chats />
 
       {/* conversation component */}
-      <Box sx={
-        {
-          position: 'absolute',
-          height: '100%', 
+      <Box
+        sx={{
+          position: "absolute",
+          height: "100%",
           top: 0,
-          left: '320px',
-          bottom: 0, 
-          right: sidebar.open ? '320px' : '0', 
-          backgroundColor: theme.palette.mode === 'light'? '#f0f4fa' : theme.palette.background.default, 
+          left: "320px",
+          bottom: 0,
+          right: sidebar.open ? "320px" : "0",
+          backgroundColor:
+            theme.palette.mode === "light"
+              ? "#f0f4fa"
+              : theme.palette.background.default,
           // border: '1px dashed grey'
-        }
-          }>
-        <Conversation/>
+        }}
+      >
+        {chatList[0] === undefined && (
+          <Stack
+            sx={{ height: "100%" }}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <Typography variant="h4">Welcome to Tawk</Typography>
+            <Typography variant="body2">New Chat?</Typography>
+          </Stack>
+        )}
+        {chatList[0] !== undefined && <Conversation />}
       </Box>
 
       {/* contacts */}
-      {sidebar.open && (()=> {
-        switch (sidebar.type) {
-          case "CONTACT": 
-            return <Contact />; 
-          
-          case "STARRED":
-            return <StarredMessages/>
+      {sidebar.open &&
+        (() => {
+          switch (sidebar.type) {
+            case "CONTACT":
+              return <Contact />;
 
-          case "SHARED":
-            return <SharedMessages/>
-          
-          default: 
-            break; 
-        }
-      })()}
+            case "STARRED":
+              return <StarredMessages />;
+
+            case "SHARED":
+              return <SharedMessages />;
+
+            default:
+              break;
+          }
+        })()}
       {/* <Contact/> */}
     </Stack>
   );

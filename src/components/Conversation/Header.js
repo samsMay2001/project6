@@ -26,10 +26,15 @@ import {
 // import {ToggleSidebar}  from "../../redux/slices/app";
 import { useDispatch } from "react-redux";
 import { ToggleSidebar } from "../../redux/slices/app";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function ConvoHeader() {
   const theme = useTheme();
   const dispatch = useDispatch();
+  const { chatList, room_id } = useSelector((state) => state.app);
+  const { firstname } = useSelector((state) => state.auth);
+  useEffect(() => {}, []);
   return (
     <Box
       p={2}
@@ -72,7 +77,10 @@ function ConvoHeader() {
           </Box>
           <Stack spacing={0.3}>
             <Typography variant={"subtitle2"}>
-              {faker.name.fullName()}
+              {chatList[room_id] !== undefined &&
+                chatList[room_id].names.map(
+                  (name, index) => name !== firstname && name,
+                )}
             </Typography>
             <Typography variant={"caption"}>{"online"}</Typography>
           </Stack>
