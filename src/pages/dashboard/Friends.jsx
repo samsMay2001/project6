@@ -6,8 +6,8 @@ import { Box, Stack, Typography } from "@mui/material";
 import { User } from "./AddFriends";
 
 export const Friends = () => {
-  const { _id } = useSelector((state) => state.auth);
-  const { friends } = useSelector((state) => state.app);
+  const { _id, firstname } = useSelector((state) => state.auth);
+  const { friends, chatList } = useSelector((state) => state.app);
   useEffect(() => {
     dispatch(FetchFriends(_id));
   }, []);
@@ -28,6 +28,10 @@ export const Friends = () => {
                 user_id={item._id}
                 added={true}
                 friend={true}
+                user={item}
+                _chatList={chatList}
+                _firstname={firstname}
+                _id_c={_id}
               />
             </Stack>
           ))

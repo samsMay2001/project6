@@ -23,8 +23,10 @@ import { styled } from "@mui/system";
 import { ChatCircle, ChatCircleDots } from "phosphor-react";
 import { setChatTab, newChat } from "../../redux/slices/app";
 export function AddFriends() {
-  const { friends, users, requests } = useSelector((state) => state.app);
-  const { _id } = useSelector((state) => state.auth);
+  const { friends, users, requests, chatList } = useSelector(
+    (state) => state.app,
+  );
+  const { _id, firstname } = useSelector((state) => state.auth);
   const [tab, setTab] = useState(0);
   const theme = useTheme();
   function handleChange(event, value) {
@@ -97,6 +99,9 @@ export function AddFriends() {
               added={item.added}
               friend={item.friend}
               user={item}
+              _chatList={chatList}
+              _firstname={firstname}
+              _id_c={_id}
             />
           ))}
         {tab === 1 &&
@@ -200,6 +205,9 @@ export function User({
   added,
   friend,
   user,
+  _chatList,
+  _firstname,
+  _id_c,
 }) {
   const theme = useTheme();
   const { _id, firstname } = useSelector((state) => state.auth);
@@ -276,24 +284,7 @@ export function User({
               <Stack
                 sx={{ paddingRight: "20px" }}
                 onClick={() => {
-                  // see if a mutual chat between this user and the logged in user already exists
-                  const mutualChatIndex = chatList.findIndex(
-                    (chat) => chat.participants.includes(user._id), // to be tested
-                  );
-                  if (mutualChatIndex < 0) {
-                    // create a new chat
-                    const newChatObj = {
-                      names: [user.firstname, firstname],
-                      participants: [user._id, _id],
-                      msg: "", // should be empty
-                      time: "9:00 am", // should be the current time
-                    };
-                    dispatch(newChat(newChatObj));
-                  } else {
-                    // move the chat to the begining of chatList
-                  }
-                  // change chatTabs to chats
-                  dispatch(setChatTab(2));
+                  createNewChat(_chatList, user, _firstname, _id_c);
                 }}
               >
                 <ChatCircleDots
@@ -313,6 +304,26 @@ export function User({
       <Divider />
     </>
   );
+}
+export function createNewChat(chatList, user, firstname, _id) {
+  // see if a mutual chat between this user and the logged in user already exists
+  const mutualChatIndex = chatList.findIndex(
+    (chat) => chat.participants.includes(user._id), // to be tested
+  );
+  if (mutualChatIndex < 0) {
+    // create a new chat
+    const newChatObj = {
+      names: [user.firstname, firstname],
+      participants: [user._id, _id],
+      msg: "", // should be empty
+      time: "9:00 am", // should be the current time
+    };
+    dispatch(newChat(newChatObj));
+  } else {
+    // move the chat to the begining of chatList
+  }
+  // change chatTabs to chats
+  dispatch(setChatTab(2));
 }
 
 const StyledChatBox = styled(Box)(({ theme }) => ({
