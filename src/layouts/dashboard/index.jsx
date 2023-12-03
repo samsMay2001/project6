@@ -49,11 +49,6 @@ const DashboardLayout = () => {
     socket.on("new_friend_request", (data) => {
       dispatch(FetchRequests(_id));
     });
-    socket.on("new_socket_id", (data) => {
-      dispatch(FetchUsers(friends, _id));
-      dispatch(FetchRequests(_id));
-      dispatch(FetchFriends(_id));
-    });
     socket.on("request_accepted", (data) => {
       dispatch(FetchUsers(friends, _id));
       dispatch(FetchRequests(_id));
@@ -67,7 +62,7 @@ const DashboardLayout = () => {
       dispatch(FetchUsers(friends, _id));
       dispatch(FetchRequests(_id));
     });
-    socket.on("new_chat", (data) => {
+    socket.on("chat_sent", (data) => {
       console.log("new chat");
     });
 
@@ -75,6 +70,8 @@ const DashboardLayout = () => {
       socket.off("new_friend_request");
       socket.off("request_accepted");
       socket.off("request_sent");
+      socket.off("request_cancelled");
+      socket.off("new_chat");
     };
   }, []);
   if (!isLoggedIn) {

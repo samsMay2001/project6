@@ -195,3 +195,17 @@ export function setChatIndex(index) {
     dispatch(slice.actions.setChatIndex({ index }));
   };
 }
+
+export function fetchMessages(from, to) {
+  // not tested
+  return async (dispatch, getState) => {
+    axios
+      .post("https://33srd5-4000.csb.app/messages", { from, to })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+}
