@@ -110,7 +110,9 @@ const ChatElement = ({ id, names, img, msg, time, unread, online, chatId }) => {
 export function ActualChats() {
   const theme = useTheme();
   const { chatList, room_id, requests } = useSelector((state) => state.app); // gets the new chat list
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(chatList);
+  }, []);
   return (
     <Stack
       spacing={2}

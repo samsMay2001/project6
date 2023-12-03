@@ -1,5 +1,5 @@
 // import { Cat } from "phosphor-react";
-import React from "react"; // lazy // Suspense,
+import { useEffect } from "react"; // lazy // Suspense,
 import Chats from "./Chat";
 import { Box, Stack, useTheme, Typography } from "@mui/material";
 import Conversation from "../../components/Conversation/Conversation";
@@ -7,13 +7,19 @@ import Contact from "../../components/Contacts";
 import { useSelector } from "react-redux";
 import SharedMessages from "../../components/SharedMessages";
 import StarredMessages from "../../components/StarredMessages";
+import { dispatch } from "../../redux/store";
+import { getChatList } from "../../redux/slices/app";
 
 // Dynamic import
 // const Cat = lazy(()=> import('../../components/Cat'))
 
 const GeneralApp = () => {
   const theme = useTheme();
+  const { _id } = useSelector((store) => store.auth);
   const { sidebar, chatList } = useSelector((store) => store.app);
+  useEffect(() => {
+    dispatch(getChatList(_id));
+  }, []);
   return (
     <Stack direction="row" sx={{ width: "100%", position: "relative" }}>
       {/* chats list component */}

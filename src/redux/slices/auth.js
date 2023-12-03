@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "../../utils/axios";
 import { dispatch } from "../store";
+import getChatList from "./app";
 
 const initialState = {
   isLoggedIn: false,

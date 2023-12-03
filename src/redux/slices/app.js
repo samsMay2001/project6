@@ -11,10 +11,10 @@ const initialState = {
   friends: [],
   chatList: [],
   chatIndex: 0,
-  chatTab: 0,
+  chatTab: 2,
   requests: [],
   chat_type: null,
-  room_id: null,
+  room_id: 0,
 };
 
 const slice = createSlice({
@@ -41,7 +41,7 @@ const slice = createSlice({
       state.chat_type = "individual";
       state.room_id = action.payload.room_id;
     },
-    getChatList(state, action) {
+    setChatList(state, action) {
       state.chatList = action.payload.chatList;
     },
     setNewChat(state, action) {
@@ -180,9 +180,16 @@ export function selectConversation(room_id) {
 
 export function getChatList(_id) {
   return async (dispatch, getState) => {
-    await axios.post("url", {
-      _id: _id,
-    });
+    axios
+      .post("/chatlist", {
+        user_id: _id,
+      })
+      .then((res) => {
+        dispatch(slice.actions.setChatList({ chatList: res.data }));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 }
 export function newChat(user) {
