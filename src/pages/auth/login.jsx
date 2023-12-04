@@ -3,6 +3,8 @@ import { Link as RouterLink } from "react-router-dom";
 import AuthSocial from "./AuthSocial";
 import LoginForm from "./LoginForm";
 import { useEffect, useState } from "react";
+import { selectConversation } from "../../redux/slices/app";
+import { dispatch } from "../../redux/store";
 
 function Login() {
   const [windowReloaded, setWindowReloaded] = useState(false);
@@ -20,6 +22,7 @@ function Login() {
       window.location.reload();
       // Set the value in localStorage
       localStorage.setItem("reloadWindow", JSON.stringify(true));
+      dispatch(selectConversation(0));
     }
   }, []);
   return (

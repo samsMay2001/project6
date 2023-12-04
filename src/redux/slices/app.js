@@ -15,6 +15,7 @@ const initialState = {
   requests: [],
   chat_type: null,
   room_id: 0,
+  chat_history: [],
 };
 
 const slice = createSlice({
@@ -44,6 +45,9 @@ const slice = createSlice({
     setChatList(state, action) {
       state.chatList = action.payload.chatList;
     },
+    setChatHistory(state, action) {
+      state.chat_history = action.payload.chat_history;
+    },
     setNewChat(state, action) {
       state.chatList.unshift(action.payload.user);
     },
@@ -56,8 +60,9 @@ const slice = createSlice({
       state.chat_type = null;
       state.room_id = null;
       state.chatList = [];
-      state.chatTab = 0;
+      state.chatTab = 2;
       state.chatIndex = 0;
+      state.chat_history = [];
     },
     setChatIndex(state, action) {
       state.chatIndex = action.payload.index;
@@ -209,7 +214,7 @@ export function fetchMessages(from, to) {
     axios
       .post("https://33srd5-4000.csb.app/messages", { from, to })
       .then((res) => {
-        console.log(res);
+        dispatch(slice.actions.setChatHistory({ chat_history: res.data }));
       })
       .catch((err) => {
         console.log(err);

@@ -1,5 +1,9 @@
 import { Box, Stack } from "@mui/material";
 import { Chat_History } from "../../data";
+import { useSelector } from "react-redux";
+import { dispatch } from "../../redux/store";
+import { fetchMessages } from "../../redux/slices/app";
+import { useEffect } from "react";
 import {
   DocMsg,
   LinkMsg,
@@ -10,6 +14,16 @@ import {
 } from "./MsgTypes";
 
 function Message({ menu }) {
+  const { chat_history, chatList, room_id } = useSelector((state) => state.app);
+  const { _id } = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (chatList[room_id] !== undefined) {
+      const to = chatList[room_id].participants.filter(
+        (participant) => participant !== _id,
+      );
+      dispatch(fetchMessages(_id, to[0]));
+    }
+  }, []);
   return (
     <Box
       p={3}
@@ -22,11 +36,12 @@ function Message({ menu }) {
         overflowY: "scroll",
         scrollbarWidth: "thin", // For Firefox
         scrollbarColor: "transparent transparent", // For Firefox
+        paddingRight: "5px",
 
         // For WebKit browsers (Chrome, Safari)
         WebkitOverflowScrolling: "touch",
         "&::-webkit-scrollbar": {
-          width: "12px", // Adjust as needed
+          width: "0px", // Adjust as needed
         },
         "&::-webkit-scrollbar-thumb": {
           backgroundColor: "transparent", // Hide scrollbar thumb
@@ -37,33 +52,9 @@ function Message({ menu }) {
       }}
     >
       <Stack spacing={3}>
-        {Chat_History.map((el) => {
-          switch (el.type) {
-            case "divider":
-              return <TimeLine el={el} />;
-            case "msg":
-              switch (el.subtype) {
-                case "doc":
-                  return <DocMsg el={el} menu={menu} />;
-                case "link":
-                  return <LinkMsg el={el} menu={menu} />;
-                case "img":
-                  return <MediaMsg el={el} menu={menu} />;
-
-                case "reply":
-                  return <ReplyMsg el={el} menu={menu} />;
-
-                default: //  txt msg
-                  return <TextMessage el={el} menu={menu} />;
-                // break;
-              }
-              return;
-              break;
-            default:
-              return <></>;
-              break;
-          }
-        })}
+        {chat_history.map((el) => (
+          <TextMessage el={el} menu={menu} />
+        ))}
       </Stack>
     </Box>
   );

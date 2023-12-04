@@ -4,6 +4,7 @@ import {
   FetchFriends,
   FetchRequests,
   FetchUsers,
+  fetchMessages,
 } from "../../redux/slices/app";
 import { dispatch } from "../../redux/store";
 import {
@@ -101,7 +102,7 @@ export function AddFriends() {
               user={item}
               _chatList={chatList}
               _firstname={firstname}
-              _id_c={_id}
+              _id={_id}
             />
           ))}
         {tab === 1 &&
@@ -207,11 +208,11 @@ export function User({
   user,
   _chatList,
   _firstname,
-  _id_c,
+  __id,
 }) {
   const theme = useTheme();
   const { _id, firstname } = useSelector((state) => state.auth);
-  const { chatList } = useSelector((state) => state.app);
+  const { chatList, room_id } = useSelector((state) => state.app);
   return (
     <>
       <StyledChatBox
@@ -284,7 +285,14 @@ export function User({
               <Stack
                 sx={{ paddingRight: "20px" }}
                 onClick={() => {
-                  createNewChat(_chatList, user, _firstname, _id_c);
+                  createNewChat(
+                    _chatList,
+                    user,
+                    _firstname,
+                    __id,
+                    room_id,
+                    fetchMessages,
+                  );
                 }}
               >
                 <ChatCircleDots
@@ -305,7 +313,14 @@ export function User({
     </>
   );
 }
-export function createNewChat(chatList, user, firstname, _id) {
+export function createNewChat(
+  chatList,
+  user,
+  firstname,
+  _id,
+  room_id,
+  fetchMessages,
+) {
   // see if a mutual chat between this user and the logged in user already exists
   const mutualChatIndex = chatList.findIndex(
     (chat) => chat.participants.includes(user._id), // to be tested
@@ -324,6 +339,14 @@ export function createNewChat(chatList, user, firstname, _id) {
   }
   // change chatTabs to chats
   dispatch(setChatTab(2));
+
+  // get messages
+  if (chatList[room_id] !== undefined) {
+    const to = chatList[room_id].participants.filter(
+      (participant) => participant !== _id,
+    );
+    dispatch(fetchMessages(_id, to[0]));
+  }
 }
 
 const StyledChatBox = styled(Box)(({ theme }) => ({

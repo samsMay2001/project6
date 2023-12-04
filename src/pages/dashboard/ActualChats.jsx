@@ -9,7 +9,7 @@ import { Box, Stack, Typography, Badge, Avatar, useTheme } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import { useSelector } from "react-redux";
 import { dispatch } from "../../redux/store";
-import { selectConversation } from "../../redux/slices/app";
+import { selectConversation, fetchMessages } from "../../redux/slices/app";
 // import {ChatEle}
 export const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -42,11 +42,16 @@ export const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const ChatElement = ({ id, names, img, msg, time, unread, online, chatId }) => {
   const theme = useTheme();
-  const { room_id } = useSelector((state) => state.app);
-  const { firstname } = useSelector((state) => state.auth);
+  const { room_id, chatList } = useSelector((state) => state.app);
+  const { firstname, _id } = useSelector((state) => state.auth);
   useEffect(() => {
-    dispatch(selectConversation(0));
-  }, []);
+    if (chatList[room_id] !== undefined) {
+      const to = chatList[room_id].participants.filter(
+        (participant) => participant !== _id,
+      );
+      dispatch(fetchMessages(_id, to[0]));
+    }
+  }, [room_id]);
   return (
     <Box
       sx={{
@@ -110,9 +115,7 @@ const ChatElement = ({ id, names, img, msg, time, unread, online, chatId }) => {
 export function ActualChats() {
   const theme = useTheme();
   const { chatList, room_id, requests } = useSelector((state) => state.app); // gets the new chat list
-  useEffect(() => {
-    console.log(chatList);
-  }, []);
+  useEffect(() => {}, []);
   return (
     <Stack
       spacing={2}
