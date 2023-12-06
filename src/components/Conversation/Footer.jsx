@@ -94,11 +94,12 @@ export function ConvoFooter() {
                     <Stack justifyContent={'center'} alignItems="center" sx={{width: '100%', height: '100%'}}>
                         <IconButton onClick={()=> {
                             if (message.length > 0){
+                                const to = chatList[room_id].participants.filter(participant => participant !== _id)
                                 socket.emit(
                                   "text_message",
                                   { 
                                     from: _id, 
-                                    to: chatList[room_id].participants.filter(participant => participant !== _id),
+                                    to: to[0],
                                     type: "Text", 
                                     file: "", 
                                     created_at: Date.now(),

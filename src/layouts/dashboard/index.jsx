@@ -12,13 +12,14 @@ import {
   FetchRequests,
   FetchUsers,
   FetchFriends,
+  fetchMessages,
 } from "../../redux/slices/app";
 
 const isAuthenticated = false;
 const DashboardLayout = () => {
   const theme = useTheme();
   const { isLoggedIn, _id } = useSelector((state) => state.auth);
-  const { friends } = useSelector((state) => state.app);
+  const { friends, chatList, room_id } = useSelector((state) => state.app);
   const [selected, setSelected] = useState(0);
   const dispatch = useDispatch();
   const { onToggleMode } = useSettings();
@@ -62,18 +63,26 @@ const DashboardLayout = () => {
       dispatch(FetchUsers(friends, _id));
       dispatch(FetchRequests(_id));
     });
-    socket.on("chat_sent", (data) => {
-      console.log("new chat");
-    });
+    socket.on('message_sent', (data)=> {
+      // console.log('message sent', room_id)
+      getMessages(chatList, dispatch, fetchMessages, room_id, _id)
+    })
+    socket.on('new_message', (data)=> {
+      // console.log({room_id: room_id})
+      getMessages(chatList, dispatch, fetchMessages, room_id, _id)
+    })
+
 
     return () => {
+      socket.off('connect')
       socket.off("new_friend_request");
       socket.off("request_accepted");
       socket.off("request_sent");
       socket.off("request_cancelled");
-      socket.off("new_chat");
+      socket.off("message_sent"); 
+      socket.off("new_message"); 
     };
-  }, []);
+  }, [room_id, chatList]);
   if (!isLoggedIn) {
     return <Navigate to={"/auth/login"} />;
   }
@@ -89,3 +98,12 @@ const DashboardLayout = () => {
 };
 
 export default DashboardLayout;
+
+function getMessages(chatList, dispatch, fetchMessages, room_id, _id){
+  if (chatList[room_id] !== undefined) {
+    const to = chatList[room_id].participants.filter(
+      (participant) => participant !== _id,
+    );
+    dispatch(fetchMessages(_id, to[0]));
+  }
+}

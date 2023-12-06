@@ -51,18 +51,8 @@ const slice = createSlice({
     setNewChat(state, action) {
       state.chatList.unshift(action.payload.user);
     },
-    resetAppState(state, action) {
-      state.sidebar.open = false;
-      state.sidebar.type = "CONTACT";
-      state.users = [];
-      state.friends = [];
-      state.requests = [];
-      state.chat_type = null;
-      state.room_id = null;
-      state.chatList = [];
-      state.chatTab = 2;
-      state.chatIndex = 0;
-      state.chat_history = [];
+    resetAppState(state = initialState, action) {
+      return {...initialState}
     },
     setChatIndex(state, action) {
       state.chatIndex = action.payload.index;
