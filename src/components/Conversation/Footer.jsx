@@ -8,6 +8,8 @@ import Picker  from "@emoji-mart/react";
 import data from "@emoji-mart/data"
 import { useState } from "react";
 import { Actions } from "./footerActions";
+import { socket } from "../../socket";
+import { useSelector } from "react-redux";
 
 const StyledInput = styled(TextField)(({ theme }) => (
     {
@@ -23,11 +25,11 @@ const StyledInput = styled(TextField)(({ theme }) => (
     }
 ))
 
-const ChatInput = ({setOpenPicker}) => {
+const ChatInput = ({setOpenPicker, message, handleMessage}) => {
 
     const [openActions, setOpenAction] = useState(false); 
     return (
-        <StyledInput fullWidth placeholder='Write a message' variant='filled' InputProps={{
+        <StyledInput fullWidth placeholder='Write a message' value={message} onChange={handleMessage} variant='filled' InputProps={{
             disableUnderline: true, 
             startAdornment: (
                 <Stack sx={{width: 'max-content'}}>
@@ -66,6 +68,12 @@ const ChatInput = ({setOpenPicker}) => {
 export function ConvoFooter() {
     const theme = useTheme()
     const [openPicker, setOpenPicker] = useState(false)
+    const {chatList, room_id} = useSelector(state => state.app)
+    const {_id} = useSelector( state => state.auth)
+    const [message, setMessage] = useState('')
+    function handleMessage (e) {
+        setMessage(e.target.value)
+    }
     return ( 
         <Box p={2} sx={{ width: '100%',backgroundColor: theme.palette.mode === 'light'? '#f8faff' : theme.palette.background.paper, boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)' }}>
             <Stack direction='row' alignItems={'center'} spacing={3}>
@@ -80,11 +88,29 @@ export function ConvoFooter() {
                     }}>
                         <Picker theme={theme.palette.mode} data={data}/>
                     </Box>
-                    <ChatInput setOpenPicker={setOpenPicker}/>
+                    <ChatInput setOpenPicker={setOpenPicker} message={message} handleMessage={handleMessage}/>
                 </Stack>
                 <Box sx={{height: 48, width: 48, backgroundColor: theme.palette.primary.main, borderRadius: 1.5}}>
                     <Stack justifyContent={'center'} alignItems="center" sx={{width: '100%', height: '100%'}}>
-                        <IconButton >
+                        <IconButton onClick={()=> {
+                            if (message.length > 0){
+                                socket.emit(
+                                  "text_message",
+                                  { 
+                                    from: _id, 
+                                    to: chatList[room_id].participants.filter(participant => participant !== _id),
+                                    type: "Text", 
+                                    file: "", 
+                                    created_at: Date.now(),
+                                    message: message.trim()
+                                 },
+                                  () => {
+                                    alert("request sent");
+                                  },
+                                );
+                            }
+                            setMessage('')
+                        }}>
                             <PaperPlaneTilt color="#fff"/>
                         </IconButton>
                     </Stack>
