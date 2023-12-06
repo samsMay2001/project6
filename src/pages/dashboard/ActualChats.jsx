@@ -93,10 +93,10 @@ const ChatElement = ({ id, names, img, msg, time, unread, online, chatId }) => {
           {/* text section */}
           <Stack spacing={0.3}>
             <Typography variant={"subtitle2"}>
-              {names.map((name, index) => name !== firstname && name)}
+              {names!== undefined && names.map((name, index) => name !== firstname && name)}
             </Typography>
             <Typography variant={"caption"}>
-              {msg.length > 1 ? msg : "No messages"}
+              {msg !== undefined && msg.length > 1 ? msg : "No messages"}
             </Typography>
           </Stack>
         </Stack>
