@@ -221,3 +221,8 @@ export function fetchMessages(from, to) {
       });
   };
 }
+export function setChatList(chatList){
+  return async (dispatch, getState) => {
+    dispatch(slice.actions.setChatList({chatList: chatList}))
+  }
+}

@@ -5,6 +5,7 @@ import {
   FetchRequests,
   FetchUsers,
   fetchMessages,
+  setChatList,
 } from "../../redux/slices/app";
 import { dispatch } from "../../redux/store";
 import {
@@ -336,6 +337,10 @@ export function createNewChat(
     dispatch(newChat(newChatObj));
   } else {
     // move the chat to the begining of chatList
+    const chatListCopy = JSON.parse(JSON.stringify(chatList));
+    const selectedChat = chatListCopy.splice(mutualChatIndex, 1)[0];
+    chatListCopy.splice(0, 0, selectedChat);
+    dispatch(setChatList(chatListCopy)); 
   }
   // change chatTabs to chats
   dispatch(setChatTab(2));
@@ -348,6 +353,7 @@ export function createNewChat(
     dispatch(fetchMessages(_id, to[0]));
   }
 }
+
 
 const StyledChatBox = styled(Box)(({ theme }) => ({
   "&:hover": {
