@@ -2,10 +2,11 @@ import { faker } from "@faker-js/faker";
 import { Avatar, Box, Divider, IconButton, Stack, Typography, useTheme } from "@mui/material";
 import { Bell, CaretLeft, Lock, PencilCircle } from "phosphor-react";
 import Profile from "./Profile";
+import { useSelector } from "react-redux";
 
 function Settings() {
     const theme = useTheme()
-
+    const {firstname, lastname} = useSelector((state) => state.auth)
     const list = [
         {
             key: 1, 
@@ -47,7 +48,7 @@ function Settings() {
                             <Avatar sx={{width: 56, height: 56}} src={faker.image.avatar()} alt={faker.name.fullName()} />
                             <Stack spacing={0.5}>
                                 <Typography variant="article">
-                                    {faker.name.fullName()}
+                                    {firstname} {lastname}
                                 </Typography>
                                 <Typography variant="body2">
                                     {faker.random.words()}

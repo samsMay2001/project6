@@ -51,7 +51,7 @@ const ChatElement = ({ id, names, img, msg, time, unread, online, chatId }) => {
       );
       dispatch(fetchMessages(_id, to[0]));
     }
-  }, [room_id]);
+  }, [room_id, chatList]);
   return (
     <Box
       sx={{
