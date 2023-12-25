@@ -103,7 +103,8 @@ export function ConvoFooter() {
                                     type: "Text", 
                                     file: "", 
                                     created_at: Date.now(),
-                                    message: message.trim()
+                                    message: message.trim(), 
+                                    currentChat: room_id
                                  },
                                   () => {
                                     alert("request sent");
