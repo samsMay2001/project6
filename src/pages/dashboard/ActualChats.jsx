@@ -44,14 +44,10 @@ const ChatElement = ({ id, names, img, msg, time, unread, online, chatId }) => {
   const theme = useTheme();
   const { room_id, chatList } = useSelector((state) => state.app);
   const { firstname, _id } = useSelector((state) => state.auth);
-  useEffect(() => {
-    if (chatList[room_id] !== undefined) {
-      const to = chatList[room_id].participants.filter(
-        (participant) => participant !== _id,
-      );
-      dispatch(fetchMessages(_id, to[0]));
-    }
-  }, [room_id, chatList]);
+  // useEffect(() => {
+  //   console.log(room_id)
+    
+  // }, [room_id]);
   return (
     <Box
       sx={{
@@ -115,10 +111,44 @@ const ChatElement = ({ id, names, img, msg, time, unread, online, chatId }) => {
 export function ActualChats() {
   const theme = useTheme();
   const { chatList, room_id, requests } = useSelector((state) => state.app); // gets the new chat list
-  const { _id, currentChat } = useSelector((state) => state.auth); // gets the new chat list
+  const { _id, currentChat, messageSentToggle } = useSelector((state) => state.auth); // gets the new chat list
   useEffect(() => {
-    dispatch(getChatList(_id, currentChat))    
-  }, [currentChat]);
+    // find the room index and fetch messages
+    const newRoom_index = chatList.findIndex(chat => chat.participants.includes(currentChat))
+    if (chatList[newRoom_index] !== undefined) {
+      const to = chatList[newRoom_index].participants.filter(
+        (participant) => participant !== _id,
+        );
+        // console.log('fetching messages')
+        dispatch(fetchMessages(_id, to[0]));
+        dispatch(getChatList(_id, currentChat)) 
+
+        setTimeout(()=>{
+          dispatch(selectConversation(0))   
+        }, [500])
+    }
+  }, [currentChat, messageSentToggle]);
+  useEffect(()=> {
+    if (chatList[room_id] !== undefined) {
+      const to = chatList[room_id].participants.filter(
+        (participant) => participant !== _id,
+      );
+      dispatch(fetchMessages(_id, to[0]));
+    }
+  }, [room_id])
+  // useEffect(()=> {
+  //   console.log('working')
+  //   if (currentChat === oldChat){
+  //     const newRoom_index = chatList.findIndex(chat => chat.participants.includes(currentChat))
+  //     if (chatList[newRoom_index] !== undefined) {
+  //       const to = chatList[newRoom_index].participants.filter(
+  //         (participant) => participant !== _id,
+  //         );
+  //         console.log('fetching messages')
+  //         dispatch(fetchMessages(_id, to[0]));
+  //     }
+  //   }
+  // }, [currentChat, chatList, oldChat])
   return (
     <Stack
       spacing={2}

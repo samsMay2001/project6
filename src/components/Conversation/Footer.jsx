@@ -10,7 +10,7 @@ import { useState } from "react";
 import { Actions } from "./footerActions";
 import { socket } from "../../socket";
 import { useSelector } from "react-redux";
-import { setCurrentChat } from "../../redux/slices/auth";
+import { setCurrentChat, setOldChat } from "../../redux/slices/auth";
 import { dispatch } from "../../redux/store";
 import { useEffect } from "react";
 
@@ -72,7 +72,7 @@ export function ConvoFooter() {
     const theme = useTheme()
     const [openPicker, setOpenPicker] = useState(false)
     const {chatList, room_id} = useSelector(state => state.app)
-    const {_id} = useSelector( state => state.auth)
+    const {_id, currentChat} = useSelector( state => state.auth)
     const [message, setMessage] = useState('')
     function handleMessage (e) {
         setMessage(e.target.value)
@@ -115,8 +115,7 @@ export function ConvoFooter() {
                                   () => {
                                     alert("request sent");
                                   },
-                                );
-                                dispatch(setCurrentChat(to[0]))
+                                  );
                             }
                             setMessage('')
                         }}>

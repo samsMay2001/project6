@@ -11,7 +11,9 @@ const initialState = {
   firstname: "",
   lastname: "",
   _id: "",
-  currentChat: 0
+  currentChat: 0,
+  oldChat: 0,
+  messageSentToggle: false // this is to always allow the code that needs to run on the "message-sent" event to run
 };
 
 const slice = createSlice({
@@ -35,6 +37,9 @@ const slice = createSlice({
     },
     setCurrentChat(state, action) {
       state.currentChat = action.payload.currentChat
+    },
+    setMessageSentToggle(state, action) {
+      state.messageSentToggle = !state.messageSentToggle
     }
   },
 });
@@ -125,5 +130,10 @@ export function createUser(formValues) {
 export function setCurrentChat(currentChat){
   return ()=> {
     dispatch(slice.actions.setCurrentChat({currentChat: currentChat}))
+  }
+}
+export function setMessageSentToggle(){
+  return ()=> {
+    dispatch(slice.actions.setMessageSentToggle())
   }
 }
