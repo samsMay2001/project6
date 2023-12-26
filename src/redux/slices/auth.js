@@ -11,6 +11,7 @@ const initialState = {
   firstname: "",
   lastname: "",
   _id: "",
+  currentChat: 0
 };
 
 const slice = createSlice({
@@ -24,17 +25,17 @@ const slice = createSlice({
       state.firstname = action.payload.firstname;
       state.lastname = action.payload.lastname;
       state._id = action.payload._id;
+      state.currentChat = action.payload.currentChat
     },
-    signOut(state, action) {
-      state.isLoggedIn = false;
-      state.token = "";
-      state.errorMessage = "";
-      state.firstname = "";
-      state.lastname = "";
+    signOut(state=initialState, action) {
+      return {...initialState}
     },
     resetErrorMessage(state, action) {
       state.errorMessage = "";
     },
+    setCurrentChat(state, action) {
+      state.currentChat = action.payload.currentChat
+    }
   },
 });
 
@@ -62,6 +63,7 @@ export function LoginUser(formValues) {
             firstname: res.data.firstname,
             lastname: res.data.lastname,
             _id: res.data._id,
+            currentChat: res.data.currentChat
           }),
         );
       })
@@ -119,4 +121,9 @@ export function createUser(formValues) {
         );
       });
   };
+}
+export function setCurrentChat(currentChat){
+  return ()=> {
+    dispatch(slice.actions.setCurrentChat({currentChat: currentChat}))
+  }
 }

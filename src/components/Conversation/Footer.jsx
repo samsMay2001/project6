@@ -104,7 +104,7 @@ export function ConvoFooter() {
                                     file: "", 
                                     created_at: Date.now(),
                                     message: message.trim(), 
-                                    currentChat: room_id
+                                    currentChat: to[0]
                                  },
                                   () => {
                                     alert("request sent");

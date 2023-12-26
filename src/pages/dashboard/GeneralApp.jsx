@@ -15,10 +15,10 @@ import { getChatList } from "../../redux/slices/app";
 
 const GeneralApp = () => {
   const theme = useTheme();
-  const { _id } = useSelector((store) => store.auth);
+  const { _id, currentChat } = useSelector((store) => store.auth);
   const { sidebar, chatList } = useSelector((store) => store.app);
   useEffect(() => {
-    dispatch(getChatList(_id));
+    dispatch(getChatList(_id, currentChat));
   }, []);
   return (
     <Stack direction="row" sx={{ width: "100%", position: "relative" }}>

@@ -173,11 +173,12 @@ export function selectConversation(room_id) {
   };
 }
 
-export function getChatList(_id) {
+export function getChatList(_id, currentChat) {
   return async (dispatch, getState) => {
     axios
       .post("/chatlist", {
         user_id: _id,
+        currentChat: currentChat
       })
       .then((res) => {
         dispatch(slice.actions.setChatList({ chatList: res.data }));
