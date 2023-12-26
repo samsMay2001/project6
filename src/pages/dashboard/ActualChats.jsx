@@ -136,19 +136,6 @@ export function ActualChats() {
       dispatch(fetchMessages(_id, to[0]));
     }
   }, [room_id])
-  // useEffect(()=> {
-  //   console.log('working')
-  //   if (currentChat === oldChat){
-  //     const newRoom_index = chatList.findIndex(chat => chat.participants.includes(currentChat))
-  //     if (chatList[newRoom_index] !== undefined) {
-  //       const to = chatList[newRoom_index].participants.filter(
-  //         (participant) => participant !== _id,
-  //         );
-  //         console.log('fetching messages')
-  //         dispatch(fetchMessages(_id, to[0]));
-  //     }
-  //   }
-  // }, [currentChat, chatList, oldChat])
   return (
     <Stack
       spacing={2}
