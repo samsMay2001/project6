@@ -13,12 +13,14 @@ import {
   FetchUsers,
   FetchFriends,
   fetchMessages,
+  getChatList,
+  selectConversation,
 } from "../../redux/slices/app";
 
 const isAuthenticated = false;
 const DashboardLayout = () => {
   const theme = useTheme();
-  const { isLoggedIn, _id } = useSelector((state) => state.auth);
+  const { isLoggedIn, _id, currentChat } = useSelector((state) => state.auth);
   const { friends, chatList, room_id } = useSelector((state) => state.app);
   const [selected, setSelected] = useState(0);
   const dispatch = useDispatch();
@@ -66,6 +68,7 @@ const DashboardLayout = () => {
     socket.on('message_sent', (data)=> {
       // console.log('message sent', room_id)
       getMessages(chatList, dispatch, fetchMessages, room_id, _id)
+      dispatch(selectConversation(0))
     })
     socket.on('new_message', (data)=> {
       // console.log({room_id: room_id})

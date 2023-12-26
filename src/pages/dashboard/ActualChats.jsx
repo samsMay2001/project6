@@ -9,7 +9,7 @@ import { Box, Stack, Typography, Badge, Avatar, useTheme } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import { useSelector } from "react-redux";
 import { dispatch } from "../../redux/store";
-import { selectConversation, fetchMessages } from "../../redux/slices/app";
+import { selectConversation, fetchMessages, getChatList } from "../../redux/slices/app";
 // import {ChatEle}
 export const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -115,7 +115,12 @@ const ChatElement = ({ id, names, img, msg, time, unread, online, chatId }) => {
 export function ActualChats() {
   const theme = useTheme();
   const { chatList, room_id, requests } = useSelector((state) => state.app); // gets the new chat list
-  useEffect(() => {}, []);
+  const { _id, currentChat } = useSelector((state) => state.auth); // gets the new chat list
+  useEffect(() => {
+    console.log(currentChat)
+    dispatch(getChatList(_id, currentChat))
+    
+  }, [currentChat]);
   return (
     <Stack
       spacing={2}

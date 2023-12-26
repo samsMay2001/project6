@@ -10,6 +10,9 @@ import { useState } from "react";
 import { Actions } from "./footerActions";
 import { socket } from "../../socket";
 import { useSelector } from "react-redux";
+import { setCurrentChat } from "../../redux/slices/auth";
+import { dispatch } from "../../redux/store";
+import { useEffect } from "react";
 
 const StyledInput = styled(TextField)(({ theme }) => (
     {
@@ -74,6 +77,9 @@ export function ConvoFooter() {
     function handleMessage (e) {
         setMessage(e.target.value)
     }
+    useEffect(()=>{
+
+    }, [])
     return ( 
         <Box p={2} sx={{ width: '100%',backgroundColor: theme.palette.mode === 'light'? '#f8faff' : theme.palette.background.paper, boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)' }}>
             <Stack direction='row' alignItems={'center'} spacing={3}>
@@ -110,6 +116,7 @@ export function ConvoFooter() {
                                     alert("request sent");
                                   },
                                 );
+                                dispatch(setCurrentChat(to[0]))
                             }
                             setMessage('')
                         }}>
