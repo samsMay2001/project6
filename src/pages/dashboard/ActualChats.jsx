@@ -117,9 +117,7 @@ export function ActualChats() {
   const { chatList, room_id, requests } = useSelector((state) => state.app); // gets the new chat list
   const { _id, currentChat } = useSelector((state) => state.auth); // gets the new chat list
   useEffect(() => {
-    console.log(currentChat)
-    dispatch(getChatList(_id, currentChat))
-    
+    dispatch(getChatList(_id, currentChat))    
   }, [currentChat]);
   return (
     <Stack
