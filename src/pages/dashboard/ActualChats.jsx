@@ -10,6 +10,7 @@ import { styled, alpha } from "@mui/material/styles";
 import { useSelector } from "react-redux";
 import { dispatch } from "../../redux/store";
 import { selectConversation, fetchMessages, getChatList } from "../../redux/slices/app";
+import { setMessageReceivedToggle, setMessageSentToggle } from "../../redux/slices/auth";
 // import {ChatEle}
 export const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -111,23 +112,7 @@ const ChatElement = ({ id, names, img, msg, time, unread, online, chatId }) => {
 export function ActualChats() {
   const theme = useTheme();
   const { chatList, room_id, requests } = useSelector((state) => state.app); // gets the new chat list
-  const { _id, currentChat, messageSentToggle } = useSelector((state) => state.auth); // gets the new chat list
-  useEffect(() => {
-    // find the room index and fetch messages
-    const newRoom_index = chatList.findIndex(chat => chat.participants.includes(currentChat))
-    if (chatList[newRoom_index] !== undefined) {
-      const to = chatList[newRoom_index].participants.filter(
-        (participant) => participant !== _id,
-        );
-        // console.log('fetching messages')
-        dispatch(fetchMessages(_id, to[0]));
-        dispatch(getChatList(_id, currentChat)) 
-
-        setTimeout(()=>{
-          dispatch(selectConversation(0))   
-        }, [500])
-    }
-  }, [currentChat, messageSentToggle]);
+  const { _id} = useSelector((state) => state.auth); // gets the new chat list
   useEffect(()=> {
     if (chatList[room_id] !== undefined) {
       const to = chatList[room_id].participants.filter(

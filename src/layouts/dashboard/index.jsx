@@ -16,7 +16,7 @@ import {
   getChatList,
   selectConversation,
 } from "../../redux/slices/app";
-import { setCurrentChat, setMessageSentToggle } from "../../redux/slices/auth";
+import { setCurrentChat, setMessageReceivedToggle, setMessageSentToggle, setToggler } from "../../redux/slices/auth";
 
 const isAuthenticated = false;
 const DashboardLayout = () => {
@@ -67,13 +67,22 @@ const DashboardLayout = () => {
       dispatch(FetchRequests(_id));
     });
     socket.on('message_sent', (data)=> {
-      const to = chatList[room_id].participants.filter(participant => participant !== _id)
-      dispatch(setCurrentChat(to[0]))
-      dispatch(setMessageSentToggle())
-      
+      const newRoom_index = chatList.findIndex(chat => chat.participants.includes(data.currentChat))
+      if (chatList[newRoom_index] !== undefined) {
+        const to = chatList[newRoom_index].participants.filter(
+          (participant) => participant !== _id,
+          );
+            dispatch(fetchMessages(_id, to[0]));
+            dispatch(getChatList(_id, data.currentChat)) 
+            dispatch(setMessageSentToggle(false))
+            setTimeout(()=>{
+              dispatch(selectConversation(0))   
+            }, [500])
+        }
     })
     socket.on('new_message', (data)=> {
-      getMessages(chatList, dispatch, fetchMessages, room_id, _id)
+      // dispatch
+      
     })
 
 

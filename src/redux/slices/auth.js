@@ -13,7 +13,8 @@ const initialState = {
   _id: "",
   currentChat: 0,
   oldChat: 0,
-  messageSentToggle: false // this is to always allow the code that needs to run on the "message-sent" event to run
+  messageSentToggle: false, // this is to always allow the code that needs to run on the "message-sent" event to run
+  messageRecievedToggle: false, // this is to always allow the code that needs to run on the "message-received" event to run
 };
 
 const slice = createSlice({
@@ -38,9 +39,13 @@ const slice = createSlice({
     setCurrentChat(state, action) {
       state.currentChat = action.payload.currentChat
     },
-    setMessageSentToggle(state, action) {
-      state.messageSentToggle = !state.messageSentToggle
+    setMessageSent(state, action) {
+      state.messageSentToggle = action.payload.messageSent
+    }, 
+    setMessageRecieved(state, action){
+      state.messageRecievedToggle = action.payload.messageReceived
     }
+
   },
 });
 
@@ -68,7 +73,7 @@ export function LoginUser(formValues) {
             firstname: res.data.firstname,
             lastname: res.data.lastname,
             _id: res.data._id,
-            currentChat: res.data.currentChat
+            currentChat: res.data.currentChat, 
           }),
         );
       })
@@ -132,8 +137,13 @@ export function setCurrentChat(currentChat){
     dispatch(slice.actions.setCurrentChat({currentChat: currentChat}))
   }
 }
-export function setMessageSentToggle(){
+export function setMessageSentToggle(messageSent){
   return ()=> {
-    dispatch(slice.actions.setMessageSentToggle())
+    dispatch(slice.actions.setMessageSent({messageSent: messageSent}))
+  }
+}
+export function setMessageReceivedToggle(messageReceived){
+  return ()=> {
+    dispatch(slice.actions.setMessageRecieved({messageReceived: messageReceived}))
   }
 }
