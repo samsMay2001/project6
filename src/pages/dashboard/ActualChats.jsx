@@ -111,7 +111,7 @@ export function ActualChats() {
   const theme = useTheme();
   const { chatList, requests } = useSelector((state) => state.app); // gets the new chat list
   const { _id, room_id, currentChat} = useSelector((state) => state.auth); // gets the new chat list
-  
+  const roomIndex = chatList.findIndex(chat => chat._id === room_id)
   
   useEffect(()=> {
     if (room_id === 0){
@@ -123,6 +123,14 @@ export function ActualChats() {
       console.log('room_id was already set')
     }
   }, [room_id, chatList])
+  useEffect(() => {
+    if (chatList[roomIndex] !== undefined) {
+      const to = chatList[roomIndex].participants.filter(
+        (participant) => participant !== _id,
+      );
+      dispatch(fetchMessages(_id, to[0]));
+    }
+  }, [room_id]);
   return (
     <Stack
       spacing={2}

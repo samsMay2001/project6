@@ -71,8 +71,8 @@ const ChatInput = ({setOpenPicker, message, handleMessage}) => {
 export function ConvoFooter() {
     const theme = useTheme()
     const [openPicker, setOpenPicker] = useState(false)
-    const {chatList, room_id} = useSelector(state => state.app)
-    const {_id, currentChat} = useSelector( state => state.auth)
+    const {chatList} = useSelector(state => state.app)
+    const {_id, currentChat, room_id} = useSelector( state => state.auth)
     const [message, setMessage] = useState('')
     function handleMessage (e) {
         setMessage(e.target.value)
@@ -100,7 +100,10 @@ export function ConvoFooter() {
                     <Stack justifyContent={'center'} alignItems="center" sx={{width: '100%', height: '100%'}}>
                         <IconButton onClick={()=> {
                             if (message.length > 0){
-                                const to = chatList[room_id].participants.filter(participant => participant !== _id)
+                                // find the roomIndex
+                                const roomIndex = chatList.findIndex(chat => chat._id === room_id)
+                                console.log(roomIndex)
+                                const to = chatList[roomIndex].participants.filter(participant => participant !== _id)
                                 socket.emit(
                                   "text_message",
                                   { 
@@ -110,7 +113,7 @@ export function ConvoFooter() {
                                     file: "", 
                                     created_at: Date.now(),
                                     message: message.trim(), 
-                                    currentChat: to[0]
+                                    currentChat: to[0],
                                  },
                                   () => {
                                     alert("request sent");

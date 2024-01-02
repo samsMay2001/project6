@@ -73,10 +73,9 @@ const DashboardLayout = () => {
           );
             dispatch(fetchMessages(_id, to[0]));
             dispatch(getChatList(_id, data.currentChat)) 
-            // dispatch(setMessageSentToggle(false))
-            setTimeout(()=>{
-              dispatch(selectConversation(0))   
-            }, [500])
+            dispatch(selectConversation(chatList[newRoom_index]._id))   
+            // setTimeout(()=>{
+            // }, [500])
         }
     })
     socket.on('new_message', (data)=> {

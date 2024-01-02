@@ -17,7 +17,7 @@ function Message({ menu }) {
   const { chat_history, chatList } = useSelector((state) => state.app);
   const { _id, room_id } = useSelector((state) => state.auth);
   const scrollRef = useRef()
-  const roomIndex = chatList.findIndex(chat => chat._id === room_id)
+  
   const scrollToBottom = () => {
     if (scrollRef.current){
       const scrollHeight = scrollRef.current.scrollHeight; 
@@ -29,14 +29,7 @@ function Message({ menu }) {
       });
     }
   }
-  useEffect(() => {
-    if (chatList[roomIndex] !== undefined) {
-      const to = chatList[roomIndex].participants.filter(
-        (participant) => participant !== _id,
-      );
-      dispatch(fetchMessages(_id, to[0]));
-    }
-  }, [room_id]);
+  
   useEffect(()=> {
     scrollToBottom(); 
   }, [chat_history])
