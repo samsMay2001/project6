@@ -14,6 +14,7 @@ const initialState = {
   currentChat: 0,
   room_id: 0,
   oldChat: 0,
+  connection: false,
   messageSentToggle: false, // this is to always allow the code that needs to run on the "message-sent" event to run
   messageRecievedToggle: false, // this is to always allow the code that needs to run on the "message-received" event to run
 };
@@ -50,6 +51,9 @@ const slice = createSlice({
       state.chat_type = "individual";
       state.room_id = action.payload.room_id;
     },
+    setConnection(state, action){
+      state.connection = action.payload.connection
+    }
 
   },
 });
@@ -156,4 +160,10 @@ export function selectConversation(room_id) {
   return (dispatch, getState) => {
     dispatch(slice.actions.selectConversation({ room_id }));
   };
+}
+export function setConnection(connection){
+  console.log('setting connection')
+  return (dispatch, getState) => {
+    dispatch(slice.actions.setConnection({connection}))
+  }
 }

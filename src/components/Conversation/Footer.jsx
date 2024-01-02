@@ -28,11 +28,16 @@ const StyledInput = styled(TextField)(({ theme }) => (
     }
 ))
 
-const ChatInput = ({setOpenPicker, message, handleMessage}) => {
+const ChatInput = ({setOpenPicker, message, handleMessage, handleClick}) => {
 
     const [openActions, setOpenAction] = useState(false); 
     return (
-        <StyledInput fullWidth placeholder='Write a message' value={message} onChange={handleMessage} variant='filled' InputProps={{
+        <StyledInput fullWidth placeholder='Write a message' value={message} onKeyDown={(e)=> {
+            if (e.key === 'Enter') {
+                // Handle the "Enter" key press
+                handleClick();
+              }
+        }} onChange={handleMessage} variant='filled' InputProps={{
             disableUnderline: true, 
             startAdornment: (
                 <Stack sx={{width: 'max-content'}}>
@@ -72,10 +77,33 @@ export function ConvoFooter() {
     const theme = useTheme()
     const [openPicker, setOpenPicker] = useState(false)
     const {chatList} = useSelector(state => state.app)
-    const {_id, currentChat, room_id} = useSelector( state => state.auth)
+    const {_id, currentChat, room_id, connection} = useSelector( state => state.auth)
     const [message, setMessage] = useState('')
     function handleMessage (e) {
         setMessage(e.target.value)
+    }
+    function handleClick(){
+        if (message.length > 0 && connection){
+            // find the roomIndex
+            const roomIndex = chatList.findIndex(chat => chat._id === room_id)
+            const to = chatList[roomIndex].participants.filter(participant => participant !== _id)
+            socket.emit(
+              "text_message",
+              { 
+                from: _id, 
+                to: to[0],
+                type: "Text", 
+                file: "", 
+                created_at: Date.now(),
+                message: message.trim(), 
+                currentChat: to[0],
+             },
+              () => {
+                alert("request sent");
+              },
+              );
+        }
+        setMessage('')
     }
     useEffect(()=>{
 
@@ -94,33 +122,11 @@ export function ConvoFooter() {
                     }}>
                         <Picker theme={theme.palette.mode} data={data}/>
                     </Box>
-                    <ChatInput setOpenPicker={setOpenPicker} message={message} handleMessage={handleMessage}/>
+                    <ChatInput handleClick={handleClick} setOpenPicker={setOpenPicker} message={message} handleMessage={handleMessage}/>
                 </Stack>
                 <Box sx={{height: 48, width: 48, backgroundColor: theme.palette.primary.main, borderRadius: 1.5}}>
                     <Stack justifyContent={'center'} alignItems="center" sx={{width: '100%', height: '100%'}}>
-                        <IconButton onClick={()=> {
-                            if (message.length > 0){
-                                // find the roomIndex
-                                const roomIndex = chatList.findIndex(chat => chat._id === room_id)
-                                const to = chatList[roomIndex].participants.filter(participant => participant !== _id)
-                                socket.emit(
-                                  "text_message",
-                                  { 
-                                    from: _id, 
-                                    to: to[0],
-                                    type: "Text", 
-                                    file: "", 
-                                    created_at: Date.now(),
-                                    message: message.trim(), 
-                                    currentChat: to[0],
-                                 },
-                                  () => {
-                                    alert("request sent");
-                                  },
-                                  );
-                            }
-                            setMessage('')
-                        }}>
+                        <IconButton onClick={handleClick}>
                             <PaperPlaneTilt color="#fff"/>
                         </IconButton>
                     </Stack>

@@ -61,7 +61,7 @@ function Message({ menu }) {
         },
       }}
     >
-      <Stack spacing={3}>
+      <Stack spacing={.7}>
         {chat_history.map((el) => (
           <TextMessage el={el} menu={menu} />
         ))}

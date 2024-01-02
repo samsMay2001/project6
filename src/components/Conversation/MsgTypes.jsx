@@ -85,6 +85,7 @@ function TextMessage({ el, menu }) {
               : theme.palette.primary.main,
           borderRadius: 1.5,
           width: "max-content",
+          maxWidth: '250px'
         }}
       >
         <Typography

@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Slide, Snackbar, Stack } from "@mui/material";
 import { useTheme, styled } from "@mui/material/styles";
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
@@ -15,13 +15,17 @@ import {
   fetchMessages,
   getChatList,
 } from "../../redux/slices/app";
-import { selectConversation, setCurrentChat, setMessageReceivedToggle, setMessageSentToggle, setToggler } from "../../redux/slices/auth";
+import { selectConversation, setConnection, setCurrentChat, setMessageReceivedToggle, setMessageSentToggle, setToggler } from "../../redux/slices/auth";
 
 const isAuthenticated = false;
+function TransitionDown(props){
+  return <Slide {...props} direction="down"/>
+}
 const DashboardLayout = () => {
   const theme = useTheme();
-  const { isLoggedIn, _id, currentChat } = useSelector((state) => state.auth);
-  const { friends, chatList, room_id } = useSelector((state) => state.app);
+  const { isLoggedIn, _id, currentChat, connection, room_id } = useSelector((state) => state.auth);
+  const { friends, chatList } = useSelector((state) => state.app);
+  const [transition , setTransition] = useState(()=> TransitionDown)
   const [selected, setSelected] = useState(0);
   const dispatch = useDispatch();
   const { onToggleMode } = useSettings();
@@ -45,10 +49,18 @@ const DashboardLayout = () => {
       dispatch(FetchUsers(friends, _id));
       dispatch(FetchRequests(_id));
       dispatch(FetchFriends(_id));
+      dispatch(setConnection(true))
+      // set a state to show there's no error in the connection
+      
+    });
+    socket.on("connect_error", () => {
+      dispatch(setConnection(false))
     });
     socket.on("error", (err) => {
+      // set a state for show there's an error in the connection
       console.log(err);
     });
+    
     socket.on("new_friend_request", (data) => {
       dispatch(FetchRequests(_id));
     });
@@ -97,16 +109,33 @@ const DashboardLayout = () => {
       socket.off("request_cancelled");
       socket.off("message_sent"); 
       socket.off("new_message"); 
+      socket.off('error')
+      socket.off("disconnect")
     };
   }, [room_id, chatList]);
+  useEffect(()=> {
+    console.log(connection)
+  }, [connection])
   if (!isLoggedIn) {
     return <Navigate to={"/auth/login"} />;
   }
+  
   return (
     <Stack
       direction={"row"}
       sx={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0 }}
     >
+      <Snackbar
+        open={!connection}
+        TransitionComponent={transition}
+        message="Please check your connection..."
+        key={transition ? transition.name : ''}
+        sx={{ height: '100px', width: '100px'}}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      />
       <SideBar />
       <Outlet />
     </Stack>
@@ -114,12 +143,3 @@ const DashboardLayout = () => {
 };
 
 export default DashboardLayout;
-
-function getMessages(chatList, dispatch, fetchMessages, room_id, _id){
-  if (chatList[room_id] !== undefined) {
-    const to = chatList[room_id].participants.filter(
-      (participant) => participant !== _id,
-    );
-    dispatch(fetchMessages(_id, to[0]));
-  }
-}
