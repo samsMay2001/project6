@@ -24,6 +24,7 @@ import { socket } from "../../socket";
 import { styled } from "@mui/system";
 import { ChatCircle, ChatCircleDots } from "phosphor-react";
 import { setChatTab, newChat } from "../../redux/slices/app";
+import { selectConversation } from "../../redux/slices/auth";
 export function AddFriends() {
   const { friends, users, requests, chatList } = useSelector(
     (state) => state.app,
@@ -341,6 +342,8 @@ export function createNewChat(
     const selectedChat = chatListCopy.splice(mutualChatIndex, 1)[0];
     chatListCopy.splice(0, 0, selectedChat);
     dispatch(setChatList(chatListCopy)); 
+    const newRoomIndex = chatList.filter(chat => chat.participants.includes(user._id))
+    dispatch(selectConversation(newRoomIndex[0]._id))
   }
   // change chatTabs to chats
   dispatch(setChatTab(2));
