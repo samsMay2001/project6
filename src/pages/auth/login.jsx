@@ -3,11 +3,15 @@ import { Link as RouterLink } from "react-router-dom";
 import AuthSocial from "./AuthSocial";
 import LoginForm from "./LoginForm";
 import { useEffect, useState } from "react";
-import { selectConversation } from "../../redux/slices/app";
+// import { selectConversation } from "../../redux/slices/app";
 import { dispatch } from "../../redux/store";
+import { selectConversation } from "../../redux/slices/auth";
+import { useSelector } from "react-redux";
 
 function Login() {
   const [windowReloaded, setWindowReloaded] = useState(false);
+  const {chatList} = useSelector(state => state.app)
+  const {room_id, currentChat} = useSelector(state => state.auth)
   useEffect(() => {
     // Get the reloaded value from localStorage
     const storedValue = localStorage.getItem("reloadWindow");
@@ -22,7 +26,8 @@ function Login() {
       window.location.reload();
       // Set the value in localStorage
       localStorage.setItem("reloadWindow", JSON.stringify(true));
-      dispatch(selectConversation(0));
+      // first set the room_id if it's 0
+    
     }
   }, []);
   return (

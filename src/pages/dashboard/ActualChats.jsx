@@ -9,8 +9,8 @@ import { Box, Stack, Typography, Badge, Avatar, useTheme } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import { useSelector } from "react-redux";
 import { dispatch } from "../../redux/store";
-import { selectConversation, fetchMessages, getChatList } from "../../redux/slices/app";
-import { setMessageReceivedToggle, setMessageSentToggle } from "../../redux/slices/auth";
+import { fetchMessages, getChatList } from "../../redux/slices/app";
+import { selectConversation, setMessageReceivedToggle, setMessageSentToggle } from "../../redux/slices/auth";
 // import {ChatEle}
 export const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -41,14 +41,12 @@ export const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const ChatElement = ({ id, names, img, msg, time, unread, online, chatId }) => {
+const ChatElement = ({ id, names, img, msg, time, unread, online, chatId, item, room_id1 }) => {
   const theme = useTheme();
-  const { room_id, chatList } = useSelector((state) => state.app);
-  const { firstname, _id } = useSelector((state) => state.auth);
-  // useEffect(() => {
-  //   console.log(room_id)
-    
-  // }, [room_id]);
+  const { chatList } = useSelector((state) => state.app);
+  const { firstname, _id, currentChat, room_id } = useSelector((state) => state.auth);
+  useEffect(() => {    
+  }, []);
   return (
     <Box
       sx={{
@@ -56,17 +54,17 @@ const ChatElement = ({ id, names, img, msg, time, unread, online, chatId }) => {
         borderRadius: 1,
         background:
           theme.palette.mode === "light"
-            ? chatId !== room_id
+            ? item._id !== room_id
               ? "#fff"
               : "rgb(0, 0, 0, .05)"
-            : chatId !== room_id
+            : item._id !== room_id
               ? "rgb(255, 255, 255, 0.025)"
               : "rgb(255, 255, 255, 0.07)",
         cursor: "pointer",
       }}
       p={2}
       onClick={() => {
-        dispatch(selectConversation(chatId));
+        dispatch(selectConversation(item._id));
       }}
     >
       <Stack
@@ -111,16 +109,20 @@ const ChatElement = ({ id, names, img, msg, time, unread, online, chatId }) => {
 
 export function ActualChats() {
   const theme = useTheme();
-  const { chatList, room_id, requests } = useSelector((state) => state.app); // gets the new chat list
-  const { _id} = useSelector((state) => state.auth); // gets the new chat list
+  const { chatList, requests } = useSelector((state) => state.app); // gets the new chat list
+  const { _id, room_id, currentChat} = useSelector((state) => state.auth); // gets the new chat list
+  
+  
   useEffect(()=> {
-    if (chatList[room_id] !== undefined) {
-      const to = chatList[room_id].participants.filter(
-        (participant) => participant !== _id,
-      );
-      dispatch(fetchMessages(_id, to[0]));
+    if (room_id === 0){
+      const room_id1 = chatList.filter(chat => chat.participants.includes(currentChat))
+      if (room_id1[0] !== undefined){
+        dispatch(selectConversation(room_id1[0]._id))
+      }
+    } else {
+      console.log('room_id was already set')
     }
-  }, [room_id])
+  }, [room_id, chatList])
   return (
     <Stack
       spacing={2}
@@ -166,7 +168,7 @@ export function ActualChats() {
           All Chats
         </Typography>
         {chatList.map((el, index) => (
-          <ChatElement {...el} chatId={index} />
+          <ChatElement {...el} chatId={index} item={el}/>
         ))}
         {/* {chatList.length < 1 && "No Chats"} */}
       </Stack>

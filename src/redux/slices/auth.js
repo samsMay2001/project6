@@ -12,6 +12,7 @@ const initialState = {
   lastname: "",
   _id: "",
   currentChat: 0,
+  room_id: 0,
   oldChat: 0,
   messageSentToggle: false, // this is to always allow the code that needs to run on the "message-sent" event to run
   messageRecievedToggle: false, // this is to always allow the code that needs to run on the "message-received" event to run
@@ -44,7 +45,11 @@ const slice = createSlice({
     }, 
     setMessageRecieved(state, action){
       state.messageRecievedToggle = action.payload.messageReceived
-    }
+    },
+    selectConversation(state, action) {
+      state.chat_type = "individual";
+      state.room_id = action.payload.room_id;
+    },
 
   },
 });
@@ -146,4 +151,9 @@ export function setMessageReceivedToggle(messageReceived){
   return ()=> {
     dispatch(slice.actions.setMessageRecieved({messageReceived: messageReceived}))
   }
+}
+export function selectConversation(room_id) {
+  return (dispatch, getState) => {
+    dispatch(slice.actions.selectConversation({ room_id }));
+  };
 }

@@ -38,10 +38,7 @@ const slice = createSlice({
     updateFriendRequests(state, action) {
       state.requests = action.payload.requests;
     },
-    selectConversation(state, action) {
-      state.chat_type = "individual";
-      state.room_id = action.payload.room_id;
-    },
+
     setChatList(state, action) {
       state.chatList = action.payload.chatList;
     },
@@ -167,11 +164,7 @@ export function resetAppState() {
   };
 }
 
-export function selectConversation(room_id) {
-  return (dispatch, getState) => {
-    dispatch(slice.actions.selectConversation({ room_id }));
-  };
-}
+
 
 export function getChatList(_id, currentChat) {
   return async (dispatch, getState) => {

@@ -14,9 +14,8 @@ import {
   FetchFriends,
   fetchMessages,
   getChatList,
-  selectConversation,
 } from "../../redux/slices/app";
-import { setCurrentChat, setMessageReceivedToggle, setMessageSentToggle, setToggler } from "../../redux/slices/auth";
+import { selectConversation, setCurrentChat, setMessageReceivedToggle, setMessageSentToggle, setToggler } from "../../redux/slices/auth";
 
 const isAuthenticated = false;
 const DashboardLayout = () => {
@@ -74,7 +73,7 @@ const DashboardLayout = () => {
           );
             dispatch(fetchMessages(_id, to[0]));
             dispatch(getChatList(_id, data.currentChat)) 
-            dispatch(setMessageSentToggle(false))
+            // dispatch(setMessageSentToggle(false))
             setTimeout(()=>{
               dispatch(selectConversation(0))   
             }, [500])
@@ -82,7 +81,19 @@ const DashboardLayout = () => {
     })
     socket.on('new_message', (data)=> {
       // dispatch
-      
+      const newRoom_index = chatList.findIndex(chat => chat.participants.includes(data.currentChat))
+      if (chatList[newRoom_index] !== undefined) {
+        const to = chatList[newRoom_index].participants.filter(
+          (participant) => participant !== _id,
+          );
+            dispatch(fetchMessages(_id, to[0]));
+            // dispatch(getChatList(_id, data.currentChat)) 
+            // dispatch(setMessageSentToggle(false))
+            // setTimeout(()=>{
+            //   dispatch(selectConversation(0))   
+            // }, [500])
+            // const currentConversation = JSON.parse(JSON.stringify())
+        }
     })
 
 

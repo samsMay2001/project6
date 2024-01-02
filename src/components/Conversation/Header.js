@@ -32,9 +32,13 @@ import { useEffect } from "react";
 function ConvoHeader() {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const { chatList, room_id } = useSelector((state) => state.app);
-  const { firstname } = useSelector((state) => state.auth);
-  useEffect(() => {}, []);
+  const { chatList } = useSelector((state) => state.app);
+  const { firstname, room_id } = useSelector((state) => state.auth);
+  const roomIndex = chatList.findIndex(chat => chat._id === room_id)
+
+  useEffect(() => {
+    // console.log(roomIndex)
+  }, []);
   return (
     <Box
       p={2}
@@ -77,8 +81,8 @@ function ConvoHeader() {
           </Box>
           <Stack spacing={0.3}>
             <Typography variant={"subtitle2"}>
-              {chatList[room_id] !== undefined &&
-                chatList[room_id].names.map(
+              {chatList[roomIndex] !== undefined &&
+                chatList[roomIndex].names.map(
                   (name, index) => name !== firstname && name,
                 )}
             </Typography>
