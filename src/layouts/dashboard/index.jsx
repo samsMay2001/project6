@@ -71,11 +71,9 @@ const DashboardLayout = () => {
         const to = chatList[newRoom_index].participants.filter(
           (participant) => participant !== _id,
           );
-            dispatch(fetchMessages(_id, to[0]));
-            dispatch(getChatList(_id, data.currentChat)) 
-            dispatch(selectConversation(chatList[newRoom_index]._id))   
-            // setTimeout(()=>{
-            // }, [500])
+          dispatch(fetchMessages(_id, to[0]));
+          dispatch(getChatList(_id, data.currentChat)) 
+          dispatch(selectConversation(chatList[newRoom_index]._id))   
         }
     })
     socket.on('new_message', (data)=> {
@@ -85,13 +83,8 @@ const DashboardLayout = () => {
         const to = chatList[newRoom_index].participants.filter(
           (participant) => participant !== _id,
           );
-            dispatch(fetchMessages(_id, to[0]));
-            // dispatch(getChatList(_id, data.currentChat)) 
-            // dispatch(setMessageSentToggle(false))
-            // setTimeout(()=>{
-            //   dispatch(selectConversation(0))   
-            // }, [500])
-            // const currentConversation = JSON.parse(JSON.stringify())
+          dispatch(fetchMessages(_id, to[0]));
+          dispatch(getChatList(_id, data.currentChat)) 
         }
     })
 

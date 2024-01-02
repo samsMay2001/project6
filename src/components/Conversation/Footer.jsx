@@ -102,7 +102,6 @@ export function ConvoFooter() {
                             if (message.length > 0){
                                 // find the roomIndex
                                 const roomIndex = chatList.findIndex(chat => chat._id === room_id)
-                                console.log(roomIndex)
                                 const to = chatList[roomIndex].participants.filter(participant => participant !== _id)
                                 socket.emit(
                                   "text_message",
