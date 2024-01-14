@@ -16,9 +16,10 @@ import {
   getChatList,
 } from "../../redux/slices/app";
 import { selectConversation, setConnection, setCurrentChat, setMessageReceivedToggle, setMessageSentToggle, setToggler } from "../../redux/slices/auth";
+import Call from "../../pages/dashboard/Call";
 
 const isAuthenticated = false;
-function TransitionDown(props){
+export function TransitionDown(props){
   return <Slide {...props} direction="down"/>
 }
 const DashboardLayout = () => {
@@ -138,6 +139,7 @@ const DashboardLayout = () => {
       />
       <SideBar />
       <Outlet />
+      {true && <Call/>}
     </Stack>
   );
 };

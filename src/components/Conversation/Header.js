@@ -4,6 +4,7 @@ import {
   Divider,
   IconButton,
   InputAdornment,
+  Snackbar,
   Stack,
   TextField,
   Typography,
@@ -27,13 +28,17 @@ import {
 import { useDispatch } from "react-redux";
 import { ToggleSidebar } from "../../redux/slices/app";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { TransitionDown } from "../../layouts/dashboard";
+import Call from "../../pages/dashboard/Call";
 
 function ConvoHeader() {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { chatList } = useSelector((state) => state.app);
   const { firstname, room_id } = useSelector((state) => state.auth);
+  const [open, setOpen] = useState(true)
+  const [transition , setTransition] = useState(()=> TransitionDown)
   const roomIndex = chatList.findIndex(chat => chat._id === room_id)
 
   useEffect(() => {
@@ -52,6 +57,7 @@ function ConvoHeader() {
         zIndex: "100",
       }}
     >
+      
       <Stack
         direction={"row"}
         spacing={2}
@@ -63,7 +69,7 @@ function ConvoHeader() {
 
         <Stack
           onClick={() => {
-            dispatch(ToggleSidebar()); // there's a problem here because togglesidebar doesn't appear to be calling !!!!!!!!!
+            dispatch(ToggleSidebar());
           }}
           direction={"row"}
           alignItems="center"
@@ -107,6 +113,7 @@ function ConvoHeader() {
           </IconButton>
         </Stack>
       </Stack>
+
     </Box>
   );
 }
