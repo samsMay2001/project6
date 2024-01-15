@@ -1,8 +1,19 @@
 import { Avatar, Box, IconButton, Stack, Typography, useTheme } from "@mui/material";
 import { Microphone, PhoneCall, PhoneDisconnect, SpeakerHigh } from "phosphor-react";
+import { ZegoExpressEngine } from "zego-express-engine-webrtc";
 
 function Call() {
     const theme = useTheme()
+    const appID = 110868845; 
+    const server = "wss://webliveroom110868845-api.coolzcloud.com/ws"
+
+    // initiate the zegoExpressEngine
+    // const zg = new ZegoExpressEngine(appID, server)
+
+    // check browser competability
+
+    // log in the room
+
     return ( 
         <Box sx={{
             position: 'absolute', 
@@ -32,8 +43,8 @@ function Call() {
                         }} alignItems={'center'} justifyContent={'center'}>
                             {/* Profile image of the person being called or calling */}
                             <Avatar sx={{
-                                width: '60px', 
-                                height: '60px', 
+                                width: '70px', 
+                                height: '70px', 
                                 border: '2px solid white'
                             }}/>
                         </Stack> 

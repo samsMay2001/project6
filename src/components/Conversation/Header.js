@@ -31,12 +31,13 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { TransitionDown } from "../../layouts/dashboard";
 import Call from "../../pages/dashboard/Call";
+import { PushToAudioCallQueue, StartAudioCall } from "../../redux/slices/audioCall";
 
 function ConvoHeader() {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { chatList } = useSelector((state) => state.app);
-  const { firstname, room_id } = useSelector((state) => state.auth);
+  const { firstname, room_id, _id } = useSelector((state) => state.auth);
   const [open, setOpen] = useState(true)
   const [transition , setTransition] = useState(()=> TransitionDown)
   const roomIndex = chatList.findIndex(chat => chat._id === room_id)
@@ -101,7 +102,11 @@ function ConvoHeader() {
           <IconButton>
             <VideoCamera />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={()=> {
+            const roomIndex = chatList.findIndex(chat => chat._id === room_id)
+            const to = chatList[roomIndex].participants.filter(participant => participant !== _id)
+            dispatch(StartAudioCall(_id, to[0]))
+          }}>
             <Phone />
           </IconButton>
           <IconButton>

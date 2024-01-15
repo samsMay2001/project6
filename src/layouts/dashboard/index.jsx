@@ -26,6 +26,7 @@ const DashboardLayout = () => {
   const theme = useTheme();
   const { isLoggedIn, _id, currentChat, connection, room_id } = useSelector((state) => state.auth);
   const { friends, chatList } = useSelector((state) => state.app);
+  const {open_audio_dialog} = useSelector(state => state.audioCall)
   const [transition , setTransition] = useState(()=> TransitionDown)
   const [selected, setSelected] = useState(0);
   const dispatch = useDispatch();
@@ -139,7 +140,7 @@ const DashboardLayout = () => {
       />
       <SideBar />
       <Outlet />
-      {true && <Call/>}
+      {open_audio_dialog && <Call/>}
     </Stack>
   );
 };
