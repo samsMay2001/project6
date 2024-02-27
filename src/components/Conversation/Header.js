@@ -15,6 +15,7 @@ import { StyledBadge } from "../../pages/dashboard/ActualChats";
 import { faker } from "@faker-js/faker";
 import {
   CaretDown,
+  CaretLeft,
   LinkSimple,
   MagnifyingGlass,
   PaperPlane,
@@ -41,13 +42,14 @@ function ConvoHeader() {
   const [open, setOpen] = useState(true)
   const [transition , setTransition] = useState(()=> TransitionDown)
   const roomIndex = chatList.findIndex(chat => chat._id === room_id)
+  const [mobileState, setMobileState] = useState(false)
 
   useEffect(() => {
     // console.log(roomIndex)
   }, []);
   return (
     <Box
-      p={2}
+      p={1}
       sx={{
         width: "100%",
         backgroundColor:
@@ -70,12 +72,20 @@ function ConvoHeader() {
 
         <Stack
           onClick={() => {
-            dispatch(ToggleSidebar());
+            // dispatch(ToggleSidebar());
           }}
           direction={"row"}
           alignItems="center"
-          spacing={2}
+          spacing={1}
         >
+          {/* carret to show sidebar and chats */}
+          <Box>
+            <Stack sx={{cursor: 'pointer'}}>
+              <CaretLeft/>
+            </Stack>
+            {/* <IconButton>
+            </IconButton> */}
+          </Box>
           {/* Avatar and text section */}
           <Box>
             <StyledBadge
@@ -99,7 +109,7 @@ function ConvoHeader() {
 
         {/* right section, which has icons  */}
         <Stack direction="row" alignItems="center" spacing={3}>
-          <IconButton>
+          {/* <IconButton>
             <VideoCamera />
           </IconButton>
           <IconButton onClick={()=> {
@@ -111,11 +121,11 @@ function ConvoHeader() {
           </IconButton>
           <IconButton>
             <MagnifyingGlass />
-          </IconButton>
-          <Divider orientation="vertical" flexItem />
+          </IconButton> */}
+          {/* <Divider orientation="vertical" flexItem />
           <IconButton>
             <CaretDown />
-          </IconButton>
+          </IconButton> */}
         </Stack>
       </Stack>
 

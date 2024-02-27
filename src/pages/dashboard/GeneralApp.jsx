@@ -1,5 +1,5 @@
 // import { Cat } from "phosphor-react";
-import { useEffect } from "react"; // lazy // Suspense,
+import { useEffect, useState } from "react"; // lazy // Suspense,
 import Chats from "./Chat";
 import { Box, Stack, useTheme, Typography } from "@mui/material";
 import Conversation from "../../components/Conversation/Conversation";
@@ -17,6 +17,7 @@ const GeneralApp = () => {
   const theme = useTheme();
   const { _id, currentChat } = useSelector((store) => store.auth);
   const { sidebar, chatList } = useSelector((store) => store.app);
+  const [mobileState, setMobileState] = useState(false)
   useEffect(() => {
     dispatch(getChatList(_id, currentChat));
   }, []);
