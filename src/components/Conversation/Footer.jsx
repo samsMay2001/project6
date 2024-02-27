@@ -40,36 +40,39 @@ const ChatInput = ({setOpenPicker, message, handleMessage, handleClick}) => {
         }} onChange={handleMessage} variant='filled' InputProps={{
             disableUnderline: true, 
             startAdornment: (
-                <Stack sx={{width: 'max-content'}}>
-                    <Stack sx={{
-                        position: 'relative', 
-                        display: openActions ? 'inline-block' : 'none'
-                        }}>
-                        {Actions.map((el)=> (
-                            <Tooltip title={el.title} placement="right">
-                                <Fab sx={{
-                                    position: 'absolute', 
-                                    top: -el.y, 
-                                    backgroundColor: el.color
-                                }}>
-                                    {el.icon}
-                                </Fab>
-                            </Tooltip>
-                        ))}
-                    </Stack>
-                    <InputAdornment  >
-                            <IconButton onBlur={()=> {setOpenAction(false)}} onClick={()=> {setOpenAction((oldVal)=> !oldVal)}}>
-                                <LinkSimple/>
-                            </IconButton>
-                    </InputAdornment> 
-                </Stack>
+                <div></div>
+                // <Stack sx={{width: 'max-content'}}>
+                //     <Stack sx={{
+                //         position: 'relative', 
+                //         display: openActions ? 'inline-block' : 'none'
+                //         }}>
+                //         {Actions.map((el)=> (
+                //             <Tooltip title={el.title} placement="right">
+                //                 <Fab sx={{
+                //                     position: 'absolute', 
+                //                     top: -el.y, 
+                //                     backgroundColor: el.color
+                //                 }}>
+                //                     {el.icon}
+                //                 </Fab>
+                //             </Tooltip>
+                //         ))}
+                //     </Stack>
+                //     <InputAdornment  >
+                //             <IconButton onBlur={()=> {setOpenAction(false)}} onClick={()=> {setOpenAction((oldVal)=> !oldVal)}}>
+                //                 <LinkSimple/>
+                //             </IconButton>
+                //     </InputAdornment> 
+                // </Stack>
             ), 
-            endAdornment: 
-            <InputAdornment>
-                <IconButton onBlur={()=> {setOpenPicker(false)}} onClick={()=> {setOpenPicker((oldVal)=> !oldVal)}}>
-                    <Smiley/>
-                </IconButton>
-            </InputAdornment>, 
+            endAdornment: (
+                <div></div>
+            )
+            // <InputAdornment>
+            //     <IconButton onBlur={()=> {setOpenPicker(false)}} onClick={()=> {setOpenPicker((oldVal)=> !oldVal)}}>
+            //         <Smiley/>
+            //     </IconButton>
+            // </InputAdornment>, 
         }}/>
     )
 }
@@ -109,8 +112,8 @@ export function ConvoFooter() {
 
     }, [])
     return ( 
-        <Box p={2} sx={{ width: '100%',backgroundColor: theme.palette.mode === 'light'? '#f8faff' : theme.palette.background.paper, boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)' }}>
-            <Stack direction='row' alignItems={'center'} spacing={3}>
+        <Box p={1} sx={{ width: '100%',backgroundColor: theme.palette.mode === 'light'? '#f8faff' : theme.palette.background.paper, boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)' }}>
+            <Stack direction='row' alignItems={'center'} spacing={1}>
                 {/* Chat input */}
                 <Stack sx={{width : '100%'}}>
                     <Box sx={{
