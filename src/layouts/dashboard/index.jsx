@@ -29,6 +29,7 @@ const DashboardLayout = () => {
   const {open_audio_dialog} = useSelector(state => state.audioCall)
   const [transition , setTransition] = useState(()=> TransitionDown)
   const [selected, setSelected] = useState(0);
+  const [mobileState, setMobileState] = useState(true)
   const dispatch = useDispatch();
   const { onToggleMode } = useSettings();
 
@@ -138,7 +139,9 @@ const DashboardLayout = () => {
           horizontal: 'center',
         }}
       />
-      <SideBar />
+      { 
+        !mobileState && <SideBar />
+      }
       <Outlet />
       {open_audio_dialog && <Call/>}
     </Stack>

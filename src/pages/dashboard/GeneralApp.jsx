@@ -17,14 +17,17 @@ const GeneralApp = () => {
   const theme = useTheme();
   const { _id, currentChat } = useSelector((store) => store.auth);
   const { sidebar, chatList } = useSelector((store) => store.app);
-  const [mobileState, setMobileState] = useState(false)
+  const [mobileState, setMobileState] = useState(true)
   useEffect(() => {
     dispatch(getChatList(_id, currentChat));
   }, []);
   return (
     <Stack direction="row" sx={{ width: "100%", position: "relative" }}>
       {/* chats list component */}
-      <Chats />
+      {
+        !mobileState && <Chats/>
+      }
+      {/* <Chats /> */}
 
       {/* conversation component */}
       <Box
@@ -32,7 +35,7 @@ const GeneralApp = () => {
           position: "absolute",
           height: "100%",
           top: 0,
-          left: "320px",
+          left: mobileState ? "0px": "320px",
           bottom: 0,
           right: sidebar.open ? "320px" : "0",
           backgroundColor:

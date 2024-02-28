@@ -46,11 +46,11 @@ function Message({ menu }) {
         overflowY: "scroll",
         scrollbarWidth: "thin", // For Firefox
         scrollbarColor: "transparent transparent", // For Firefox
-        paddingRight: "0px",
+        paddingRight: "5px",
         // For WebKit browsers (Chrome, Safari)
         WebkitOverflowScrolling: "touch",
         "&::-webkit-scrollbar": {
-          width: "0px", // Adjust as needed
+          width: "5px", // Adjust as needed
         },
         "&::-webkit-scrollbar-thumb": {
           backgroundColor: "transparent", // Hide scrollbar thumb
