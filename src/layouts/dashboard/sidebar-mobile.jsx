@@ -86,7 +86,8 @@ import {
               <img src={Logo} alt="Chat App Logo" />
             </Box>
             <Stack sx={{ width: "max-content"}} spacing={2} alignItems="center" direction={'row'}>
-              {Nav_Buttons.map((el, index) =>
+                {/* start */}
+              {/* {Nav_Buttons.map((el, index) =>
                 el.index === selected ? (
                   <Box
                     key={index}
@@ -137,12 +138,13 @@ import {
                     {el.icon}
                   </Stack>
                 ),
-              )}
+              )} */}
+              {/* end */}
               {/* Sign out button */}
   
-              <Divider orientation="vertical" sx={{ height: "48px" }} />
-  
-              {selected === 3 ? (
+              {/* <Divider orientation="vertical" sx={{ height: "48px" }} /> */}
+                    {/* start */}
+              {/* {selected === 3 ? (
                 <Box
                   p={2}
                   sx={{
@@ -184,7 +186,7 @@ import {
                 >
                   <Gear size={24} />
                 </Stack>
-              )}
+              )} end */}
               <Divider orientation="vertical" sx={{ height: "48px" }} />
               <Box sx={{ backgroundColor: theme.palette.main }}>
                 <IconButton
@@ -205,14 +207,14 @@ import {
               </Box>
             </Stack>
           </Stack>
-          <Stack spacing={4}>
+          {/* <Stack spacing={4}> */}
             {/* <AntSwitch
               defaultChecked
               onChange={() => {
                 onToggleMode();
               }}
             /> */}
-            <Avatar
+            {/* <Avatar
               src={faker.image.avatar()}
               id="demo-positioned-button"
               aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -222,8 +224,8 @@ import {
               style={{
                 cursor: "pointer",
               }}
-            />
-          </Stack>
+            /> */}
+          {/* </Stack> */}
         </Stack>
       </Box>
     );
