@@ -61,10 +61,11 @@ import {
         sx={{
           backgroundColor: theme.palette.background.paper,
           width: "100%",
-          height: '100px',
+          height: '100%',
           boxShadow: "0px 0px 2px rgba(0,0,0, 0.25)",
           // width: 100,
         }}
+        onClick={()=> {console.log('clicked box')}}
       >
         <Stack
           spacing={3}
@@ -73,7 +74,7 @@ import {
           alignItems={"center"}
           justifyContent={"space-between"}
         >
-          <Stack alignItems={"center"} spacing={4}>
+          <Stack direction={'row'} alignItems={"center"} spacing={4}>
             <Box
               sx={{
                 backgroundColor: theme.palette.primary.main,
@@ -84,7 +85,7 @@ import {
             >
               <img src={Logo} alt="Chat App Logo" />
             </Box>
-            <Stack sx={{ width: "max-content" }} spacing={2} alignItems="center">
+            <Stack sx={{ width: "max-content"}} spacing={2} alignItems="center" direction={'row'}>
               {Nav_Buttons.map((el, index) =>
                 el.index === selected ? (
                   <Box
@@ -139,7 +140,7 @@ import {
               )}
               {/* Sign out button */}
   
-              <Divider sx={{ width: "48px" }} />
+              <Divider orientation="vertical" sx={{ height: "48px" }} />
   
               {selected === 3 ? (
                 <Box
@@ -184,7 +185,7 @@ import {
                   <Gear size={24} />
                 </Stack>
               )}
-              <Divider sx={{ width: "48px" }} />
+              <Divider orientation="vertical" sx={{ height: "48px" }} />
               <Box sx={{ backgroundColor: theme.palette.main }}>
                 <IconButton
                   sx={{
@@ -205,12 +206,12 @@ import {
             </Stack>
           </Stack>
           <Stack spacing={4}>
-            <AntSwitch
+            {/* <AntSwitch
               defaultChecked
               onChange={() => {
                 onToggleMode();
               }}
-            />
+            /> */}
             <Avatar
               src={faker.image.avatar()}
               id="demo-positioned-button"

@@ -1,5 +1,6 @@
 import { Box } from "@mui/material"
 import Chats from "../../pages/dashboard/Chat"
+import SideBarMobile from "./sidebar-mobile"
 
 
 export const MobileChatSibar = () => {
@@ -9,19 +10,20 @@ export const MobileChatSibar = () => {
             right: 0, 
             left: 0, 
             height: '100%', 
-        }}>
-            {/* Mobile Chat Sidebar Component */}
+        }} onClick={()=> {console.log("clicked on the outer box")}}>
             {/* chat component */}
-            <Box sx={{ position: 'absolute', top: 0, bottom: '100px', right: 0, left: 0 }}>
+            <Box sx={{ position: 'absolute', top: 0, bottom: '80px', right: 0, left: 0 }}>
                 <Chats/>
             </Box>
+
+            {/* sidebar component */}
             <Box sx={{
                 position: 'absolute',
-                height: '100px',
+                height: '80px',
                 width: '100%',
                 bottom: '0px',
             }}>
-                {/* sidebar component */}
+                <SideBarMobile/>
             </Box>
         </Box>
     )
