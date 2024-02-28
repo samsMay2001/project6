@@ -27,7 +27,7 @@ import {
 // import { dispatch } from "../../redux/store";
 // import {ToggleSidebar}  from "../../redux/slices/app";
 import { useDispatch } from "react-redux";
-import { ToggleSidebar } from "../../redux/slices/app";
+import { ToggleSidebar, setMobileChatSidebar } from "../../redux/slices/app";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { TransitionDown } from "../../layouts/dashboard";
@@ -80,7 +80,7 @@ function ConvoHeader() {
         >
           {/* carret to show sidebar and chats */}
           <Box>
-            <Stack sx={{cursor: 'pointer'}}>
+            <Stack sx={{cursor: 'pointer'}} onClick={() => {dispatch(setMobileChatSidebar(1))}}>
               <CaretLeft/>
             </Stack>
             {/* <IconButton>

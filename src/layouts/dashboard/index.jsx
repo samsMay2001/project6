@@ -146,7 +146,7 @@ const DashboardLayout = () => {
         !mobileState && <SideBar />
       }
       {
-        (mobileState && mobileChatSidebar) && <MobileChatSibar/>
+        (mobileState && mobileChatSidebar == 1) && <MobileChatSibar/>
       }
       <Outlet />
       {open_audio_dialog && <Call/>}

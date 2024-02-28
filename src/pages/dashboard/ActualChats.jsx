@@ -9,7 +9,7 @@ import { Box, Stack, Typography, Badge, Avatar, useTheme } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import { useSelector } from "react-redux";
 import { dispatch } from "../../redux/store";
-import { fetchMessages, getChatList } from "../../redux/slices/app";
+import { fetchMessages, getChatList, setMobileChatSidebar } from "../../redux/slices/app";
 import { selectConversation, setMessageReceivedToggle, setMessageSentToggle } from "../../redux/slices/auth";
 // import {ChatEle}
 export const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -65,6 +65,7 @@ const ChatElement = ({ id, names, img, msg, time, unread, online, chatId, item, 
       p={2}
       onClick={() => {
         dispatch(selectConversation(item._id));
+        dispatch(setMobileChatSidebar(0)); 
       }}
     >
       <Stack

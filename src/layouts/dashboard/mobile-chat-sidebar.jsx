@@ -10,9 +10,13 @@ export const MobileChatSibar = () => {
             right: 0, 
             left: 0, 
             height: '100%', 
-        }} onClick={()=> {console.log("clicked on the outer box")}}>
+        }}>
             {/* chat component */}
-            <Box sx={{ position: 'absolute', top: 0, bottom: '80px', right: 0, left: 0 }}>
+            <Box sx={{ 
+                position: 'absolute',
+                top: 0, bottom: '80px', 
+                right: 0, 
+                left: 0 }}>
                 <Chats/>
             </Box>
 
@@ -22,7 +26,8 @@ export const MobileChatSibar = () => {
                 height: '80px',
                 width: '100%',
                 bottom: '0px',
-            }}>
+                zIndex: '400'
+            }} onClick={()=>{console.log("clicked sidebar")}}>
                 <SideBarMobile/>
             </Box>
         </Box>
