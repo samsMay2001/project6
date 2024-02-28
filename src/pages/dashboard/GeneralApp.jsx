@@ -16,8 +16,9 @@ import { getChatList } from "../../redux/slices/app";
 const GeneralApp = () => {
   const theme = useTheme();
   const { _id, currentChat } = useSelector((store) => store.auth);
-  const { sidebar, chatList } = useSelector((store) => store.app);
-  const [mobileState, setMobileState] = useState(true)
+  const { sidebar, chatList, mobileState, mobileChatSidebar } = useSelector((store) => store.app);
+  // const [mobileState, setMobileState] = useState(true); // to be turned to global state
+  // const [mobileChatSidebar, setMobileChatSidebar] = useState(true); // to be turned to global state
   useEffect(() => {
     dispatch(getChatList(_id, currentChat));
   }, []);
@@ -30,7 +31,8 @@ const GeneralApp = () => {
       {/* <Chats /> */}
 
       {/* conversation component */}
-      <Box
+      
+  { !mobileChatSidebar &&    <Box
         sx={{
           position: "absolute",
           height: "100%",
@@ -56,10 +58,10 @@ const GeneralApp = () => {
           </Stack>
         )}
         {chatList[0] !== undefined && <Conversation />}
-      </Box>
+      </Box> }
 
       {/* contacts */}
-      {sidebar.open &&
+      {/* {sidebar.open &&
         (() => {
           switch (sidebar.type) {
             case "CONTACT":
@@ -74,7 +76,7 @@ const GeneralApp = () => {
             default:
               break;
           }
-        })()}
+        })()} */}
       {/* <Contact/> */}
     </Stack>
   );

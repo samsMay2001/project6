@@ -16,6 +16,8 @@ const initialState = {
   chat_type: null,
   room_id: 0,
   chat_history: [],
+  mobileState : true, 
+  mobileChatSidebar: true,
 };
 
 const slice = createSlice({
@@ -57,12 +59,28 @@ const slice = createSlice({
     setChatTab(state, action) {
       state.chatTab = action.payload.tab;
     },
+    setMobileState(state, action) {
+      state.mobileState = action.payload.mobileState
+    }, 
+    setMobileChatSidebar(state, action){
+      state.mobileChatSidebar = action.payload.mobileChatSidebar
+    }
   },
 });
 
 // Reducer
 export default slice.reducer;
 // changing chatTabs
+export function setMobileState (mobileState) {
+  return (dispatch, getState) => {
+    dispatch(slice.actions.setMobileState({mobileState}))
+  }
+}
+export function setMobileChatSidebar (mobileChatSidebar) {
+  return (dispatch, getState) => {
+    dispatch(slice.actions.setMobileChatSidebar({mobileChatSidebar}))
+  }
+}
 export function setChatTab(tab) {
   // console.log(tab);
   return (dispatch, getState) => {

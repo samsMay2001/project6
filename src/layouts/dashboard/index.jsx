@@ -17,6 +17,8 @@ import {
 } from "../../redux/slices/app";
 import { selectConversation, setConnection, setCurrentChat, setMessageReceivedToggle, setMessageSentToggle, setToggler } from "../../redux/slices/auth";
 import Call from "../../pages/dashboard/Call";
+import SideBarMobile from "./sidebar-mobile";
+import { MobileChatSibar } from "./mobile-chat-sidebar";
 
 const isAuthenticated = false;
 export function TransitionDown(props){
@@ -25,11 +27,12 @@ export function TransitionDown(props){
 const DashboardLayout = () => {
   const theme = useTheme();
   const { isLoggedIn, _id, currentChat, connection, room_id } = useSelector((state) => state.auth);
-  const { friends, chatList } = useSelector((state) => state.app);
+  const { friends, chatList, mobileState, mobileChatSidebar } = useSelector((state) => state.app);
   const {open_audio_dialog} = useSelector(state => state.audioCall)
   const [transition , setTransition] = useState(()=> TransitionDown)
   const [selected, setSelected] = useState(0);
-  const [mobileState, setMobileState] = useState(true)
+  // const [mobileState, setMobileState] = useState(true); // to be turned to global state
+  // const [mobileChatSidebar, setMobileChatSidebar] = useState(true); // to be turned to global state
   const dispatch = useDispatch();
   const { onToggleMode } = useSettings();
 
@@ -141,6 +144,9 @@ const DashboardLayout = () => {
       />
       { 
         !mobileState && <SideBar />
+      }
+      {
+        (mobileState && mobileChatSidebar) && <MobileChatSibar/>
       }
       <Outlet />
       {open_audio_dialog && <Call/>}

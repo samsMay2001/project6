@@ -65,7 +65,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function Chats() {
   const theme = useTheme();
-  const { chatTab } = useSelector((state) => state.app);
+  const { chatTab, mobileState, mobileChatSidebar } = useSelector((state) => state.app);
+  // const [mobileState, setMobileState] = useState(true); // to be turned to global state
+  // const [mobileChatSidebar, setMobileChatSidebar] = useState(true); // to be turned to global state
   const tab = chatTab;
   // useEffect(() => {}, []);
   return (
@@ -75,7 +77,7 @@ function Chats() {
         top: 0,
         left: 0,
         bottom: 0,
-        width: "320px",
+        width:mobileState? "100%" : "320px",
         backgroundColor:
           theme.palette.mode === "light"
             ? "#F8FAFF"
