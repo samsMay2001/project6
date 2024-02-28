@@ -15,6 +15,7 @@ import { DotsThreeVertical, DownloadSimple, Image } from "phosphor-react";
 import { Message_options } from "../../data";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import Message from "./messages";
 
 function TimeLine({ el }) {
   const theme = useTheme();
@@ -76,8 +77,9 @@ function TextMessage({ el, menu }) {
   useEffect(() => {}, []);
   return (
     <Stack direction={"row"} justifyContent={el.to === _id ? "start" : "end"}>
+      {el.to !== _id && <MessageOptions/>}
       <Box
-        p={1.5}
+        p={1}
         sx={{
           backgroundColor:
             el.to === _id
@@ -85,7 +87,7 @@ function TextMessage({ el, menu }) {
               : theme.palette.primary.main,
           borderRadius: 1.5,
           width: "max-content",
-          maxWidth: '250px'
+          maxWidth: '250px', 
         }}
       >
         <Typography
@@ -95,7 +97,7 @@ function TextMessage({ el, menu }) {
           {el.message}
         </Typography>
       </Box>
-      {menu && <MessageOptions />}
+      {el.to === _id && <MessageOptions/>}
     </Stack>
   );
 }

@@ -36,18 +36,17 @@ function Message({ menu }) {
   return (
     <Box
       ref={scrollRef}
-      p={3}
+      p={1.3}
       sx={{
         position: "absolute",
         left: 0,
         top: 0,
-        width: "100%",
+        right: '0px',
         bottom: 0,
         overflowY: "scroll",
         scrollbarWidth: "thin", // For Firefox
         scrollbarColor: "transparent transparent", // For Firefox
-        paddingRight: "5px",
-
+        paddingRight: "0px",
         // For WebKit browsers (Chrome, Safari)
         WebkitOverflowScrolling: "touch",
         "&::-webkit-scrollbar": {
