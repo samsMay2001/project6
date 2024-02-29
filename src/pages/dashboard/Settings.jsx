@@ -3,10 +3,13 @@ import { Avatar, Box, Divider, IconButton, Stack, Typography, useTheme } from "@
 import { Bell, CaretLeft, Lock, PencilCircle } from "phosphor-react";
 import Profile from "./Profile";
 import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Settings() {
     const theme = useTheme()
     const {firstname, lastname} = useSelector((state) => state.auth)
+    const {mobileState} = useSelector((state)=> state.app)
     const list = [
         {
             key: 1, 
@@ -21,6 +24,10 @@ function Settings() {
             onclick: () => {}
         }, 
     ]
+    if (mobileState){
+        // console.log()
+        return <Navigate to={'/app'}/>
+    }
     return ( 
         <>
            { true && <Stack direction={'row'} sx={{width: '100%'}}>
