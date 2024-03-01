@@ -24,8 +24,7 @@ function Settings() {
             onclick: () => {}
         }, 
     ]
-    if (mobileState){
-        // console.log()
+    if (mobileState){ // blocks settings feature while in mobileState
         return <Navigate to={'/app'}/>
     }
     return ( 

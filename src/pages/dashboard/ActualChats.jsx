@@ -43,7 +43,7 @@ export const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const ChatElement = ({ id, names, img, msg, time, unread, online, chatId, item, room_id1 }) => {
   const theme = useTheme();
-  const { chatList } = useSelector((state) => state.app);
+  const { chatList, mobileState } = useSelector((state) => state.app);
   const { firstname, _id, currentChat, room_id } = useSelector((state) => state.auth);
   useEffect(() => {    
   }, []);
@@ -65,7 +65,9 @@ const ChatElement = ({ id, names, img, msg, time, unread, online, chatId, item, 
       p={2}
       onClick={() => {
         dispatch(selectConversation(item._id));
-        dispatch(setMobileChatSidebar(0)); 
+        if (mobileState) { // this functionality only happens in mobileState
+          dispatch(setMobileChatSidebar(0)); 
+        } 
       }}
     >
       <Stack
@@ -112,7 +114,7 @@ export function ActualChats() {
   const theme = useTheme();
   const { chatList, requests } = useSelector((state) => state.app); // gets the new chat list
   const { _id, room_id, currentChat} = useSelector((state) => state.auth); // gets the new chat list
-  const roomIndex = chatList.findIndex(chat => chat._id === room_id)
+  // const roomIndex = chatList.findIndex(chat => chat._id === room_id)
   
   useEffect(()=> {
     if (room_id === 0){
@@ -121,17 +123,9 @@ export function ActualChats() {
         dispatch(selectConversation(room_id1[0]._id))
       }
     } else {
-      console.log('room_id was already set')
+      // console.log('room_id was already set')
     }
   }, [room_id, chatList])
-  useEffect(() => {
-    if (chatList[roomIndex] !== undefined) {
-      const to = chatList[roomIndex].participants.filter(
-        (participant) => participant !== _id,
-      );
-      dispatch(fetchMessages(_id, to[0]));
-    }
-  }, [room_id]);
   return (
     <Stack
       spacing={2}

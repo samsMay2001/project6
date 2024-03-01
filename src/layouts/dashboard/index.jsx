@@ -120,7 +120,7 @@ const DashboardLayout = () => {
     };
   }, [room_id, chatList]);
   useEffect(()=> {
-    console.log(connection)
+    // console.log(connection)
   }, [connection])
   if (!isLoggedIn) {
     return <Navigate to={"/auth/login"} />;

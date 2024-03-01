@@ -33,6 +33,15 @@ function Message({ menu }) {
   useEffect(()=> {
     scrollToBottom(); 
   }, [chat_history])
+  useEffect(() => {
+    const roomIndex = chatList.findIndex(chat => chat._id === room_id)
+    if (chatList[roomIndex] !== undefined) {
+      const to = chatList[roomIndex].participants.filter(
+        (participant) => participant !== _id,
+      );
+      dispatch(fetchMessages(_id, to[0]));
+    }
+  }, [room_id]);
   return (
     <Box
       ref={scrollRef}

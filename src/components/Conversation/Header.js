@@ -37,12 +37,11 @@ import { PushToAudioCallQueue, StartAudioCall } from "../../redux/slices/audioCa
 function ConvoHeader() {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const { chatList } = useSelector((state) => state.app);
+  const { chatList, mobileState } = useSelector((state) => state.app);
   const { firstname, room_id, _id } = useSelector((state) => state.auth);
   const [open, setOpen] = useState(true)
   const [transition , setTransition] = useState(()=> TransitionDown)
   const roomIndex = chatList.findIndex(chat => chat._id === room_id)
-  const [mobileState, setMobileState] = useState(false)
 
   useEffect(() => {
     // console.log(roomIndex)
@@ -80,7 +79,11 @@ function ConvoHeader() {
         >
           {/* carret to show sidebar and chats */}
           <Box>
-            <Stack sx={{cursor: 'pointer'}} onClick={() => {dispatch(setMobileChatSidebar(1))}}>
+            <Stack sx={{cursor: 'pointer'}} onClick={() => {
+                if (mobileState){
+                  dispatch(setMobileChatSidebar(1))
+                }
+              }}>
               <CaretLeft/>
             </Stack>
             {/* <IconButton>

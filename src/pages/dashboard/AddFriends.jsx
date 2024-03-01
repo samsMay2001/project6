@@ -6,6 +6,7 @@ import {
   FetchUsers,
   fetchMessages,
   setChatList,
+  setMobileChatSidebar,
 } from "../../redux/slices/app";
 import { dispatch } from "../../redux/store";
 import {
@@ -210,11 +211,10 @@ export function User({
   user,
   _chatList,
   _firstname,
-  __id,
 }) {
   const theme = useTheme();
   const { _id, firstname } = useSelector((state) => state.auth);
-  const { chatList, room_id } = useSelector((state) => state.app);
+  const { chatList, room_id, mobileState } = useSelector((state) => state.app);
   return (
     <>
       <StyledChatBox
@@ -291,10 +291,13 @@ export function User({
                     _chatList,
                     user,
                     _firstname,
-                    __id,
+                    _id,
                     room_id,
                     fetchMessages,
                   );
+                  if (mobileState){
+                    dispatch(setMobileChatSidebar(0)); 
+                  }
                 }}
               >
                 <ChatCircleDots
@@ -327,6 +330,7 @@ export function createNewChat(
   const mutualChatIndex = chatList.findIndex(
     (chat) => chat.participants.includes(user._id), // to be tested
   );
+  // console.log(mutualChatIndex)
   if (mutualChatIndex < 0) {
     // create a new chat
     const newChatObj = {
@@ -343,18 +347,19 @@ export function createNewChat(
     chatListCopy.splice(0, 0, selectedChat);
     dispatch(setChatList(chatListCopy)); 
     const newRoomIndex = chatList.filter(chat => chat.participants.includes(user._id))
-    dispatch(selectConversation(newRoomIndex[0]._id))
+    dispatch(selectConversation(newRoomIndex[0]._id)) // this in itself fetchesMessages
   }
   // change chatTabs to chats
   dispatch(setChatTab(2));
 
   // get messages
-  if (chatList[room_id] !== undefined) {
-    const to = chatList[room_id].participants.filter(
-      (participant) => participant !== _id,
-    );
-    dispatch(fetchMessages(_id, to[0]));
-  }
+  // console.log(room_id)
+  // if (chatList[room_id] !== undefined) {
+  //   const to = chatList[room_id].participants.filter(
+  //     (participant) => participant !== _id,
+  //   );
+  //   dispatch(fetchMessages(_id, to[0]));
+  // }
 }
 
 

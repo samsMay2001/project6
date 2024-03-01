@@ -17,7 +17,7 @@ const initialState = {
   room_id: 0,
   chat_history: [],
   mobileState : true, 
-  mobileChatSidebar: 1, // 0 -> messages, 1 -> chats-modified, 2 -> settings-modified, 3 -> profile-modified
+  mobileChatSidebar: 1, // 0 -> messages, 1 -> chats-modified, 2 -> settings-modified, 3 -> profile-modified, 
 };
 
 const slice = createSlice({

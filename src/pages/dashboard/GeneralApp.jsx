@@ -32,7 +32,7 @@ const GeneralApp = () => {
 
       {/* conversation component */}
       
-  { mobileChatSidebar == 0 &&    <Box
+  { (mobileChatSidebar == 0 || (!mobileState)) &&    <Box
         sx={{
           position: "absolute",
           height: "100%",

@@ -31,7 +31,6 @@ export const Friends = () => {
                 user={item}
                 _chatList={chatList}
                 _firstname={firstname}
-                _id_c={_id}
               />
             </Stack>
           ))
